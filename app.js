@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 //Routes
-app.use('/api/user',);
+app.use('/api/user',userRoute);
 
 app.get('/*', (req, res) => {
     res.sendFile('./index.html', {root: __dirname});
