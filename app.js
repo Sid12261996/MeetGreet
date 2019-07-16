@@ -3,10 +3,9 @@ const express = require('express'),
     cors = require('cors'),
     bodyParser = require('body-parser'),
     path = require('path'),
-
-    mailer = require('./routes/mailer'),
     Url = require('./environment'),
-    mongoose = require('mongoose')
+    mongoose = require('mongoose'),
+    userRoute = require('./routes/userRoute')
 
 ;
 app.use(cors());
@@ -21,7 +20,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 //Routes
-app.use('/api/user',)
+app.use('/api/user',);
 
 app.get('/*', (req, res) => {
     res.sendFile('./index.html', {root: __dirname});
