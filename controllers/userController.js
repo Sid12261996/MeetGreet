@@ -1,14 +1,55 @@
-const mongo = require('mongoose'),
-    user = require('../models/userModel')
+const schema = require('mongoose').Schema,
+    Users = require('../models/userModel');
 
 exports.Login = (req, res, next) => {
-    //Add login logic here...
-    //  user.find({email:req.body.email});
-    res.send('Login working');
+
+
+
 };
 
 exports.Register = (req, res, next) => {
-    // Add register logic here...
-    //  user.save();
-    res.send('register Working');
+    Users.find({"Email": req.body.Email}).exec()
+        .then(data => {
+            if (data.length > 0) {
+
+                res.json({message: "UserName or Email already Exists"});
+            } else {
+                bcrypt.hash(req.body.Password, 10, (err, hash) => {
+
+                    if (err) {
+                        throw err
+                    }
+
+
+                    RegisterUser = new Users(
+                        {
+                            _id: schema.Types.ObjectId,
+                            Email: req.body.Email,
+                            Name: req.body.Name,
+                            Age: req.body.Age,
+                            Gender: req.body.Gender,
+                            Password: hash,
+                            MobileNo:req.body.MobileNo,
+                            CurrentJobPlace: req.body.CurrentJobPlace,
+                            State: req.body.State,
+                            City: req.body.City,
+                            Country: req.body.Country,
+                            Security: req.body.Security,
+                            inCommunity: req.body.inCommunity,
+
+                            JobProfile: req.body.JobProfile
+                        });
+                    console.log(RegisterUser);
+                    RegisterUser.save().then(result => {
+
+                        res.json({message: 'Successfully Saved', result});
+                    }).catch(err => {
+                        console.log(err)
+                    })
+
+                })
+            }
+        }).catch(err => {
+        console.log(err)
+    })
 };
