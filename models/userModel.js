@@ -15,7 +15,7 @@ const securityLock = mongo.model('Security',securityLockSchema);
 const User = new schema({
     _id: schema.Types.ObjectId,
     Email:{type: schema.Types.String, required: true, minlength: 6},
-    Name: (50),
+    Name: String,
     Age: {type: schema.Types.Number, required: true},
     Gender: {type: String, enum: ["Male", "Female"]},
     Password: {type: String, required: true, minlength: 6, maxlength: 20},

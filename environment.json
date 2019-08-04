@@ -1,6 +1,6 @@
 {
   "env":{
-    "MongoUrl":"mongodb+srv://dev1:dev123@cluster0-5zaen.mongodb.net/norasite?retryWrites=true&w=majority",
+    "MongoUrl":"mongodb+srv://MeetGDemo:MeetTeam@18@meetgdemo-kjmtn.mongodb.net/beta",
     "jwtKey":"wejghcdhbxilhbhfenjdmkfc;x45gy3wegehxoufcrdbsuh3nyr8475g"
   }
 }
