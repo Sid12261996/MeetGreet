@@ -23,7 +23,7 @@ app.use(bodyParser.json());
 app.use('/api/user',userRoute);
 
 app.use( (err,req,res,next) => {
-    res.status(422).send({error: err.message});
+    res.status(500).send({error: err.message});
 });
 
 app.get('/*', (req, res) => {
