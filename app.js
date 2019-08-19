@@ -22,6 +22,10 @@ app.use(bodyParser.json());
 //Routes
 app.use('/api/user',userRoute);
 
+app.use( (err,req,res,next) => {
+    res.status(422).send({error: err.message});
+});
+
 app.get('/*', (req, res) => {
     res.sendFile('./index.html', {root: __dirname});
 });

@@ -3,11 +3,19 @@ const schema = require('mongoose').Schema,
     Users = require('../models/userModel');
 
 exports.Login = (req, res, next) => {
-
-    Users.find({Email:'sidharth@gmail.com'}).then(doc=>{
-        res.status(200).json({doc});
+// Login Check
+    Users.find({Email: req.body.Email , Password: req.body.Password}).then(doc=>{
+        if (doc.length > 0)
+        {
+            res.status(200).json({doc});
+        }
+        else
+        {
+            res.json({message : "Invalid Username or Password"});
+        }
+    }).catch(err => {
+        console.log(err);
     })
-
 
 };
 
