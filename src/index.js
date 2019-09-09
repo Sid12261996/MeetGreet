@@ -1,7 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Login from './Login/login-page';
+import App from './App';
+// import { createStore, applyMiddleware } from 'redux';
+// import { Provider } from 'react-redux';
+// import thunk from 'redux-thunk';
 
+// import rootReducer from './Store/Reducers/RootReducer';
+// const store = createStore(rootReducer, applyMiddleware(thunk));
 
-ReactDOM.render(<Login/>, document.getElementById('root'));
-
+ReactDOM.render(<App/>, document.getElementById('root'));
