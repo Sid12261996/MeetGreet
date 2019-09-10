@@ -6,7 +6,7 @@ class Navbar extends Component{
     render(){
     return(
         <div>
-            <nav class="navbar navbar-expand-md navbar-light" id="logo">
+            <nav className="navbar navbar-expand-md navbar-light" id="logo">
                 <Link className="navbar-brand mx-auto">
                     <img className="LogoMG2" src="#" alt="Logo" />
                 </Link>
