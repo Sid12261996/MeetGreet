@@ -18,7 +18,7 @@ const User = new schema({
     Name: String,
     Age: {type: schema.Types.Number, required: true},
     Gender: {type: String, enum: ["Male", "Female"]},
-    Password: {type: String, required: true, minlength: 6, maxlength: 20},
+    Password: {type: String, required: true, minlength: 6},
     MobileNo: {type: String, required: true},
     CurrentJobPlace: String,
     State: String,

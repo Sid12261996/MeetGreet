@@ -2,10 +2,10 @@ const express = require('express'),
     app = express(),
     cors = require('cors'),
     bodyParser = require('body-parser'),
-    path = require('path'),
     Url = require('./environment'),
     mongoose = require('mongoose'),
-    userRoute = require('./routes/userRoute')
+    userRoute = require('./routes/userRoute'),
+    JwtToken = require('./AuthVerify/AuthVerify')
 
 ;
 app.use(cors());
@@ -13,7 +13,7 @@ app.use(cors());
 
 //Mongo Connection
 
-mongoose.connect(Url.env.MongoUrl || process.env.MongoUrl, {useNewUrlParser: true});
+mongoose.connect(Url.env.MongoUrl || process.env.MongoUrl, {useNewUrlParser: true}).catch(err=>console.error(err));
 mongoose.Promise = global.Promise;
 
 app.use(bodyParser.urlencoded({extended: false}));
@@ -22,7 +22,12 @@ app.use(bodyParser.json());
 //Routes
 app.use('/api/user',userRoute);
 
-app.use( (err,req,res,next) => {
+//Fake route to tst JWT
+app.get('/api/protected',JwtToken,(req,res)=>{
+   res.send('You have successfully accessed a protected route!! JWT works!!')
+});
+
+app.use( (err,req,res) => {
     res.status(500).send({error: err.message});
 });
 
