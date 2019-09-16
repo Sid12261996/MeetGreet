@@ -4,7 +4,7 @@ import './Home.css';
 class Home extends Component {
     render() {
         return (
-            <div classNameName="wrapper">
+            <div className="wrapper">
 
                 <div className="body-container container-fluid padding">
                     <div className="row flex-row-reverse padding">
@@ -29,25 +29,27 @@ class Home extends Component {
                         </div>
 
                         <div className="signin col-md-4 order-first" align="center">
-                            <form className="sign" action="Validation.php" method="post">
+                            <form className="sign">
                                 <span className="JOC"><h1>Sign In</h1></span>
-                                <table align="center" cellpadding="8px">
+                                <table align="center" cellPadding="8px">
+                                  <tbody>
                                     <tr>
                                         <td>Username</td>
-                                        <td><input type="text" name="username" required /></td>
+                                        <td><input className="userinput" type="text" name="username" required /></td>
                                     </tr>
                                     <tr>
                                         <td>Password</td>
-                                        <td><input type="password" name="password" /></td>
+                                        <td><input className="userinput" type="password" name="password" /></td>
                                     </tr>
                                     <tr>
                                         <td></td>
-                                        <td><input className="bg2" type="submit" value="Login" />
+                                        <td className="spectr">
+                                            <input className="bg2" type="submit" value="Login" />
                                             <span className="forgot"><a href="">Forgot Password?</a></span>
                                         </td>
                                     </tr>
 
-                                    <tr colspan="2">
+                                    <tr colSpan="2">
                                         <td>
                                             <span className="social-signin-text">Or SignIn using:</span>
                                         </td>
@@ -59,6 +61,7 @@ class Home extends Component {
                                             </div>
                                         </td>
                                     </tr>
+                                    </tbody>
                                 </table>
                             </form>
                             <div className="NotAMem">
@@ -75,7 +78,6 @@ class Home extends Component {
                         <a href="#"><i className="fab fa-facebook"></i></a>
                         <a href="#"><i className="fab fa-twitter"></i></a>
                         <a href="#"><i className="fab fa-youtube"></i></a>
-                        <a href="#"><i className="fab fa-google-plus-g"></i></a>
                         <a href="#"><i className="fab fa-instagram"></i></a>
                     </div>
                 </div>
@@ -95,30 +97,27 @@ class Home extends Component {
                             </div>
                             <div className="col-md-4">
                                 <hr className="light" />
-                                <h5>DOWNLOAD</h5>
+                                <h5>Download</h5>
                                 <hr className="light" />
                                 <div className="footer-items">
                                     <p><a href="">Windows</a></p>
                                     <p><a href="">Android</a></p>
-                                    <p>Linux (Currently N/A)</p>
-                                    <p>Mac (Currently N/A)</p>
-                                    <p>IPhone & IPad (Currently N/A)</p>
+                                    <p>Linux</p>
+                                    <p>Mac</p>
+                                    <p>IPhone & IPad</p>
                                 </div>
                             </div>
                             <div className="col-md-4">
                                 <hr className="light" />
-                                <h5>Service Provided</h5>
+                                <h5>Services</h5>
                                 <hr className="light" />
                                 <div className="footer-items">
                                     <p><a href="#">Team Support</a></p>
-                                    <p>City, State, 122001</p>
-                                    <p>City, State, 122001</p>
-                                    <p>City, State, 122001</p>
                                 </div>
                             </div>
                             <div className="col-12">
                                 <hr className="light" />
-                                <h5><a className="js-scroll-trigger" href="#logo">&copy; MeetGreet.com</a></h5>
+                                <h5>Copyright &copy; 2019 All rights reserved | <a className="js-scroll-trigger" href="#logo">MeetGreet</a></h5>
                             </div>
 
                         </div>
