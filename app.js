@@ -27,10 +27,6 @@ app.get('/api/protected',JwtToken,(req,res)=>{
    res.send('You have successfully accessed a protected route!! JWT works!!')
 });
 
-app.use( (err,req,res) => {
-    res.status(500).send({error: err.message});
-});
-
 app.get('/*', (req, res) => {
     res.sendFile('./index.html', {root: __dirname});
 });
