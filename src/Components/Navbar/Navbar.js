@@ -8,7 +8,7 @@ class Navbar extends Component{
         <div>
             <nav className="navbar navbar-expand-md navbar-light" id="logo">
                 <Link className="navbar-brand mx-auto">
-                    <img className="LogoMG2" src="#" alt="Logo" />
+                    <img className="LogoMG2" src="https://meetgreet-upload.herokuapp.com/images/1570295217.662374mg02.png" alt="Logo" />
                 </Link>
             </nav>
         </div>

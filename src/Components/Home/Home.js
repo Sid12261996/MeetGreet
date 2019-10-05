@@ -1,8 +1,35 @@
 import React, { Component } from 'react';
 import './Home.css';
+import SignUp from '../SignUp/SignUp';
 
 class Home extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            addModalShow: false,
+            username: null,
+            password: null
+        }
+    }
+
+    handleChange = (e) => {
+        this.setState({
+            [e.target.id] : e.target.value
+        });
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(this.state);
+        this.setState({
+            ...this.state,
+            username: '',
+            password: ''
+        });
+    }
+
     render() {
+        let addModalClose = () => this.setState({ addModalShow: false })
         return (
             <div className="wrapper">
 
@@ -29,17 +56,17 @@ class Home extends Component {
                         </div>
 
                         <div className="signin col-md-4 order-first" align="center">
-                            <form className="sign">
+                            <form className="sign" onSubmit={this.handleSubmit}>
                                 <span className="JOC"><h1>Sign In</h1></span>
                                 <table align="center" cellPadding="8px">
                                   <tbody>
                                     <tr>
                                         <td>Username</td>
-                                        <td><input className="userinput" type="text" name="username" required /></td>
+                                        <td><input className="userinput" type="text" id="username" onChange={this.handleChange} value={this.state.username} required /></td>
                                     </tr>
                                     <tr>
                                         <td>Password</td>
-                                        <td><input className="userinput" type="password" name="password" /></td>
+                                            <td><input className="userinput" type="password" id="password" onChange={this.handleChange} value={this.state.password} /></td>
                                     </tr>
                                     <tr>
                                         <td></td>
@@ -66,7 +93,8 @@ class Home extends Component {
                             </form>
                             <div className="NotAMem">
                                 <p>Not a member yet?</p>
-                                <button className="bg" type="button" data-toggle="modal" data-target="#showModal">Sign Up</button>
+                                <button className="bg" onClick={() => { this.setState({ addModalShow: true }) }}>Sign Up</button>
+                                <SignUp show={this.state.addModalShow} onHide={addModalClose} />
                             </div>
                         </div>
                     </div>
@@ -90,9 +118,9 @@ class Home extends Component {
                                 <h5>MeetGreet</h5>
                                 <hr className="light" />
                                 <div className="footer-items">
-                                    <p><a href="">About MeetGreet</a></p>
-                                    <p><a href="">Features</a></p>
-                                    <p><a href="">Security</a></p>
+                                    <p><a href="#">About MeetGreet</a></p>
+                                    <p><a href="#">Features</a></p>
+                                    <p><a href="#">Security</a></p>
                                 </div>
                             </div>
                             <div className="col-md-4">
@@ -100,8 +128,8 @@ class Home extends Component {
                                 <h5>Download</h5>
                                 <hr className="light" />
                                 <div className="footer-items">
-                                    <p><a href="">Windows</a></p>
-                                    <p><a href="">Android</a></p>
+                                    <p><a href="#">Windows</a></p>
+                                    <p><a href="#">Android</a></p>
                                     <p>Linux</p>
                                     <p>Mac</p>
                                     <p>IPhone & IPad</p>
