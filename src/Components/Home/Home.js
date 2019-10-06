@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Home.css';
 import SignUp from '../SignUp/SignUp';
+import axios from 'axios';
 
 class Home extends Component {
     constructor(props){
@@ -20,11 +21,10 @@ class Home extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state);
-        this.setState({
-            ...this.state,
-            username: '',
-            password: ''
+        axios.post('https://meetgreet-upload.herokuapp.com/api/user/login',{ Email: this.state.username, Password: this.state.password }).then(result=>{
+            console.log(result);
+        }).catch(err=>{
+            console.log(err);
         });
     }
 
@@ -145,7 +145,7 @@ class Home extends Component {
                             </div>
                             <div className="col-12">
                                 <hr className="light" />
-                                <h5>Copyright &copy; 2019 All rights reserved | <a className="js-scroll-trigger" href="#logo">MeetGreet</a></h5>
+                                <h5>Copyright &copy; {new Date().getFullYear()} All rights reserved | <a className="js-scroll-trigger" href="#logo">MeetGreet</a></h5>
                             </div>
 
                         </div>
