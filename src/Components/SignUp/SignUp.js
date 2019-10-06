@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
 import { Modal } from 'react-bootstrap';
 import './SignUp.css';
+import userService from "../../services/user-service";
 
 class SignUp extends Component {
-    constructor(props) {
-        super(props);
-    }
+    // constructor(props) {
+    //     super(props);
+    // }
 
     handleChange = (e) => {
         this.setState({
             [e.target.id] : e.target.value
         });
-    }
+    };
 
     handleSubmit = (e) => {
         e.preventDefault();
-    }
+        // userService.register({this.this.state})
+
+    };
     render() {
         return (
             <Modal {...this.props} aria-labelledby="contained-modal-title-vcenter" centered >

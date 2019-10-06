@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './Home.css';
 import SignUp from '../SignUp/SignUp';
-import axios from 'axios';
+import userService from '../../services/user-service'
 
 class Home extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             addModalShow: false,
@@ -15,21 +15,21 @@ class Home extends Component {
 
     handleChange = (e) => {
         this.setState({
-            [e.target.id] : e.target.value
+            [e.target.id]: e.target.value
         });
-    }
+    };
 
     handleSubmit = (e) => {
         e.preventDefault();
-        axios.post('https://meetgreet-upload.herokuapp.com/api/user/login',{ Email: this.state.username, Password: this.state.password }).then(result=>{
-            console.log(result);
-        }).catch(err=>{
-            console.log(err);
-        });
-    }
+        userService.login({Email: this.state.username, Password: this.state.password}).then(
+            result => {
+                console.log(result);
+            }
+        ).catch(err => console.error(err))
+    };
 
     render() {
-        let addModalClose = () => this.setState({ addModalShow: false })
+        let addModalClose = () => this.setState({addModalShow: false});
         return (
             <div className="wrapper">
 
@@ -40,16 +40,16 @@ class Home extends Component {
                             <div className="rotating-box">
                                 <div className="single-rb">
                                     <div className="front-side">
-                                        <img src="#" alt="" />
+                                        <img src="#" alt=""/>
                                     </div>
                                     <div className="back-side">
-                                        <img src="#" alt="" />
+                                        <img src="#" alt=""/>
                                     </div>
                                     <div className="left-side">
-                                        <img src="#" alt="" />
+                                        <img src="#" alt=""/>
                                     </div>
                                     <div className="right-side">
-                                        <img src="#" alt="" />
+                                        <img src="#" alt=""/>
                                     </div>
                                 </div>
                             </div>
@@ -59,19 +59,22 @@ class Home extends Component {
                             <form className="sign" onSubmit={this.handleSubmit}>
                                 <span className="JOC"><h1>Sign In</h1></span>
                                 <table align="center" cellPadding="8px">
-                                  <tbody>
+                                    <tbody>
                                     <tr>
                                         <td>Username</td>
-                                        <td><input className="userinput" type="text" id="username" onChange={this.handleChange} value={this.state.username} required /></td>
+                                        <td><input className="userinput" type="text" id="username"
+                                                   onChange={this.handleChange} value={this.state.username} required/>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>Password</td>
-                                            <td><input className="userinput" type="password" id="password" onChange={this.handleChange} value={this.state.password} /></td>
+                                        <td><input className="userinput" type="password" id="password"
+                                                   onChange={this.handleChange} value={this.state.password}/></td>
                                     </tr>
                                     <tr>
                                         <td></td>
                                         <td className="spectr">
-                                            <input className="bg2" type="submit" value="Login" />
+                                            <input className="bg2" type="submit" value="Login"/>
                                             <span className="forgot"><a href="">Forgot Password?</a></span>
                                         </td>
                                     </tr>
@@ -93,8 +96,11 @@ class Home extends Component {
                             </form>
                             <div className="NotAMem">
                                 <p>Not a member yet?</p>
-                                <button className="bg" onClick={() => { this.setState({ addModalShow: true }) }}>Sign Up</button>
-                                <SignUp show={this.state.addModalShow} onHide={addModalClose} />
+                                <button className="bg" onClick={() => {
+                                    this.setState({addModalShow: true})
+                                }}>Sign Up
+                                </button>
+                                <SignUp show={this.state.addModalShow} onHide={addModalClose}/>
                             </div>
                         </div>
                     </div>
@@ -114,9 +120,9 @@ class Home extends Component {
                     <div className="container-fluid padding">
                         <div className="row text-center padding">
                             <div className="col-md-4">
-                                <hr className="light" />
+                                <hr className="light"/>
                                 <h5>MeetGreet</h5>
-                                <hr className="light" />
+                                <hr className="light"/>
                                 <div className="footer-items">
                                     <p><a href="#">About MeetGreet</a></p>
                                     <p><a href="#">Features</a></p>
@@ -124,9 +130,9 @@ class Home extends Component {
                                 </div>
                             </div>
                             <div className="col-md-4">
-                                <hr className="light" />
+                                <hr className="light"/>
                                 <h5>Download</h5>
-                                <hr className="light" />
+                                <hr className="light"/>
                                 <div className="footer-items">
                                     <p><a href="#">Windows</a></p>
                                     <p><a href="#">Android</a></p>
@@ -136,16 +142,17 @@ class Home extends Component {
                                 </div>
                             </div>
                             <div className="col-md-4">
-                                <hr className="light" />
+                                <hr className="light"/>
                                 <h5>Services</h5>
-                                <hr className="light" />
+                                <hr className="light"/>
                                 <div className="footer-items">
                                     <p><a href="#">Team Support</a></p>
                                 </div>
                             </div>
                             <div className="col-12">
-                                <hr className="light" />
-                                <h5>Copyright &copy; {new Date().getFullYear()} All rights reserved | <a className="js-scroll-trigger" href="#logo">MeetGreet</a></h5>
+                                <hr className="light"/>
+                                <h5>Copyright &copy; {new Date().getFullYear()} All rights reserved | <a
+                                    className="js-scroll-trigger" href="#logo">MeetGreet</a></h5>
                             </div>
 
                         </div>
