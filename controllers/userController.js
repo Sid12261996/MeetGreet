@@ -11,6 +11,7 @@ exports.Login = (req, res) => {
             let currentUser = doc[0];
             bcrypt.compare(req.body.Password, currentUser.Password, (err, result) => {
                 if (err) {
+                    console.log('- bcrypt error');
                     res.status(401).json({message: 'Password wrong', Errors: err});
                 }
                 if (result) {
@@ -21,17 +22,21 @@ exports.Login = (req, res) => {
                         MobileNo: currentUser.MobileNo
                     }, jwtKey, (err, token) => {
                         if (err) {
+                            console.log('- jwt error');
                             res.json({message: `Token generation failed`, err})
                         }
                         if (token) {
                             res.status(200).json({message: `successful Login`, token, currentUser})
                         }
                     })
+                } else {
+                    res.status(401).json({message: 'Password wrong', Errors: err});
                 }
             });
 
+
         } else {
-            res.json({message: "Invalid Username or Password"});
+            res.status(401).json({message: "Invalid Username "});
         }
     }).catch(err => {
         console.log(err);
@@ -63,14 +68,11 @@ exports.Register = (req, res) => {
                                 Age: req.body.Age,
                                 Gender: req.body.Gender,
                                 Password: hash,
-                                MobileNo: req.body.MobileNo,
-                                CurrentJobPlace: req.body.CurrentJobPlace,
                                 State: req.body.State,
                                 City: req.body.City,
                                 Country: req.body.Country,
                                 // Security: req.body.Security,
                                 inCommunity: req.body.inCommunity,
-
                                 JobProfile: req.body.JobProfile
                             });
 
@@ -90,5 +92,6 @@ exports.Register = (req, res) => {
             }
         ).catch(err => {
         console.log(err)
+        res.status(500).json({message: 'Validation Errors', Errors: err})
     })
 };

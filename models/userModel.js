@@ -17,7 +17,7 @@ const User = new schema({
     Email:{type: schema.Types.String, required: true, minlength: 6},
     Name: String,
     Age: {type: schema.Types.Number, required: true},
-    Gender: {type: String, enum: ["Male", "Female"]},
+    Gender: {type: String, enum: ["Male", "Female","Other"]},
     Password: {type: String, required: true, minlength: 6},
     MobileNo: {type: String, required: true},
     CurrentJobPlace: String,
