@@ -1,8 +1,8 @@
 import axios from "axios";
 import env from "../environment"
 
-const userURL = `${env.url}user/`;
-
+//For Sid- change {env.ApiLink} to {env.url}
+const userURL = `${env.ApiLink}user/`;
 
 class userService {
 
@@ -13,6 +13,7 @@ class userService {
 
 
    static register = (user) => {
+       console.log(user);
         return axios.post(`${userURL}register`, user);
     };
 }

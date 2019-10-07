@@ -31,7 +31,7 @@ class Home extends Component {
                 alert(err.response.data.message);
                 document.getElementById("password").value = "";
             }
-        ).catch(err => console.error(err));
+        );
     };
 
     render() {
