@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Modal } from 'react-bootstrap';
 import './SignUp.css';
-import userService from "../../Services/user-services";
+import userService from "../../services/user-services";
 
 class SignUp extends Component {
     constructor(props){
