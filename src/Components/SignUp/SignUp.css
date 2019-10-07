@@ -1,0 +1,11 @@
+.TableSection {display: grid; place-items: center;}
+.modal-tbody tr td {padding : 5px;}
+.modal-tbody tr .thead {padding-right: 30px;}
+.modal-tbody tr .radio-label:hover {cursor: pointer;}
+.modal-tbody tr .input-field {padding: 2px 4px;}
+.modal-head {background-color: #77274B;}
+.modal-head .heading {color: #fff;}
+.modal-footer {background-color: #d2c1c8;}
+
+.modal-btn {display:block; margin-left:auto; border: none; margin-right:auto; background-color:#714d87; border-radius:5px; width:12rem; height:3rem; color:white; cursor:pointer;}
+.modal-btn:hover { display:block; margin-left:auto; margin-right:auto; background-color:#511d68; border-radius:5px; width:12rem; height:3rem; color:white; cursor:pointer;}
