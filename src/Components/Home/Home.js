@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './Home.css';
 import SignUp from '../SignUp/SignUp';
-import userService from '../../Services/user-services'
+import userService from "../../services/user-services";
 import {Route} from 'react-router-dom';
 import Start from '../Start/Start';
 
