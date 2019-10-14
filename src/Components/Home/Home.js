@@ -3,6 +3,10 @@ import './Home.css';
 import SignUp from '../SignUp/SignUp';
 import userService from "../../services/user-services";
 
+import {Route} from 'react-router-dom';
+import Start from '../Start/Start';
+
+
 class Home extends Component {
     constructor(props) {
         super(props);
