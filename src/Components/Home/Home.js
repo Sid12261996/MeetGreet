@@ -2,8 +2,10 @@ import React, {Component} from 'react';
 import './Home.css';
 import SignUp from '../SignUp/SignUp';
 import userService from "../../services/user-services";
+
 import {Route} from 'react-router-dom';
 import Start from '../Start/Start';
+
 
 class Home extends Component {
     constructor(props) {
@@ -25,8 +27,9 @@ class Home extends Component {
         e.preventDefault();
         userService.login({Email: this.state.username, Password: this.state.password}).then(
             result => {
-                return alert('Welcome ' + result.data.currentUser.Name);
-                // return <Route path="/start" component={Start} />
+                if(result){
+                    this.props.history.push("/start");
+                }
             }, err => {
                 alert(err.response.data.message);
                 document.getElementById("password").value = "";
