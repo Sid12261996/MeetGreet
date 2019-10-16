@@ -5,6 +5,7 @@ import SignUp from '../SignUp/SignUp';
 import Navbar from '../Navbar/Navbar';
 import userService from "../../services/user-services";
 import auth from '../../services/auth';
+import Start from '../Start/Start';
 
 
 class Home extends Component {
@@ -45,7 +46,7 @@ class Home extends Component {
             <div className="wrapper">
                 <Route exact path="/" component={Navbar} />
                 <div className="body-container container-fluid padding">
-                    <div className="row flex-row-reverse">
+                    <div className="row flex-row-reverse padding">
 
                         <div className="col-md-8 order-last">
                             <div className="rotating-box">
@@ -66,11 +67,11 @@ class Home extends Component {
                             </div>
                         </div>
 
-                        <div className="signins col-md-4 order-first">
+                        <div className="signin col-md-4 order-first" align="center">
                             <form className="sign" onSubmit={this.handleSubmit}>
                                 <span className="JOC"><h1>Sign In</h1></span>
                                 <table align="center" cellPadding="8px">
-                                    <tbody className="signin-body">
+                                    <tbody>
                                     <tr>
                                         <td>Username</td>
                                         <td><input className="userinput" type="text" id="username"
