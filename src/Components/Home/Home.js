@@ -6,6 +6,10 @@ import Navbar from '../Navbar/Navbar';
 import userService from "../../services/user-services";
 import auth from '../../services/auth';
 
+import {Route} from 'react-router-dom';
+import Start from '../Start/Start';
+
+
 class Home extends Component {
     constructor(props) {
         super(props);
