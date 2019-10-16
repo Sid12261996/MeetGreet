@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import auth from '../../services/auth';
+import './Start.css';
 
 export default class Start extends Component {
     handleLogout = () => {

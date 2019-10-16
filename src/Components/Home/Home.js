@@ -6,9 +6,6 @@ import Navbar from '../Navbar/Navbar';
 import userService from "../../services/user-services";
 import auth from '../../services/auth';
 
-import {Route} from 'react-router-dom';
-import Start from '../Start/Start';
-
 
 class Home extends Component {
     constructor(props) {
@@ -48,7 +45,7 @@ class Home extends Component {
             <div className="wrapper">
                 <Route exact path="/" component={Navbar} />
                 <div className="body-container container-fluid padding">
-                    <div className="row flex-row-reverse padding">
+                    <div className="row flex-row-reverse">
 
                         <div className="col-md-8 order-last">
                             <div className="rotating-box">
@@ -69,11 +66,11 @@ class Home extends Component {
                             </div>
                         </div>
 
-                        <div className="signin col-md-4 order-first" align="center">
+                        <div className="signins col-md-4 order-first">
                             <form className="sign" onSubmit={this.handleSubmit}>
                                 <span className="JOC"><h1>Sign In</h1></span>
                                 <table align="center" cellPadding="8px">
-                                    <tbody>
+                                    <tbody className="signin-body">
                                     <tr>
                                         <td>Username</td>
                                         <td><input className="userinput" type="text" id="username"
