@@ -54,31 +54,31 @@ class SignUp extends Component {
                     <tbody className="modal-tbody">
                         <tr>
                             <td className="thead">Name</td>
-                            <td><input className="input-field" onChange={this.handleChange} id="Name" type="text" name="Name"/></td>
+                            <td><input className="input-field" onChange={this.handleChange} id="Name" type="text" name="Name" required /></td>
                             <td></td>
                             <td></td>
                         </tr>
                         <tr>
                             <td className="thead">Username</td>
-                            <td><input className="input-field" onChange={this.handleChange} id="Email" type="text" name="Email"/></td>
+                            <td><input className="input-field" onChange={this.handleChange} id="Email" type="text" name="Email" required /></td>
                             <td></td>
                             <td></td>
                         </tr>
                         <tr>
                             <td className="thead">Password</td>
-                            <td><input className="input-field" onChange={this.handleChange} id="Password" type="password" name="Password" /></td>
+                            <td><input className="input-field" onChange={this.handleChange} id="Password" type="password" name="Password" required /></td>
                             <td></td>
                             <td></td>
                         </tr>
                         <tr>
                             <td className="thead">Confirm Password</td>
-                            <td><input className="input-field" onChange={this.handleChange} id="ConfPassword" type="password" name="ConfPassword" /></td>
+                            <td><input className="input-field" onChange={this.handleChange} id="ConfPassword" type="password" name="ConfPassword" required /></td>
                             <td></td>
                             <td></td>
                         </tr>
                         <tr>
                             <td>Gender</td>
-                            <td className="p-2">
+                            <td>
                             <label className="radio-label"><input className="radio-inline m-2" onChange={this.handleChange} id="GenderM" type="radio" name="Gender" value="Male" />Male</label>
                             <label className="radio-label"><input className="radio-inline m-2" onChange={this.handleChange} id="GenderF" type="radio" name="Gender" value="Female" />Female</label>
                             <label className="radio-label"><input className="radio-inline m-2" onChange={this.handleChange} id="GenderO" type="radio" name="Gender" value="Other" />Other</label>

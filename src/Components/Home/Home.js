@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
+import {Route} from 'react-router-dom';
 import './Home.css';
 import SignUp from '../SignUp/SignUp';
+import Navbar from '../Navbar/Navbar';
 import userService from "../../services/user-services";
-
-import {Route} from 'react-router-dom';
+import auth from '../../services/auth';
 import Start from '../Start/Start';
 
 
@@ -28,7 +29,9 @@ class Home extends Component {
         userService.login({Email: this.state.username, Password: this.state.password}).then(
             result => {
                 if(result){
-                    this.props.history.push("/start");
+                    auth.login(()=>{
+                        this.props.history.push("/start");
+                    });
                 }
             }, err => {
                 alert(err.response.data.message);
@@ -41,7 +44,7 @@ class Home extends Component {
         let addModalClose = () => this.setState({addModalShow: false});
         return (
             <div className="wrapper">
-
+                <Route exact path="/" component={Navbar} />
                 <div className="body-container container-fluid padding">
                     <div className="row flex-row-reverse padding">
 
