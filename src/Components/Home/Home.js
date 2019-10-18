@@ -29,14 +29,16 @@ class Home extends Component {
         userService.login({Email: this.state.username, Password: this.state.password}).then(
             result => {
                 if(result){
-                    auth.login(()=>{
+
+
+                    auth.setAuthenticity(true,result,()=>{
                         this.props.user(result);
                         console.log(this.props);
                         this.props.history.push("/start");
                     });
                 }
             }, err => {
-                alert(err.response.data.message);
+                // alert(err.response.data);
                 document.getElementById("password").value = "";
             }
         );
