@@ -5,7 +5,7 @@ import SignUp from '../SignUp/SignUp';
 import Navbar from '../Navbar/Navbar';
 import userService from "../../services/user-services";
 import auth from '../../services/auth';
-import Start from '../Start/Start';
+import {connect} from 'react-redux';
 
 
 class Home extends Component {
@@ -29,7 +29,11 @@ class Home extends Component {
         userService.login({Email: this.state.username, Password: this.state.password}).then(
             result => {
                 if(result){
+
+
                     auth.setAuthenticity(true,result,()=>{
+                        this.props.user(result);
+                        console.log(this.props);
                         this.props.history.push("/start");
                     });
                 }
@@ -44,7 +48,11 @@ class Home extends Component {
         let addModalClose = () => this.setState({addModalShow: false});
         return (
             <div className="wrapper">
+            {/* Navbar Starts */}
+
                 <Route exact path="/" component={Navbar} />
+
+            {/* Home Body */}
                 <div className="body-container container-fluid padding">
                     <div className="row flex-row-reverse padding">
 
@@ -176,4 +184,10 @@ class Home extends Component {
     }
 }
 
-export default Home;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        user : (result) => { dispatch({type: 'USERS_DATA', result : result})}
+    }
+}
+
+export default connect(null,mapDispatchToProps)(Home);
