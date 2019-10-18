@@ -8,14 +8,14 @@ class Start extends Component {
         auth.logout(()=>{
             this.props.history.push("/");
         });
-    }
+    };
     render() {
         console.log(this.props);
-        let userData = this.props.user.data
+        let userData = this.props.user;
         return (
             <div>
-                <h1>{userData.currentUser.Name}</h1>
-                <h1>{userData.currentUser.Email}</h1>
+                <h1>{userData.Name}</h1>
+                <h1>{userData.Email}</h1>
                 <button onClick={this.handleLogout}>Logout</button>
             </div>
         )
@@ -26,6 +26,6 @@ const mapStateToProps = (state) => {
     return {
         user: state.root.user
     }
-}
+};
 
 export default connect(mapStateToProps)(Start);

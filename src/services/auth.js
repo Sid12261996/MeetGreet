@@ -1,42 +1,4 @@
-class Auth {
-    constructor() {
-        this.authenticated = false;
-        this.isCacheSet()
-    }
-
-    isCacheSet() {
-        let token = PlayingWithCache.getCache('token');
-        if (token) {
-            let user = JSON.stringify(PlayingWithCache.getCache('user'));
-            // Todo: call the reducer and load the value from user
-            this.authenticated = true;
-            return true;
-        }
-        return false;
-    }
-
-    //Todo: change the name of this function to some generic name as setAuthenticity() where 2nd parameter accepts true or false and set authentication factor, No need of logout
-    setAuthenticity = (authenticity, result, cb) => {
-        this.authenticated = authenticity;
-        if (authenticity) {
-            PlayingWithCache.setCache('user', result.currentUser);
-            PlayingWithCache.setCache('token', result.token);
-        } else {
-            PlayingWithCache.removeCache();
-        }
-        return cb();
-    };
-//Todo: define the callback here , so that we can add our own middlewares standing common to all
-    logout = (cb) => {
-        this.authenticated = false;
-        return cb();
-    };
-
-    isAuthenticated() {
-        return this.authenticated;
-    }
-
-}
+import {connect} from "react-redux";
 
 class PlayingWithCache {
     static setCache(key, value) {
@@ -58,10 +20,66 @@ class PlayingWithCache {
     static getCache(key) {
         try {
             return localStorage.getItem(key);
+
         } catch (e) {
             console.error('Could not retrieve cache check the error:', e)
         }
     }
 }
 
+class Auth extends PlayingWithCache {
+    constructor() {
+        super();
+        this.authenticated = false;
+        this.isCacheSet()
+    }
+
+    isCacheSet() {
+        let token = Auth.getCache('token');
+        if (token) {
+            let user = JSON.parse(Auth.getCache('user'));
+            // Todo: call the reducer and load the value from user
+            console.log(user);
+            this.props.user(user);
+            this.authenticated = true;
+            return true;
+        }
+        return false;
+    }
+
+    //Todo: change the name of this function to some generic name as setAuthenticity() where 2nd parameter accepts true or false and set authentication factor, No need of logout
+    setAuthenticity = (authenticity, result, cb) => {
+        this.authenticated = authenticity;
+        if (authenticity) {
+            Auth.setCache('user', result.data.currentUser);
+            Auth.setCache('token', result.data.token);
+        } else {
+            Auth.removeCache();
+        }
+        return cb();
+    };
+//Todo: define the callback here , so that we can add our own middlewares standing common to all
+    logout = (cb) => {
+        this.authenticated = false;
+        return cb();
+    };
+
+    isAuthenticated() {
+        return this.authenticated;
+    }
+
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        user: (result) => {
+            dispatch({type: 'USERS_DATA', result: result})
+        }
+    }
+};
+connect(null, mapDispatchToProps)(Auth);
 export default new Auth();
+
+
+
+

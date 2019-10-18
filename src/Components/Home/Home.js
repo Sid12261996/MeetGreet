@@ -28,17 +28,14 @@ class Home extends Component {
         e.preventDefault();
         userService.login({Email: this.state.username, Password: this.state.password}).then(
             result => {
-                if(result){
-
-
-                    auth.setAuthenticity(true,result,()=>{
-                        this.props.user(result);
-                        console.log(this.props);
+                if (result) {
+                    auth.setAuthenticity(true, result, () => {
+                        this.props.user(result.data.currentUser);
                         this.props.history.push("/start");
                     });
                 }
             }, err => {
-                // alert(err.response.data);
+                 alert(err.response.data);
                 document.getElementById("password").value = "";
             }
         );
@@ -48,11 +45,11 @@ class Home extends Component {
         let addModalClose = () => this.setState({addModalShow: false});
         return (
             <div className="wrapper">
-            {/* Navbar Starts */}
+                {/* Navbar Starts */}
 
-                <Route exact path="/" component={Navbar} />
+                <Route exact path="/" component={Navbar}/>
 
-            {/* Home Body */}
+                {/* Home Body */}
                 <div className="body-container container-fluid padding">
                     <div className="row flex-row-reverse padding">
 
@@ -186,8 +183,10 @@ class Home extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        user : (result) => { dispatch({type: 'USERS_DATA', result : result})}
+        user: (result) => {
+            dispatch({type: 'USERS_DATA', result: result})
+        }
     }
 }
 
-export default connect(null,mapDispatchToProps)(Home);
+export default connect(null, mapDispatchToProps)(Home);
