@@ -1,4 +1,4 @@
-import {connect} from "react-redux";
+import userStore from "../Store/stores/user-store";
 
 class PlayingWithCache {
     static setCache(key, value) {
@@ -27,6 +27,10 @@ class PlayingWithCache {
     }
 }
 
+
+
+
+
 class Auth extends PlayingWithCache {
     constructor() {
         super();
@@ -40,7 +44,8 @@ class Auth extends PlayingWithCache {
             let user = JSON.parse(Auth.getCache('user'));
             // Todo: call the reducer and load the value from user
             console.log(user);
-            this.props.user(user);
+            userStore.dispatch({type: 'USERS_DATA', result: user});
+            console.log(userStore.getState())
             this.authenticated = true;
             return true;
         }
@@ -70,14 +75,7 @@ class Auth extends PlayingWithCache {
 
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        user: (result) => {
-            dispatch({type: 'USERS_DATA', result: result})
-        }
-    }
-};
-connect(null, mapDispatchToProps)(Auth);
+
 export default new Auth();
 
 

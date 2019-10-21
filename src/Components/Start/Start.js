@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import auth from '../../services/auth';
+import auth from '../../auth/auth';
 import './Start.css';
 import {connect} from 'react-redux';
-
+import userStore from "../../Store/stores/user-store";
 class Start extends Component {
     handleLogout = () => {
         auth.logout(()=>{
@@ -10,8 +10,9 @@ class Start extends Component {
         });
     };
     render() {
-        console.log(this.props);
-        let userData = this.props.user;
+
+        let userData = userStore.getState().user;
+       console.log(userData)
         return (
             <div>
                 <h1>{userData.Name}</h1>

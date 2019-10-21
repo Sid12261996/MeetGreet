@@ -4,9 +4,9 @@ import './Home.css';
 import SignUp from '../SignUp/SignUp';
 import Navbar from '../Navbar/Navbar';
 import userService from "../../services/user-services";
-import auth from '../../services/auth';
+import auth from '../../auth/auth';
 import {connect} from 'react-redux';
-
+import userStore from "../../Store/stores/user-store";
 
 class Home extends Component {
     constructor(props) {
@@ -30,12 +30,12 @@ class Home extends Component {
             result => {
                 if (result) {
                     auth.setAuthenticity(true, result, () => {
-                        this.props.user(result.data.currentUser);
+                        userStore.dispatch({type: 'USERS_DATA', result: result.data.currentUser});
                         this.props.history.push("/start");
                     });
                 }
             }, err => {
-                 alert(err.response.data);
+                alert(err.response.data);
                 document.getElementById("password").value = "";
             }
         );
@@ -187,6 +187,6 @@ const mapDispatchToProps = (dispatch) => {
             dispatch({type: 'USERS_DATA', result: result})
         }
     }
-}
+};
 
 export default connect(null, mapDispatchToProps)(Home);
