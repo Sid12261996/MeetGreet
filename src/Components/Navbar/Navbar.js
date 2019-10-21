@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import { Link } from "react-router-dom";
 import './Navbar.css';
-import Logo from '../Images/mg02.png'
-import env from '../../environment'
+import Logo from '../Images/mg02.png';
 
 class Navbar extends Component{
     render(){
