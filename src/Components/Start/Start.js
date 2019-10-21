@@ -9,6 +9,11 @@ class Start extends Component {
             this.props.history.push("/");
         });
     };
+
+    handleComponent = (e) => {
+        this.props.history.push("/"+e.target.id);
+    };
+
     render() {
 
         let userData = userStore.getState().user;
@@ -18,6 +23,8 @@ class Start extends Component {
                 <h1>{userData.Name}</h1>
                 <h1>{userData.Email}</h1>
                 <button onClick={this.handleLogout}>Logout</button>
+                <button id="profile" onClick={this.handleComponent}>Profile</button>
+                <button id="settings" onClick={this.handleComponent}>Settings</button>
             </div>
         )
     }
