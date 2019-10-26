@@ -65,6 +65,7 @@ class Auth extends PlayingWithCache {
     };
 //Todo: define the callback here , so that we can add our own middlewares standing common to all
     logout = (cb) => {
+        Auth.removeCache();
         this.authenticated = false;
         return cb();
     };
