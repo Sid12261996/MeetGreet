@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import userStore from "../../Store/stores/user-store";
 class Start extends Component {
     handleLogout = () => {
-        auth.logout(()=>{
+        auth.setAuthenticity(false,null,()=>{
             this.props.history.push("/");
         });
     };
