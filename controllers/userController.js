@@ -50,8 +50,8 @@ exports.Register = (req, res) => {
         .then(data => {
 
                 if (data.length > 0) {
-
-                    res.json({message: "UserName or Email already Exists"});
+                    console.log('I am called');
+                    res.status(400).json({message: "UserName or Email already taken"});
                 } else {
                     bcrypt.hash(req.body.Password, 10, (err, hash) => {
                         if (err) {
@@ -83,7 +83,7 @@ exports.Register = (req, res) => {
                             res.json({message: 'Successfully Saved', result});
                         }).catch(err => {
                             console.log(err);
-                            res.status(500).json({message: 'Validation Errors', Errors: err})
+                            res.status(400).json({message: 'Validation Errors', Errors: err})
                         })
                     });
 
