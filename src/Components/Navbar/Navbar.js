@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Link } from "react-router-dom";
 import './Navbar.css';
-import env from '../../environment'
+import Logo from '../Images/mg02.png';
 
 class Navbar extends Component{
     render(){
@@ -9,7 +9,7 @@ class Navbar extends Component{
         <div>
             <nav className="navbar navbar-expand-md navbar-light" id="logo">
                 <Link className="navbar-brand mx-auto" to={'/'}>
-                    <img className="LogoMG2" src= {`${env.logo}`} alt="Logo" />
+                    <img className="LogoMG2" src= {Logo} alt="Logo" />
                 </Link>
             </nav>
         </div>

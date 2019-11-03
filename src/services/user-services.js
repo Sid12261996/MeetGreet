@@ -7,13 +7,11 @@ const userURL = `${env.ApiLink}user/`;
 class userService {
 
    static login = (user) => {
-       console.log(user);
         return axios.post(`${userURL}login`, user);
     };
 
 
    static register = (user) => {
-       console.log(user);
         return axios.post(`${userURL}register`, user);
     };
 }
