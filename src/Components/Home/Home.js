@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
 import {Route} from 'react-router-dom';
+import Front1 from '../Images/1.png';
+import Front2 from '../Images/2.jpg';
 import './Home.css';
 import SignUp from '../SignUp/SignUp';
 import Navbar from '../Navbar/Navbar';
 import userService from "../../services/user-services";
 import auth from '../../auth/auth';
 import {connect} from 'react-redux';
+import Helmet from 'react-helmet';
 import userStore from "../../Store/stores/user-store";
 
 class Home extends Component {
@@ -45,8 +48,12 @@ class Home extends Component {
         let addModalClose = () => this.setState({addModalShow: false});
         return (
             <div className="wrapper">
-                {/* Navbar Starts */}
+                {/* Page Title */}
+                <Helmet>
+                    <title>Login | MeetGreet</title>
+                </Helmet>
 
+                {/* Navbar Starts */}
                 <Route exact path="/" component={Navbar}/>
 
                 {/* Home Body */}
@@ -57,13 +64,13 @@ class Home extends Component {
                             <div className="rotating-box">
                                 <div className="single-rb">
                                     <div className="front-side">
-                                        <img src="#" alt=""/>
+                                        <img src={Front1} alt="Welcome"/>
                                     </div>
                                     <div className="back-side">
                                         <img src="#" alt=""/>
                                     </div>
                                     <div className="left-side">
-                                        <img src="#" alt=""/>
+                                        <img src={Front2} alt="MeetCube2"/>
                                     </div>
                                     <div className="right-side">
                                         <img src="#" alt=""/>
