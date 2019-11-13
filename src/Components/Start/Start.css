@@ -1,0 +1,10 @@
+.welcome { display: grid; place-items: center; height: 100vh; width: 100%; position: absolute; background-color: lightblue; animation-name: slide; animation-duration: 1s; animation-delay: 2s; z-index: 2; animation-fill-mode: forwards; animation-timing-function: ease-out;}
+
+@keyframes slide{
+    from{transform: translateY(0);}
+    to{transform: translateY(-100vh);}
+}
+
+.start { text-align: center; display: flex; width: 100%; height: 100%; position: fixed;}
+
+.mainContent { height: 100%; position: fixed; right: 100px; left: 0;}
