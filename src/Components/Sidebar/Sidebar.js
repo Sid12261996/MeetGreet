@@ -6,7 +6,7 @@ import auth from '../../auth/auth';
 class Sidebar extends Component {
 
     handleLogout = () => {
-        auth.logout(()=>{
+        auth.setAuthenticity(false,null,()=>{
             this.props.history.push("/");
         });
     };

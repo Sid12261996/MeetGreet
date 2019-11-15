@@ -19,9 +19,15 @@
 .post-body {width: 100%; display: flex;}
 .post-left {width: 90%; background-color: #eee; height: 400px;}
 /* width = 673px Below*/
-.post-left img {height: 400px; width: 100%; } 
+.post-left img {height: 400px; width:100%; } 
 .post-left video {height: 400px;}
 .post-right {width: 10%; background-color: rgba(22,22,22,0.9);}
 .like, .dislike, .share, .comment, .report {display: block; height: 20%; width: 100%; display: grid; place-items: center; color: white; cursor: pointer; transition: background-color 0.4s;}
 .like:hover, .dislike:hover, .share:hover, .comment:hover, .report:hover {background-color: rgba(20,0,0,0.9);}
 .fa-thumbs-up, .fa-thumbs-down, .fa-exclamation-triangle, .fa-comment, .fa-share {font-size: 24px;}
+
+.create-toolbar {display: flex; justify-content: center;}
+.choose-pic {display: flex; width: 80px; height: 40px; background-color: rgba(22,22,22,0.9);; color: white;}
+.choose-pic:hover {cursor: pointer; background-color: rgba(20,0,0,0.9);}
+.choose-pic h3 {margin: auto;}
+#fileinputbutton {width: 0px;}
