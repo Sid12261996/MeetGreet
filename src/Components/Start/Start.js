@@ -9,6 +9,13 @@ import Post1 from '../SamplePosts/post1.jpg';
 import Post2 from '../SamplePosts/post2.jpg';
 
 class Start extends Component {
+
+    handleLogout = () => {
+        auth.setAuthenticity(false,null,()=>{
+            this.props.history.push("/");
+        });
+    };
+
     render() {
 
         let userData = userStore.getState().user;
