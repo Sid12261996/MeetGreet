@@ -1,0 +1,7 @@
+.Sidebar { background-color: black; position: fixed; right: 0; bottom: 60px; top: 0; display: grid; place-items: center;}
+
+.Notifications, .Messages, .Onlinefriends, .Search { color: white; width: 100px; height: 100%; display: grid; place-items: center; transition: background-color 0.4s;}
+.Notifications:hover, .Messages:hover, .Onlinefriends:hover, .Search:hover {cursor: pointer; background-color: rgba(22,22,22,0.9);}
+.Logout { background-color: rgba(220,53,69,0.9); color: white; width: 100px; height: 100%; display: grid; place-items: center; transition: background-color 0.4s;}
+.Logout:hover { background-color: #d63031; cursor: pointer;}
+.fa-search, .fa-users, .fa-envelope, .fa-bell, .fa-power-off {color: white; display: block; font-size: 40px;}
