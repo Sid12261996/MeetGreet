@@ -28,9 +28,6 @@ class PlayingWithCache {
 }
 
 
-
-
-
 class Auth extends PlayingWithCache {
     constructor() {
         super();
@@ -42,17 +39,14 @@ class Auth extends PlayingWithCache {
         let token = Auth.getCache('token');
         if (token) {
             let user = JSON.parse(Auth.getCache('user'));
-            // Todo: call the reducer and load the value from user
-            console.log(user);
             userStore.dispatch({type: 'USERS_DATA', result: user});
-            console.log(userStore.getState())
             this.authenticated = true;
             return true;
         }
         return false;
     }
 
-    //Todo: change the name of this function to some generic name as setAuthenticity() where 2nd parameter accepts true or false and set authentication factor, No need of logout
+
     setAuthenticity = (authenticity, result, cb) => {
         this.authenticated = authenticity;
         if (authenticity) {
@@ -61,12 +55,6 @@ class Auth extends PlayingWithCache {
         } else {
             Auth.removeCache();
         }
-        return cb();
-    };
-//Todo: define the callback here , so that we can add our own middlewares standing common to all
-    logout = (cb) => {
-        Auth.removeCache();
-        this.authenticated = false;
         return cb();
     };
 
