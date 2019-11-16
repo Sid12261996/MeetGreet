@@ -5,16 +5,34 @@ import userStore from "../../Store/stores/user-store";
 import Tabs from '../Tabs/Tabs';
 import Helmet from "react-helmet";
 import Sidebar from '../Sidebar/Sidebar';
+import Post from '../SamplePosts/post.jpg';
 import Post1 from '../SamplePosts/post1.jpg';
-import Post2 from '../SamplePosts/post2.jpg';
 
 class Start extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            imgUpload: '',
+        };
 
-    handleLogout = () => {
-        auth.setAuthenticity(false,null,()=>{
-            this.props.history.push("/");
-        });
-    };
+        this.getBase64 = this.getBase64.bind(this);
+    }
+
+    getBase64(e) {
+        var file = e.target.files[0]
+        let reader = new FileReader()
+        if(e.target.files[0]){
+            reader.readAsDataURL(file)
+        reader.onload = () => {
+          this.setState({
+            imgUpload: reader.result
+          });
+        };
+        reader.onerror = function (error) {
+          console.log('Error: ', error);
+        }
+        }
+      }
 
     render() {
 
@@ -25,20 +43,30 @@ class Start extends Component {
                     <title>Start</title>
                 </Helmet>
                 <div className="welcome">
-                    <h1>{userData.Name}</h1>
-                    <h1>{userData.Email}</h1>
+                    <div className="welcome-content">
+                        <h1>{userData.Name}</h1>
+                        <h1>{userData.Email}</h1>
+                    </div>
                 </div>
                 <div className="start">
                     <div className="mainContent">
                         <div className="post-container">
+                            <div className="create-toolbar">
+                                <div className="choose-pic" onClick={()=>{document.getElementById('fileinputbutton').click()}}>
+                                    <h3>+</h3>  <input type="file" ref={this.fileInput} onChange={this.getBase64} id="fileinputbutton"/>                                    
+                                </div>
+                            </div>
                             <div className="post">
                                 <div className="post-head">
                                     <div className="post-pic"></div>
                                     <h6>Friend1</h6>
                                 </div>
+                                <div className="post-desc">
+                                    <p>This is some content related to this post.</p>
+                                </div>
                                 <div className="post-body">
                                     <div className="post-left">
-                                        <img src={Post1} alt="Post1"/>
+                                        <img src={this.state.imgUpload} alt="Choose Image from the above button."/>
                                     </div>
                                     <div className="post-right">
                                         <div className="like"><i class="fas fa-thumbs-up"></i></div>
@@ -54,9 +82,12 @@ class Start extends Component {
                                     <div className="post-pic"></div>
                                     <h6>Friend2</h6>
                                 </div>
+                                <div className="post-desc">
+                                    <p>This is some content related to this post.</p>
+                                </div>
                                 <div className="post-body">
                                     <div className="post-left">
-                                        <img src={Post2} alt="Post2"/>
+                                        <img src={Post1} alt="Post1"/>
                                     </div>
                                     <div className="post-right">
                                         <div className="like"><i class="fas fa-thumbs-up"></i></div>
