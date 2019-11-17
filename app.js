@@ -6,7 +6,7 @@ const express = require('express'),
     mongoose = require('mongoose'),
     userRoute = require('./routes/userRoute'),
     JwtToken = require('./AuthVerify/AuthVerify')
-
+    postRoute = require('./routes/post-route')
 ;
 app.use(cors());
 
@@ -21,6 +21,7 @@ app.use(bodyParser.json());
 
 //Routes
 app.use('/api/user',userRoute);
+app.use('/api/posts',postRoute);
 
 //Fake route to tst JWT
 app.get('/api/protected',JwtToken,(req,res)=>{
