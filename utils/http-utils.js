@@ -15,18 +15,18 @@ const statusMessages = {
 };
 
 
-Response = function (requestStatus, data, error) {
+const Response = function (requestStatus, data, error) {
     return (req, res) => {
         let message = {error, ...{type: statusMessages[requestStatus]}};
         res.status(requestStatus).json({data, message})
     };
 };
 
-exports.Ok = (data, error) => {
-    return Response(statusCodes.Ok, data, error)
+exports.Ok = (data) => {
+    return Response(statusCodes.Ok, data, undefined)
 };
-exports.BadRequest = (data, error) => {
-    return Response(statusCodes.BadRequest, data, error)
+exports.BadRequest = (error) => {
+    return Response(statusCodes.BadRequest, undefined, error)
 };
 exports.NotFound = (data, error) => {
     return Response(statusCodes.NotFound, data, error)

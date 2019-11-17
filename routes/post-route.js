@@ -2,16 +2,21 @@ const Router = require('express').Router(),
     controller = require('../controllers/post-controller');
 
 //Register route
-Router.post('/create', (req, res) => {
-    let ctx = controller.Create(req.body);
+Router.post('/:userId/create', async (req, res) => {
+    try {
+        let ctx = await controller.Create(req.body, req.params.userId);
+        ctx(req, res);
+    } catch (e) {
+        console.log('Route is catching Error', e);
+        res.status(500).json(e);
+    }
+});
+Router.get('/:userId', async (req, res) => {
+    let ctx = await controller.getAll(req.params.userId);
     ctx(req, res);
 });
-Router.get('', (req, res) => {
-    let ctx = controller.getAll();
-    ctx(req, res);
-});
-Router.get('/:id', (req, res) => {
-    let ctx = controller.get(req.params.id);
+Router.get('/:userId/:id', async (req, res) => {
+    let ctx = await controller.get(req.params.id, req.params.userId);
     ctx(req, res);
 });
 

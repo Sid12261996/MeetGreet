@@ -1,17 +1,36 @@
 const mongo = require('mongoose'),
     schema = mongo.Schema,
     entity = require('../models/base-entity').Entity,
-    privacy = require('./privacy').Posts
+    interactions = require('./Interactions')
 ;
 
+
 const posts = new schema({
-    _id: {type: schema.Types.ObjectId, default: new mongo.Types.ObjectId(), required: true},
     baseEntity: entity,
-    Title: {type: String, required: true, default: ''},
-    ImageUrl: String,
-    VideoUrl: String,
-    postedBy: schema.Types.ObjectId,
-    privacy: privacy,
+    title: {type: String, required: true, default: 'No Title'},
+    imageUrl: String,
+    videoUrl: String,
+    author: schema.Types.ObjectId,
+    privacy: {
+        restrictedUsers: [schema.Types.ObjectId],
+        CannotComment: Boolean
+    },
+    interactions: {
+        comments: [{author: schema.Types.ObjectId, comment: String}],
+        likes: {count: Number, actionBy: [schema.Types.ObjectId]},
+        dislikes:{count: Number,actionBy:[schema.Types.ObjectId]}
+    }
 });
 
-module.exports = mongo.model('Users', posts);
+posts.virtual('initial').get(function () {
+    let newPost = this;
+    const interaction = new interactions('First', 'Sid');
+    // console.log(interaction)
+    // newPost.interactions.likes = interaction.likes;
+    // newPost.interactions.comments.push(interaction.comment);
+    newPost.interactions = {likes: interaction.likes, comments: interaction.comments};
+    console.log(newPost);
+    return newPost;
+
+});
+module.exports = mongo.model('posts', posts);
