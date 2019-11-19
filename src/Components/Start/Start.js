@@ -1,117 +1,159 @@
 import React, { Component } from 'react';
 import './Start.css';
-import {connect} from 'react-redux';
 import userStore from "../../Store/stores/user-store";
 import Tabs from '../Tabs/Tabs';
 import Helmet from "react-helmet";
 import Sidebar from '../Sidebar/Sidebar';
-import Post from '../SamplePosts/post.jpg';
-import Post1 from '../SamplePosts/post1.jpg';
+import axios from 'axios';
+import env from '../../environment.json';
+import $ from 'jquery';
 
 class Start extends Component {
+
     constructor(props){
         super(props);
         this.state = {
             imgUpload: '',
+            posts: '',
+            postText : ''
         };
 
-        this.getBase64 = this.getBase64.bind(this);
+        //BINDING FUNCTIONS
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.onChange = this.onChange.bind(this);
     }
 
-    getBase64(e) {
-        var file = e.target.files[0]
-        let reader = new FileReader()
-        if(e.target.files[0]){
-            reader.readAsDataURL(file)
-        reader.onload = () => {
-          this.setState({
-            imgUpload: reader.result
-          });
-        };
-        reader.onerror = function (error) {
-          console.log('Error: ', error);
+
+    componentDidMount(){      //WILL RUN ON PAGE RELOAD
+        let userData = userStore.getState().root.user;
+
+        axios.get(`${env.ApiMonthLink}posts/${userData._id}`)         //POSTS API HIT
+        .then((result)=>{
+            this.setState({
+                ...this.state,
+                posts : result.data.data
+            })
+        },error => {
+            console.log(error);
+        });
+
+    }
+
+    handleSubmit = (e) => {     //POST SUBMIT FUNCTION
+        e.preventDefault();
+        let myPost = $('#postText').val();       //POST CHANGE FUNCTION
+        this.setState({
+            ...this.state,
+            postText : myPost
+        });
+
+        let userData = userStore.getState().root.user;                  
+        let formData = new FormData();
+        formData.append('file',this.state.imgUpload);
+        const config = {     
+            headers: { 'content-type': 'multipart/form-data' }
         }
-        }
-      }
+
+        // POST CREATE HIT
+        axios.post('https://meetgreet-upload.herokuapp.com/upload',formData,config).then(Imgcreate=>{
+            axios.post(`${env.ApiMonthLink}posts/${userData._id}/create`,
+            {title: this.state.postText, imageUrl : "https://meetgreet-upload.herokuapp.com/images/"+Imgcreate.data}).then(()=>{
+                document.getElementById('postText').value = "";
+                alert('Post Created Successfully');
+                window.location.reload(false);
+            },error=>{console.log(error)});
+        },err=>{console.log(err)});
+    };
+
+    onChange = (e) => {
+        let files = e.target.files[0];
+        this.setState({
+            ...this.state,
+            imgUpload : files
+        });
+    };
 
     render() {
 
-        let userData = userStore.getState().user;
+        let userData = userStore.getState().root.user;      //GETTING USER DETAILS
+        const posts = this.state.posts;                     //GETTING POSTS FROM STATE
         return (
             <div>
+
+                {/* SCREEN TITLE */}
                 <Helmet>
                     <title>Start</title>
                 </Helmet>
+
+                {/* WELCOME SCREEN */}
                 <div className="welcome">
                     <div className="welcome-content">
                         <h1>{userData.Name}</h1>
                         <h1>{userData.Email}</h1>
                     </div>
                 </div>
+
+                {/* START SCREEN */}
                 <div className="start">
                     <div className="mainContent">
                         <div className="post-container">
+
+                            {/* CREATE POST TOOLBAR */}
                             <div className="create-toolbar">
-                                <div className="choose-pic" onClick={()=>{document.getElementById('fileinputbutton').click()}}>
-                                    <h3>+</h3>  <input type="file" ref={this.fileInput} onChange={this.getBase64} id="fileinputbutton"/>                                    
-                                </div>
+                                <form autocomplete="off" onSubmit={this.handleSubmit} encType="multipart/form-data">
+
+                                    <div className="generatePost">
+                                        <input autocomplete="off" type="text" id="postText" placeholder="What's on your mind?"/>
+
+                                        <div className="choose-pic" onClick={()=>{document.getElementById('fileinputbutton').click()}}>
+                                            <h6>Image</h6>  
+                                            <input type="file" id="fileinputbutton" name="file" onChange={(e)=>{this.onChange(e)}}/>   
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" className="btn btn-success">Submit</button>
+                                </form>
                             </div>
-                            <div className="post">
-                                <div className="post-head">
-                                    <div className="post-pic"></div>
-                                    <h6>Friend1</h6>
-                                </div>
-                                <div className="post-desc">
-                                    <p>This is some content related to this post.</p>
-                                </div>
-                                <div className="post-body">
-                                    <div className="post-left">
-                                        <img src={this.state.imgUpload} alt="Choose Image from the above button."/>
-                                    </div>
-                                    <div className="post-right">
-                                        <div className="like"><i class="fas fa-thumbs-up"></i></div>
-                                        <div className="dislike"><i class="fas fa-thumbs-down"></i></div>
-                                        <div className="report"><i class="fas fa-exclamation-triangle"></i></div>
-                                        <div className="comment"><i class="fas fa-comment"></i></div>
-                                        <div className="share"><i class="fas fa-share"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="post">
-                                <div className="post-head">
-                                    <div className="post-pic"></div>
-                                    <h6>Friend2</h6>
-                                </div>
-                                <div className="post-desc">
-                                    <p>This is some content related to this post.</p>
-                                </div>
-                                <div className="post-body">
-                                    <div className="post-left">
-                                        <img src={Post1} alt="Post1"/>
-                                    </div>
-                                    <div className="post-right">
-                                        <div className="like"><i class="fas fa-thumbs-up"></i></div>
-                                        <div className="dislike"><i class="fas fa-thumbs-down"></i></div>
-                                        <div className="report"><i class="fas fa-exclamation-triangle"></i></div>
-                                        <div className="comment"><i class="fas fa-comment"></i></div>
-                                        <div className="share"><i class="fas fa-share"></i></div>
-                                    </div>
-                                </div>
-                            </div>
+
+                            {
+
+                                posts && posts.reverse().map(post=>{            //POSTS MAPPING AND DISPLAYING
+                                    return(
+                                        <div className="post" key={post._id}>   
+                                            <div className="post-head">
+                                                <div className="post-pic"></div>
+                                                <h6>{post.author}</h6>
+                                            </div>
+                                            <div className="post-desc">
+                                                <p>{post.title}</p>
+                                            </div>
+                                            <div className="post-body">
+                                                <div className="post-left">
+                                                    <img src={post.imageUrl} alt="Post1"/>
+                                                </div>
+                                                <div className="post-right">
+                                                    <div className="like"><i className="fas fa-thumbs-up"></i></div>
+                                                    <div className="dislike"><i className="fas fa-thumbs-down"></i></div>
+                                                    <div className="report"><i className="fas fa-exclamation-triangle"></i></div>
+                                                    <div className="comment"><i className="fas fa-comment"></i></div>
+                                                    <div className="share"><i className="fas fa-share"></i></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
+    
                         </div>
                     </div>
+                    {/* SIDEBAR */}
                     <Sidebar />
                 </div>
+                {/* TABSBAR */}
                 <Tabs />
             </div>
         )
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        user: state.root.user
-    }
-};
-
-export default connect(mapStateToProps)(Start);
+export default Start;

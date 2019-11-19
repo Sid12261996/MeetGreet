@@ -1,6 +1,7 @@
 {
   "url": "http://localhost:5000/api/",
   "ApiLink" : "https://meetgreet-api.herokuapp.com/api/",
+  "ApiMonthLink" : "https://meetgreet-api-nov.herokuapp.com/api/",
   "ImageBaseUrl": "https://meetgreet-upload.herokuapp.com/",
   "logo": "https://meetgreet-upload.herokuapp.com/images/1570295217.662374mg02.png"
 }
