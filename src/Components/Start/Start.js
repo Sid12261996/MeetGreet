@@ -47,7 +47,9 @@ class Start extends Component {
         let userData = userStore.getState().root.user;                  
         
         // POST CREATE HIT
-        const formData = new FormData($('#fileinputbutton')[0]);
+        const formData = new FormData();
+        formData.append('file',this.state.imgUpload);
+
         // formData.file = this.state.imgUpload;
         axios.post('https://meetgreet-upload.herokuapp.com/upload',formData).then(Imgcreate=>{
             console.log(Imgcreate);
@@ -85,7 +87,7 @@ class Start extends Component {
     //   }
 
     getImage(e){        //POST IMAGE VALUE FUNCTION
-        var src = e.target.value; 
+        var src = e.target.files[0];
         // var tarr = src.replace("C:\\fakepath\\", ""); 
         // var file = URL.createObjectURL(e.target.files[0]);
         // if(file){ 
