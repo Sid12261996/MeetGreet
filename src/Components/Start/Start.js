@@ -100,10 +100,10 @@ class Start extends Component {
 
                             {/* CREATE POST TOOLBAR */}
                             <div className="create-toolbar">
-                                <form autocomplete="off" onSubmit={this.handleSubmit} encType="multipart/form-data">
+                                <form autoComplete="off" onSubmit={this.handleSubmit} encType="multipart/form-data">
 
                                     <div className="generatePost">
-                                        <input autocomplete="off" type="text" id="postText" placeholder="What's on your mind?"/>
+                                        <input autoComplete="off" type="text" id="postText" placeholder="What's on your mind?"/>
 
                                         <div className="choose-pic" onClick={()=>{document.getElementById('fileinputbutton').click()}}>
                                             <h6>Image</h6>  
@@ -111,7 +111,7 @@ class Start extends Component {
                                         </div>
                                     </div>
 
-                                    <button type="submit" className="btn btn-success">Submit</button>
+                                    <button type="submit" className="btn btn-success">POST</button>
                                 </form>
                             </div>
 
@@ -122,7 +122,7 @@ class Start extends Component {
                                         <div className="post" key={post._id}>   
                                             <div className="post-head">
                                                 <div className="post-pic"></div>
-                                                <h6>{post.author}</h6>
+                                                <h6>{post.authorName}</h6>
                                             </div>
                                             <div className="post-desc">
                                                 <p>{post.title}</p>
