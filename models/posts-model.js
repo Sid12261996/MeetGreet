@@ -11,6 +11,7 @@ const posts = new schema({
     imageUrl: String,
     videoUrl: String,
     author: schema.Types.ObjectId,
+    authorName: {type: String, required: true},
     privacy: {
         restrictedUsers: [schema.Types.ObjectId],
         CannotComment: Boolean
