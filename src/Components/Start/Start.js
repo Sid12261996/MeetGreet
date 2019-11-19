@@ -19,8 +19,8 @@ class Start extends Component {
         };
 
         //BINDING FUNCTIONS
-        // this.getBase64 = this.getBase64.bind(this);
-        this.getImage = this.getImage.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.onChange = this.onChange.bind(this);
     }
 
 
@@ -41,71 +41,37 @@ class Start extends Component {
 
     handleSubmit = (e) => {     //POST SUBMIT FUNCTION
         e.preventDefault();
-        // console.log(this.state);         // NOT NECESSARY
-
-        
-        let userData = userStore.getState().root.user;                  
-        
-        // POST CREATE HIT
-        const formData = new FormData();
-        formData.append('file',this.state.imgUpload);
-
-        // formData.file = this.state.imgUpload;
-        axios.post('https://meetgreet-upload.herokuapp.com/upload',formData).then(Imgcreate=>{
-            console.log(Imgcreate);
-            // axios.post(`${env.ApiMonthLink}posts/${userData._id}/create`,
-            // {title: this.state.postText, imageUrl : "https://meetgreet-upload.herokuapp.com/images/"+Imgcreate}).then(()=>{
-            //     alert('Post Created Successfully');
-            // },error=>{console.log("Create API didnt work "+ error)});
-        },err=>{console.log("Python API didnt work "+ err)});
-    };
-
-    handleChange = (e) => {        //POST CHANGE FUNCTION
+        let myPost = $('#postText').val();       //POST CHANGE FUNCTION
         this.setState({
             ...this.state,
-            [e.target.id] : e.target.value
+            postText : myPost
         });
+
+        let userData = userStore.getState().root.user;                  
+        let formData = new FormData();
+        formData.append('file',this.state.imgUpload);
+        const config = {     
+            headers: { 'content-type': 'multipart/form-data' }
+        }
+
+        // POST CREATE HIT
+        axios.post('https://meetgreet-upload.herokuapp.com/upload',formData,config).then(Imgcreate=>{
+            axios.post(`${env.ApiMonthLink}posts/${userData._id}/create`,
+            {title: this.state.postText, imageUrl : "https://meetgreet-upload.herokuapp.com/images/"+Imgcreate.data}).then(()=>{
+                document.getElementById('postText').value = "";
+                alert('Post Created Successfully');
+                window.location.reload(false);
+            },error=>{console.log(error)});
+        },err=>{console.log(err)});
     };
 
-
-    // TO GET IMAGE USING BASE64
-    // getBase64(e) {
-    //     var file = e.target.files[0]
-    //     let reader = new FileReader()
-    //     if(e.target.files[0]){
-    //         reader.readAsDataURL(file)
-    //     reader.onload = () => {
-    //       this.setState({
-    //           ...this.state,
-    //         imgUpload: reader.result
-    //       });
-    //     };
-    //     reader.onerror = function (error) {
-    //       console.log('Error: ', error);
-    //     }
-    //     }
-    //   }
-
-    getImage(e){        //POST IMAGE VALUE FUNCTION
-        var src = e.target.files[0];
-        // var tarr = src.replace("C:\\fakepath\\", ""); 
-        // var file = URL.createObjectURL(e.target.files[0]);
-        // if(file){ 
-            this.setState({
-                ...this.state,
-                imgUpload : src
-            });
-        // }
-        // let files = e.target.files;
-        // let reader = new FileReader();
-        // reader.readAsDataURL(files[0]);
-        // reader.onload = (e) => {
-        //     this.setState({
-        //         ...this.state,
-        //         imgUpload: e.target.result
-        //     })
-        // }
-    }
+    onChange = (e) => {
+        let files = e.target.files[0];
+        this.setState({
+            ...this.state,
+            imgUpload : files
+        });
+    };
 
     render() {
 
@@ -134,14 +100,18 @@ class Start extends Component {
 
                             {/* CREATE POST TOOLBAR */}
                             <div className="create-toolbar">
-                                <form onSubmit={this.handleSubmit} encType="multipart/form-data">
-                                    <label htmlFor="postText">Whats on your mind..</label>
-                                    <input type="text" id="postText" onChange={this.handleChange} />
-                                    <div className="choose-pic" onClick={()=>{document.getElementById('fileinputbutton').click()}}>
-                                        <h6>Choose Image</h6>  
-                                        <input type="file" onChange={this.getImage} id="fileinputbutton" name="file"/>   
+                                <form autocomplete="off" onSubmit={this.handleSubmit} encType="multipart/form-data">
+
+                                    <div className="generatePost">
+                                        <input autocomplete="off" type="text" id="postText" placeholder="What's on your mind?"/>
+
+                                        <div className="choose-pic" onClick={()=>{document.getElementById('fileinputbutton').click()}}>
+                                            <h6>Image</h6>  
+                                            <input type="file" id="fileinputbutton" name="file" onChange={(e)=>{this.onChange(e)}}/>   
+                                        </div>
                                     </div>
-                                    <input type="submit"/>
+
+                                    <button type="submit" className="btn btn-success">Submit</button>
                                 </form>
                             </div>
 
