@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Route} from 'react-router-dom';
+import {Route, Link} from 'react-router-dom';
 import Front1 from '../Images/1.png';
 import Front2 from '../Images/2.jpg';
 import './Home.css';
@@ -100,7 +100,7 @@ class Home extends Component {
                                         <td></td>
                                         <td className="spectr">
                                             <input className="bg2" type="submit" value="Login"/>
-                                            <span className="forgot"><a href="">Forgot Password?</a></span>
+                                            <span className="forgot"><Link to="#">Forgot Password?</Link></span>
                                         </td>
                                     </tr>
 
@@ -111,7 +111,7 @@ class Home extends Component {
                                         <td>
                                             <div className="social-signin">
 
-                                                <a href="#"><i className="fab fa-google-plus-g"></i></a>
+                                                <Link to="#"><i className="fab fa-google-plus-g"></i></Link>
 
                                             </div>
                                         </td>
@@ -134,10 +134,10 @@ class Home extends Component {
                 <div className="container-fluid col-md-12" align="center">
                     <span className="JOC"><h3>Join our <span className="Us">Community</span></h3></span>
                     <div className="social">
-                        <a href="#"><i className="fab fa-facebook"></i></a>
-                        <a href="#"><i className="fab fa-twitter"></i></a>
-                        <a href="#"><i className="fab fa-youtube"></i></a>
-                        <a href="#"><i className="fab fa-instagram"></i></a>
+                        <Link to="#"><i className="fab fa-facebook"></i></Link>
+                        <Link to="#"><i className="fab fa-twitter"></i></Link>
+                        <Link to="#"><i className="fab fa-youtube"></i></Link>
+                        <Link to="#"><i className="fab fa-instagram"></i></Link>
                     </div>
                 </div>
 
@@ -149,9 +149,9 @@ class Home extends Component {
                                 <h5>MeetGreet</h5>
                                 <hr className="light"/>
                                 <div className="footer-items">
-                                    <p><a href="#">About MeetGreet</a></p>
-                                    <p><a href="#">Features</a></p>
-                                    <p><a href="#">Security</a></p>
+                                    <p><Link to="#">About MeetGreet</Link></p>
+                                    <p><Link to="#">Features</Link></p>
+                                    <p><Link to="#">Security</Link></p>
                                 </div>
                             </div>
                             <div className="col-md-4">
@@ -159,8 +159,8 @@ class Home extends Component {
                                 <h5>Download</h5>
                                 <hr className="light"/>
                                 <div className="footer-items">
-                                    <p><a href="#">Windows</a></p>
-                                    <p><a href="#">Android</a></p>
+                                    <p><Link to="#">Windows</Link></p>
+                                    <p><Link to="#">Android</Link></p>
                                     <p>Linux</p>
                                     <p>Mac</p>
                                     <p>IPhone & IPad</p>
@@ -171,7 +171,7 @@ class Home extends Component {
                                 <h5>Services</h5>
                                 <hr className="light"/>
                                 <div className="footer-items">
-                                    <p><a href="#">Team Support</a></p>
+                                    <p><Link to="#">Team Support</Link></p>
                                 </div>
                             </div>
                             <div className="col-12">
