@@ -122,7 +122,7 @@ class Start extends Component {
                                         <div className="post" key={post._id}>   
                                             <div className="post-head">
                                                 <div className="post-pic"></div>
-                                                <h6>{post.author}</h6>
+                                                <h6>{post.authorName}</h6>
                                             </div>
                                             <div className="post-desc">
                                                 <p>{post.title}</p>
