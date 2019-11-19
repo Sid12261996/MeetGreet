@@ -2,12 +2,13 @@ const response = require('../utils/http-utils'),
     interactions = require('../models/Interactions'),
     privacy = require('../models/privacy').Posts,
     Posts = require('../models/posts-model'),
+    applicationUser = require('../models/userModel'),
     mongoose = require('mongoose');
 
 exports.Create = async (post, userId) => {
     let interaction = new interactions('First', '5dd04caa2387b90c44020caf');
     // console.log(userId);
-    let errorMessage = {};
+    let user = await applicationUser.findById(userId, {Name: 1});
     let newPost = new Posts({
         title: post.title,
         imageUrl: post.imageUrl,
@@ -15,6 +16,7 @@ exports.Create = async (post, userId) => {
         interactions: {comments: interaction.comments, likes: interaction.likes},
         privacy: privacy,
         author: mongoose.Types.ObjectId(userId),
+        authorName: user.Name
     });
     // let newPost =  posts.initial;
     try {
