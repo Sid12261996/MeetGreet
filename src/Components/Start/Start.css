@@ -28,9 +28,11 @@
 
 .create-toolbar {margin-bottom: 10px;}
 .create-toolbar form {display: flex; justify-content: space-between;}
-.generatePost {display: flex; height: 50px;}
-.generatePost #postText {width: 500px; height: 50px; padding: 5px 10px;}
+.generatePost {display: flex; height: 50px; width: 100%;}
+.generatePost #postText {width: 100%; height: 50px; padding: 5px 10px;}
 .choose-pic {display: flex; width: 80px; height: 50px; background-color: rgba(22,22,22,0.9);; color: white;}
 .choose-pic:hover {cursor: pointer; background-color: rgba(20,0,0,0.9);}
 .choose-pic h6 {margin: auto;}
 #fileinputbutton {width: 0px;}
+.post-btn { background-color:#77274b; border: 1px solid #77274b; width:80px; height:50px; color:white;}
+.post-btn:hover { background-color:#ad3a6e; border: 1px solid #ad3a6e;}

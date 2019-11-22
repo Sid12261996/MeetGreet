@@ -127,11 +127,11 @@ class Start extends Component {
 
                                         <div className="choose-pic" onClick={()=>{document.getElementById('fileinputbutton').click()}}>
                                             <h6>Image</h6>  
-                                            <input type="file" id="fileinputbutton" name="file" onChange={(e)=>{this.onChange(e)}}/>   
+                                            <input type="file" id="fileinputbutton" name="file" onChange={(e)=>{this.onChange(e)}} required/>   
                                         </div>
                                     </div>
 
-                                    <button type="submit" className="btn btn-success">POST</button>
+                                    <button type="submit" className="post-btn">POST</button>
                                 </form>
                             </div>
 
