@@ -21,11 +21,12 @@ class Start extends Component {
         //BINDING FUNCTIONS
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onChange = this.onChange.bind(this);
+        this.getMeta = this.getMeta.bind(this);
     }
 
 
     componentDidMount(){      //WILL RUN ON PAGE RELOAD
-        let userData = userStore.getState().root.user;
+        let userData = userStore.getState().root.user;   
 
         axios.get(`${env.ApiMonthLink}posts/${userData._id}`)         //POSTS API HIT
         .then((result)=>{
@@ -59,7 +60,6 @@ class Start extends Component {
             axios.post(`${env.ApiMonthLink}posts/${userData._id}/create`,
             {title: this.state.postText, imageUrl : "https://meetgreet-upload.herokuapp.com/images/"+Imgcreate.data}).then(()=>{
                 document.getElementById('postText').value = "";
-                alert('Post Created Successfully');
                 window.location.reload(false);
             },error=>{console.log(error)});
         },err=>{console.log(err)});
@@ -73,8 +73,28 @@ class Start extends Component {
         });
     };
 
-    render() {
+    getMeta(url,index){   
+        var img = new Image();
+        img.addEventListener("load", function(){
+            if(this.naturalWidth >= this.naturalHeight){
+                document.getElementsByClassName('posty')[index].style.width = "100%";
+                $('.posty').css({'height':'400px'});
+            }
+            else if(this.naturalWidth < this.naturalHeight){
+                if(this.naturalWidth > 673){
+                    document.getElementsByClassName('posty')[index].style.width = '400px';
+                    $('.posty').css({'height':'400px'});
+                }
+                else{
+                    document.getElementsByClassName('posty')[index].style.width = this.naturalWidth+'px';
+                    $('.posty').css({'height':'400px'});
+                }
+            }
+        });
+        img.src = url;
+    }
 
+    render() {
         let userData = userStore.getState().root.user;      //GETTING USER DETAILS
         const posts = this.state.posts;                     //GETTING POSTS FROM STATE
         return (
@@ -100,24 +120,24 @@ class Start extends Component {
 
                             {/* CREATE POST TOOLBAR */}
                             <div className="create-toolbar">
-                                <form autocomplete="off" onSubmit={this.handleSubmit} encType="multipart/form-data">
+                                <form autoComplete="off" onSubmit={this.handleSubmit} encType="multipart/form-data">
 
                                     <div className="generatePost">
-                                        <input autocomplete="off" type="text" id="postText" placeholder="What's on your mind?"/>
+                                        <input autoComplete="off" type="text" id="postText" placeholder="What's on your mind?"/>
 
                                         <div className="choose-pic" onClick={()=>{document.getElementById('fileinputbutton').click()}}>
                                             <h6>Image</h6>  
-                                            <input type="file" id="fileinputbutton" name="file" onChange={(e)=>{this.onChange(e)}}/>   
+                                            <input type="file" id="fileinputbutton" name="file" onChange={(e)=>{this.onChange(e)}} required/>   
                                         </div>
                                     </div>
 
-                                    <button type="submit" className="btn btn-success">Submit</button>
+                                    <button type="submit" className="post-btn">POST</button>
                                 </form>
                             </div>
 
                             {
 
-                                posts && posts.reverse().map(post=>{            //POSTS MAPPING AND DISPLAYING
+                                posts && posts.reverse().map((post,index)=>{            //POSTS MAPPING AND DISPLAYING
                                     return(
                                         <div className="post" key={post._id}>   
                                             <div className="post-head">
@@ -126,10 +146,13 @@ class Start extends Component {
                                             </div>
                                             <div className="post-desc">
                                                 <p>{post.title}</p>
-                                            </div>
+                                            </div>                                            
                                             <div className="post-body">
+                                            {
+                                                this.getMeta(post.imageUrl,index)
+                                            }
                                                 <div className="post-left">
-                                                    <img src={post.imageUrl} alt="Post1"/>
+                                                    <img className="posty" src={post.imageUrl} alt="Post1" />
                                                 </div>
                                                 <div className="post-right">
                                                     <div className="like"><i className="fas fa-thumbs-up"></i></div>
