@@ -124,7 +124,6 @@ class Start extends Component {
 
                                     <div className="generatePost">
                                         <input autoComplete="off" type="text" id="postText" placeholder="What's on your mind?"/>
-
                                         <div className="choose-pic" onClick={()=>{document.getElementById('fileinputbutton').click()}}>
                                             <h6>Image</h6>  
                                             <input type="file" id="fileinputbutton" name="file" onChange={(e)=>{this.onChange(e)}} required/>   
