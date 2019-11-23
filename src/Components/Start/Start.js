@@ -76,19 +76,23 @@ class Start extends Component {
     getMeta(url,index){   
         var img = new Image();
         img.addEventListener("load", function(){
-            if(this.naturalWidth >= this.naturalHeight){
+            if(this.naturalWidth > this.naturalHeight){
                 document.getElementsByClassName('posty')[index].style.width = "100%";
-                $('.posty').css({'height':'400px'});
+                document.getElementsByClassName('posty')[index].style.height = "400px";
             }
             else if(this.naturalWidth < this.naturalHeight){
                 if(this.naturalWidth > 673){
-                    document.getElementsByClassName('posty')[index].style.width = '400px';
-                    $('.posty').css({'height':'400px'});
+                    document.getElementsByClassName('posty')[index].style.width = '300px';
+                    document.getElementsByClassName('posty')[index].style.height = "400px";
                 }
                 else{
                     document.getElementsByClassName('posty')[index].style.width = this.naturalWidth+'px';
-                    $('.posty').css({'height':'400px'});
+                    document.getElementsByClassName('posty')[index].style.height = "400px";
                 }
+            }
+            else if(this.naturalHeight == this.naturalWidth){
+                document.getElementsByClassName('posty')[index].style.width = "400px";
+                document.getElementsByClassName('posty')[index].style.height = "400px";
             }
         });
         img.src = url;
