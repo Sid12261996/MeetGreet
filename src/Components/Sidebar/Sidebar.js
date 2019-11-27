@@ -27,7 +27,7 @@ class Sidebar extends Component {
                         <i className="fas fa-bell"></i>
                     </div>
                     <div className="Logout" onClick={this.handleLogout}>
-                        <i className="fas fa-power-off"></i>
+                        <i className="fas fa-sign-out-alt"></i>
                     </div>
                 </div>
             </div>

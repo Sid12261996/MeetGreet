@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Start.css';
 import userStore from "../../Store/stores/user-store";
 import Tabs from '../Tabs/Tabs';
+import Welcome from '../Welcome/Welcome';
 import Helmet from "react-helmet";
 import Sidebar from '../Sidebar/Sidebar';
 import axios from 'axios';
@@ -26,6 +27,11 @@ class Start extends Component {
 
 
     componentDidMount(){      //WILL RUN ON PAGE RELOAD
+
+        $(document).ready(() => {
+           return <Welcome />
+        });
+
         let userData = userStore.getState().root.user;   
 
         axios.get(`${env.ApiMonthLink}posts/${userData._id}`)         //POSTS API HIT
@@ -79,27 +85,30 @@ class Start extends Component {
             if(this.naturalWidth > this.naturalHeight){
                 document.getElementsByClassName('posty')[index].style.width = "100%";
                 document.getElementsByClassName('posty')[index].style.height = "400px";
+                document.getElementsByClassName('posty')[index].style.filter = "blur(0px)";
             }
             else if(this.naturalWidth < this.naturalHeight){
                 if(this.naturalWidth > 673){
                     document.getElementsByClassName('posty')[index].style.width = '300px';
                     document.getElementsByClassName('posty')[index].style.height = "400px";
+                    document.getElementsByClassName('posty')[index].style.filter = "blur(0px)";
                 }
                 else{
                     document.getElementsByClassName('posty')[index].style.width = this.naturalWidth+'px';
                     document.getElementsByClassName('posty')[index].style.height = "400px";
+                    document.getElementsByClassName('posty')[index].style.filter = "blur(0px)";
                 }
             }
-            else if(this.naturalHeight == this.naturalWidth){
+            else if(this.naturalHeight === this.naturalWidth){
                 document.getElementsByClassName('posty')[index].style.width = "400px";
                 document.getElementsByClassName('posty')[index].style.height = "400px";
+                document.getElementsByClassName('posty')[index].style.filter = "blur(0px)";
             }
         });
         img.src = url;
     }
 
     render() {
-        let userData = userStore.getState().root.user;      //GETTING USER DETAILS
         const posts = this.state.posts;                     //GETTING POSTS FROM STATE
         return (
             <div>
@@ -108,14 +117,6 @@ class Start extends Component {
                 <Helmet>
                     <title>Start</title>
                 </Helmet>
-
-                {/* WELCOME SCREEN */}
-                <div className="welcome">
-                    <div className="welcome-content">
-                        <h1>{userData.Name}</h1>
-                        <h1>{userData.Email}</h1>
-                    </div>
-                </div>
 
                 {/* START SCREEN */}
                 <div className="start">
