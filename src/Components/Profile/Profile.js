@@ -1,28 +1,41 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 import Tabs from '../Tabs/Tabs';
 import Sidebar from "../Sidebar/Sidebar";
-import ProfilePic from '../Images/profile.jpg';
+import ProfilePic from '../Images/profile.jpg'; //Temporary
 import './Profile.css';
+import userStore from "../../Store/stores/user-store";
 import Helmet from 'react-helmet';
-import $ from 'jquery';
 
 export default class Profile extends Component {
+
     componentDidMount(){
-        this.handleFix(120,40);
+        this.handleFix(2,1);
     }
 
+    constructor(props){
+        super(props);
+        this.state = {
+            ProfilePic: "",
+            BackPic: ""
+        }
+    }
+
+    //Profile Input Initialize
     handleSubmit = () => {
         document.getElementById('profileinputbutton').click();
     }
 
+    //Button fixing positions on Load
     handleFix = (a,b) => {
-        var elmnt = document.getElementById('moveSquare');
-        elmnt.style.top = a + "px";
-        elmnt.style.left = b + "px";
+        var elmnt = document.getElementById('bigCircle');
+        elmnt.style.top = a + "%";
+        elmnt.style.left = b + "%";
     }
 
+    //Moving buttons function
     handleMove = () => {
-        var elmnt = document.getElementById('moveSquare');
+        var elmnt = document.getElementById('bigCircle');
         var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
         dragMouseDown();
 
@@ -71,7 +84,9 @@ export default class Profile extends Component {
           }
 
     }
+
     render() {
+        let userData = userStore.getState().root.user;      //GETTING USER DETAILS
         return (
             <div>
                 {/* SCREEN TITLE */}
@@ -80,30 +95,39 @@ export default class Profile extends Component {
                 </Helmet>
 
                 {/* PROFILE SCREEN */}
-                <div className="profile">
-                    <div className="profileContent">
-                        <div className="profileContainer">
+                <div className="profile">   {/* PROFILE DIV 100% WIDTH */}
+                    <div className="profileContent">    {/* INSIDE DIV WITH 100% - 100px WIDTH */}
+                            {/* PROFILE PIC CIRCLE DIV */}
                             <div className="solarProfile">
                                 <img id="profilePic" src={ProfilePic} alt="Profile"/>
                                 <div className="choose-propic" onClick={this.handleSubmit}>
-                                    <i class="fas fa-edit"></i>
+                                    <i className="fas fa-edit"></i>
                                     <form autoComplete="off" encType="multipart/form-data">
                                         <input type="file" id="profileinputbutton" name="file" />
                                     </form>
                                 </div>
                             </div>
-                            <div id="moveSquare" onMouseDown={()=>{this.handleMove()}}></div>
-                                <a className="js-scroll-trigger smallSquare" href="#showData"></a>
-                            <div class="dropdown mediumSquareButton">
-                                <div className="mediumSquare" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></div>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
+
+                            {/* PROFILE SCREEN LEFT PART */}
+                        <div className="profileContainer">
+                            <div id="bigCircle" >
+                                <div className="dropdown mediumCircleButton">
+                                    <div className="mediumSquare" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></div>
+                                    <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <Link className="dropdown-item" to="#">Choose Cover</Link>
+                                        <Link className="dropdown-item" to="#">Block</Link>
+                                        <Link className="dropdown-item" to="#">Report</Link>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div className="showProfileData" id="showData"><h1>Some Data</h1></div>
+
+                        {/* PROFILE SCREEN RIGHT PART*/}
+                        <div className="profileDetails">
+                            <div className="profileBox">
+                                <h1>{userData.Name}</h1>
+                            </div>
+                        </div>
                     </div>
                     {/* SIDEBAR */}
                     <Sidebar />

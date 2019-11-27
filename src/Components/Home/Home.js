@@ -7,7 +7,6 @@ import SignUp from '../SignUp/SignUp';
 import Navbar from '../Navbar/Navbar';
 import userService from "../../services/user-services";
 import auth from '../../auth/auth';
-import {connect} from 'react-redux';
 import Helmet from 'react-helmet';
 import userStore from "../../Store/stores/user-store";
 
@@ -189,12 +188,4 @@ class Home extends Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        user: (result) => {
-            dispatch({type: 'USERS_DATA', result: result})
-        }
-    }
-};
-
-export default connect(null, mapDispatchToProps)(Home);
+export default Home;
