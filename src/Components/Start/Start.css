@@ -22,7 +22,7 @@
 .create-toolbar {margin-bottom: 10px;}
 .create-toolbar form {display: flex; justify-content: space-between;}
 .generatePost {display: flex; height: 50px; width: 100%;}
-.generatePost #postText {width: 100%; height: 50px; padding: 0 10px; border: none; border-bottom: 2px solid #AD3A6E; }
+.generatePost #postText {width: 100%; height: 50px; padding: 0 10px; border: none; border-bottom: 2px solid #AD3A6E;}
 .generatePost #postText:focus {outline-width: 0;}
 .generatePost #postText:focus::placeholder {font-size: 12px; vertical-align: super; transform: translateY(-18px); transition: 0.3s;}
 .generatePost #postText::placeholder {transition: 0.3s;}
