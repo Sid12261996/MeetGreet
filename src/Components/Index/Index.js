@@ -1,16 +1,17 @@
-import React, {Component} from 'react';
-import {Route, Link} from 'react-router-dom';
+import React, { Component } from 'react';
+import './Index.css';
+import {Link} from 'react-router-dom';
 import Front1 from '../Images/1.png';
 import Front2 from '../Images/2.jpg';
-import './Home.css';
 import SignUp from '../SignUp/SignUp';
-import Navbar from '../Navbar/Navbar';
+import Logo from '../Images/mg02col.png';
 import userService from "../../services/user-services";
 import auth from '../../auth/auth';
 import Helmet from 'react-helmet';
 import userStore from "../../Store/stores/user-store";
+import $ from 'jquery';
 
-class Home extends Component {
+class Index extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -37,30 +38,25 @@ class Home extends Component {
                     });
                 }
             }, err => {
-                alert(err.response.data.message);
-                console.error(err.response.data);
                 document.getElementById("password").value = "";
+                $('#password').css('border', '3px solid rgba(187,0,0,0.6)');
+                document.getElementById('PassError').innerHTML = err.response.data.message;
+                $('#PassError').css({'background-color':'rgba(187,0,0,0.8)','margin':'0 10% 5%','padding':'20px', 'color': '#fff'});
             }
         );
     };
-
     render() {
         let addModalClose = () => this.setState({addModalShow: false});
         return (
-            <div className="wrapper">
+            <div>
                 {/* Page Title */}
                 <Helmet>
                     <title>Login | MeetGreet</title>
                 </Helmet>
-
-                {/* Navbar Starts */}
-                <Route exact path="/" component={Navbar}/>
-
-                {/* Home Body */}
-                <div className="body-container container-fluid padding">
-                    <div className="row flex-row-reverse padding">
-
-                        <div className="col-md-8 order-last">
+                
+                {/* First Wrapper */}
+                <div className="Index">
+                    <div className='IndexLeft'>
                             <div className="rotating-box">
                                 <div className="single-rb">
                                     <div className="front-side">
@@ -77,60 +73,52 @@ class Home extends Component {
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div className="signin col-md-4 order-first" align="center">
-                            <form className="sign" onSubmit={this.handleSubmit}>
-                                <span className="JOC"><h1>Sign In</h1></span>
-                                <table align="center" cellPadding="8px">
-                                    <tbody>
-                                    <tr>
-                                        <td>Username</td>
-                                        <td><input className="userinput" type="text" id="username"
-                                                   onChange={this.handleChange} value={this.state.username} required/>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Password</td>
-                                        <td><input className="userinput" type="password" id="password"
-                                                   onChange={this.handleChange} value={this.state.password}/></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td className="spectr">
-                                            <input className="bg2" type="submit" value="Login"/>
-                                            <span className="forgot"><Link to="#">Forgot Password?</Link></span>
-                                        </td>
-                                    </tr>
-
-                                    <tr colSpan="2">
-                                        <td>
-                                            <span className="social-signin-text">Or SignIn using:</span>
-                                        </td>
-                                        <td>
-                                            <div className="social-signin">
-
-                                                <Link to="#"><i className="fab fa-google-plus-g"></i></Link>
-
+                    </div>
+                    <div className='IndexRight'>
+                        <div className='polyContent'>
+                            <div className='UserCredentials'>
+                                <div className='SignBox'>
+                                    <div className='SignImage'>
+                                        <img src={Logo} alt="logo"/>
+                                    </div>
+                                    <span><p id='PassError'></p></span>
+                                    <form onSubmit={this.handleSubmit}>
+                                        <div className='formGroup'>
+                                            <label htmlFor="Email">Email</label>
+                                            <input type="email" id='username' onChange={this.handleChange} value={this.state.username} required/>
+                                        </div>
+                                        <div className='formGroup'>
+                                            <label htmlFor="Password">Password</label>
+                                            <input type="password" id='password' onChange={this.handleChange} value={this.state.password} required/>
+                                        </div>
+                                        <div className='formSubmit'>
+                                            <input type="submit" className='SubmitButton' value='Login'/>
+                                            <span className='forgot'><Link to='#'>Forgot Password?</Link></span>
+                                        </div>
+                                    </form>
+                                    <div className='metaData'>
+                                        <div className='formSubmit'>
+                                            <label htmlFor="Password">Not a member yet?</label>
+                                            <button className="RegisterButton" onClick={() => {
+                                            this.setState({addModalShow: true})
+                                            }}>Sign Up
+                                            </button>
+                                            <SignUp show={this.state.addModalShow} onHide={addModalClose}/>
+                                            <div className='signinUsing'>
+                                                <label>Or SignIn using: </label>
+                                                <span className='g-icon'><Link to="#"><i className="fab fa-google-plus-g"></i></Link></span>
                                             </div>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </form>
-                            <div className="NotAMem">
-                                <p>Not a member yet?</p>
-                                <button className="bg" onClick={() => {
-                                    this.setState({addModalShow: true})
-                                }}>Sign Up
-                                </button>
-                                <SignUp show={this.state.addModalShow} onHide={addModalClose}/>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+                            <div className='polygon'></div>
                         </div>
                     </div>
                 </div>
 
-                <div className="container-fluid col-md-12" align="center">
+                {/* Connect */}
+                <div className="container-fluid col-md-12 connect" align="center">
                     <span className="JOC"><h3>Join our <span className="Us">Community</span></h3></span>
                     <div className="social">
                         <Link to="#"><i className="fab fa-facebook"></i></Link>
@@ -140,6 +128,7 @@ class Home extends Component {
                     </div>
                 </div>
 
+                {/* Footer */}
                 <footer className="footer">
                     <div className="container-fluid padding">
                         <div className="row text-center padding">
@@ -184,8 +173,8 @@ class Home extends Component {
                 </footer>
 
             </div>
-        );
+        )
     }
 }
 
-export default Home;
+export default Index;

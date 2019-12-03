@@ -1,68 +1,80 @@
 import React, { Component } from 'react';
 import Tabs from '../Tabs/Tabs';
+import Sidebar from "../Sidebar/Sidebar";
 import Helmet from 'react-helmet';
 import './Settings.css';
-import UserImg from '../Images/1.png';
+import $ from 'jquery';
 
 export default class Settings extends Component {
+
+    onFirstClick = () => {
+            $('.rightUp').css({'height':'80%'});
+            $('.first').css({'width':'80%','height':'100%','background-color':'#FFF'});
+            $('.second').css({'width':'20%','height':'100%','background-color':'rgba(0,0,0,0.5)'});
+            $('.rightDown').css({'height':'20%'});
+            $('.third').css({'width':'80%','height':'100%','background-color':'rgba(0,0,0,0.5)'});
+            $('.fourth').css({'width':'20%','height':'100%','background-color':'rgba(0,0,0,0.5)'});
+    }
+
+    onSecondClick = () => {
+        $('.rightUp').css({'height':'80%'});
+        $('.first').css({'width':'20%','height':'100%','background-color':'rgba(0,0,0,0.5)'});
+        $('.second').css({'width':'80%','height':'100%','background-color':'#FFF'});
+        $('.rightDown').css({'height':'20%'});
+        $('.third').css({'width':'20%','height':'100%','background-color':'rgba(0,0,0,0.5)'});
+        $('.fourth').css({'width':'80%','height':'100%','background-color':'rgba(0,0,0,0.5)'});
+    }
+
+    onThirdClick = () => {
+        $('.rightUp').css({'height':'20%'});
+        $('.first').css({'width':'80%','height':'100%','background-color':'rgba(0,0,0,0.5)'});
+        $('.second').css({'width':'20%','height':'100%','background-color':'rgba(0,0,0,0.5)'});
+        $('.rightDown').css({'height':'80%'});
+        $('.third').css({'width':'80%','height':'100%','background-color':'#FFF'});
+        $('.fourth').css({'width':'20%','height':'100%','background-color':'rgba(0,0,0,0.5)'});
+    }
+
+    onFourthClick = () => {
+        $('.rightUp').css({'height':'20%'});
+        $('.first').css({'width':'20%','height':'100%','background-color':'rgba(0,0,0,0.5)'});
+        $('.second').css({'width':'80%','height':'100%','background-color':'rgba(0,0,0,0.5)'});
+        $('.rightDown').css({'height':'80%'});
+        $('.third').css({'width':'20%','height':'100%','background-color':'rgba(0,0,0,0.5)'});
+        $('.fourth').css({'width':'80%','height':'100%','background-color':'#FFF'});
+    }
+
+
     render() {
         return (
             <div>
                 <Helmet>
                 <title>Settings</title>
                 </Helmet>
-                <div className="row m-0">
-                    <div className="col-3 settingTab">
-                        <div className="col-lg-12 searchcol">
-                            <input type="text" placeholder="Find a setting" className="settingSearchInput" />
-                        </div>
-                        <div className="col-lg-12 SettingTabhead">
-                            <h3 className="m-0">Setting Options</h3>
-                        </div>
-                        <div className="nav flex-column" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                            <a className="nav-link SettingTaboptions active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Personal Info</a>
-                            <a className="nav-link SettingTaboptions" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>
-                            <a className="nav-link SettingTaboptions" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
-                            <a className="nav-link SettingTaboptions" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
-                        </div>
-                    </div>
-                    <div className="col-9 settingField">
-                        <div className="tab-content" id="v-pills-tabContent">
-                            <div className="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                                <div className="row m-0">
-                                    <div className="col-lg-12">
-                                        <h3 className="m-0 mt-2 mb-4">Personal Info</h3>
+                <div className='settings'>
+                    <div className='settingContent'>
+                        <div className='settingRight'>
+                            <div className='rightContent'>
+                                <div className='rightUp'>
+                                    <div className='first' onClick={this.onFirstClick}>
+                                        1
                                     </div>
-                                    <div className="col-lg-12 mb-5 userImageCol">
-                                        <img src={UserImg} className="SettingUserImg" />
-                                        <div className="imageOverlay"><b>Edit</b></div>
+                                    <div className='second' onClick={this.onSecondClick}>
+                                        2
                                     </div>
-                                    <div className="col-lg-6 mb-3">
-                                        <label className="userSettingLabels">Your Name:</label>
-                                        <input type="text" defaultValue="Name" className="userSettingInputs" />
+                                </div>
+                                <div className='rightDown'>
+                                    <div className='third' onClick={this.onThirdClick}>
+                                        3
                                     </div>
-                                    <div className="col-lg-6 mb-3">
-                                        <label className="userSettingLabels">Email:</label>
-                                        <input type="email" defaultValue="any@gmail.com" className="userSettingInputs" />
-                                    </div>
-                                    <div className="col-lg-6 mb-3">
-                                        <label className="userSettingLabels">Mobile:</label>
-                                        <input type="number" defaultValue="965085509" className="userSettingInputs" />
-                                    </div>
-                                    <div className="col-lg-6 mb-3">
-                                        <label className="userSettingLabels">Website:</label>
-                                        <input type="text" defaultValue="https://ss.dev.com" className="userSettingInputs" />
-                                    </div>
-                                    <div className="col-lg-12 text-center mt-4 mb-3">
-                                        <button className="btn btn-success">Save</button>
+                                    <div className='fourth' onClick={this.onFourthClick}>
+                                        4
                                     </div>
                                 </div>
                             </div>
-                            <div className="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">Coming Soon...</div>
-                            <div className="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">Coming Soon...</div>
-                            <div className="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">Coming Soon...</div>
                         </div>
                     </div>
+                    {/* SIDEBAR */}
+                    <Sidebar />
                 </div>
                 <Tabs />
             </div>

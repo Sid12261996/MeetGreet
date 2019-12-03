@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Route, Switch, BrowserRouter } from 'react-router-dom';
-import Home from './Components/Home/Home';
+import Index from './Components/Index/Index';
 import Start from './Components/Start/Start';
 import Profile from './Components/Profile/Profile';
 import Settings from './Components/Settings/Settings';
@@ -13,7 +13,7 @@ class App extends Component {
             <BrowserRouter>
                 <div className="wrapper">
                 <Switch>
-                    <Route exact path="/" component={Home} />
+                    <Route exact path="/" component={Index} />
                     <ProtectedRoute path="/start" component={Start} />
                     <ProtectedRoute path="/settings" component={Settings} />
                     <ProtectedRoute path="/profile" component={Profile} />

@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Roboto&display=swap');
+
 .TabContent {height: 60px; display: flex; position: absolute; bottom: 0; width: 100%; z-index: 10;}
 
 .TabContent a { padding: 5px; flex-basis: 20%; text-decoration: none; background-color: rgba(22,22,22,0.9); transition: background-color 0.4s;}
 .TabContent a.active {border-bottom: 2px solid #AD3A6E; background-color: rgba(20,0,0,0.9);}
 .TabContent a:hover {background-color: rgba(20,0,0,0.9);}
-.TabContent a h4 {color: #fff;}
+.TabContent a h4 {color: #fff;  font-family: 'Montserrat', sans-serif;}
 #startLogo {width: 60px; height: 45px;}

@@ -16,7 +16,8 @@ class Start extends Component {
         this.state = {
             imgUpload: '',
             posts: '',
-            postText : ''
+            postText : '',
+            welcome: 0
         };
 
         //BINDING FUNCTIONS
@@ -27,11 +28,6 @@ class Start extends Component {
 
 
     componentDidMount(){      //WILL RUN ON PAGE RELOAD
-
-        $(document).ready(() => {
-           return <Welcome />
-        });
-
         let userData = userStore.getState().root.user;   
 
         axios.get(`${env.ApiMonthLink}posts/${userData._id}`)         //POSTS API HIT
@@ -118,6 +114,9 @@ class Start extends Component {
                     <title>Start</title>
                 </Helmet>
 
+                {/* WELCOME SCREEN*/}
+                <Welcome />
+                
                 {/* START SCREEN */}
                 <div className="start">
                     <div className="mainContent">
@@ -128,7 +127,7 @@ class Start extends Component {
                                 <form autoComplete="off" onSubmit={this.handleSubmit} encType="multipart/form-data">
 
                                     <div className="generatePost">
-                                        <input autoComplete="off" type="text" id="postText" placeholder="What's on your mind?"/>
+                                        <input autoComplete="off" type="text" id="postText" placeholder="Click Me and start typing.."/>
                                         <div className="choose-pic" onClick={()=>{document.getElementById('fileinputbutton').click()}}>
                                             <h6>Image</h6>  
                                             <input type="file" id="fileinputbutton" name="file" onChange={(e)=>{this.onChange(e)}} required/>   
