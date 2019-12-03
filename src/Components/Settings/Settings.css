@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Roboto&display=swap');
+
+.settings { text-align: center; display: flex; width: 100%; height: 100%; position: fixed;}
+.settingContent { position: absolute; right: 100px; left: 0; top: 0; bottom: 60px ;display: flex; overflow-y: auto;}
+
+/* Right Part */
+.settingRight {width: 100%;}
+.rightContent {width: 100%; height: 100%;}
+.rightUp, .rightDown {width: 100%; height: 50%; display: flex; transition: .5s;}
+.first, .second, .third, .fourth {width: 50%; border: 1px solid rgba(0, 0, 0, 0.2); display: grid; place-items: center; cursor: pointer; transition: .5s;}
