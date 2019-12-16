@@ -9,7 +9,7 @@ export default class Settings extends Component {
 
     onFirstClick = () => {
             $('.rightUp').css({'height':'80%'});
-            $('.first').css({'width':'80%','height':'100%','background-color':'#FFF'});
+            $('.first').css({'width':'80%','height':'100%','background-color':'#fff'});
             $('.second').css({'width':'20%','height':'100%','background-color':'rgba(0,0,0,0.5)'});
             $('.rightDown').css({'height':'20%'});
             $('.third').css({'width':'80%','height':'100%','background-color':'rgba(0,0,0,0.5)'});
@@ -19,7 +19,7 @@ export default class Settings extends Component {
     onSecondClick = () => {
         $('.rightUp').css({'height':'80%'});
         $('.first').css({'width':'20%','height':'100%','background-color':'rgba(0,0,0,0.5)'});
-        $('.second').css({'width':'80%','height':'100%','background-color':'#FFF'});
+        $('.second').css({'width':'80%','height':'100%','background-color':'skyblue'});
         $('.rightDown').css({'height':'20%'});
         $('.third').css({'width':'20%','height':'100%','background-color':'rgba(0,0,0,0.5)'});
         $('.fourth').css({'width':'80%','height':'100%','background-color':'rgba(0,0,0,0.5)'});
@@ -30,7 +30,7 @@ export default class Settings extends Component {
         $('.first').css({'width':'80%','height':'100%','background-color':'rgba(0,0,0,0.5)'});
         $('.second').css({'width':'20%','height':'100%','background-color':'rgba(0,0,0,0.5)'});
         $('.rightDown').css({'height':'80%'});
-        $('.third').css({'width':'80%','height':'100%','background-color':'#FFF'});
+        $('.third').css({'width':'80%','height':'100%','background-color':'tomato'});
         $('.fourth').css({'width':'20%','height':'100%','background-color':'rgba(0,0,0,0.5)'});
     }
 
@@ -40,7 +40,7 @@ export default class Settings extends Component {
         $('.second').css({'width':'80%','height':'100%','background-color':'rgba(0,0,0,0.5)'});
         $('.rightDown').css({'height':'80%'});
         $('.third').css({'width':'20%','height':'100%','background-color':'rgba(0,0,0,0.5)'});
-        $('.fourth').css({'width':'80%','height':'100%','background-color':'#FFF'});
+        $('.fourth').css({'width':'80%','height':'100%','background-color':'lightgreen'});
     }
 
 

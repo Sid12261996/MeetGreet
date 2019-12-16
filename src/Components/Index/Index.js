@@ -112,19 +112,8 @@ class Index extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className='polygon'></div>
+                            <div className='polygon'/>
                         </div>
-                    </div>
-                </div>
-
-                {/* Connect */}
-                <div className="container-fluid col-md-12 connect" align="center">
-                    <span className="JOC"><h3>Join our <span className="Us">Community</span></h3></span>
-                    <div className="social">
-                        <Link to="#"><i className="fab fa-facebook"></i></Link>
-                        <Link to="#"><i className="fab fa-twitter"></i></Link>
-                        <Link to="#"><i className="fab fa-youtube"></i></Link>
-                        <Link to="#"><i className="fab fa-instagram"></i></Link>
                     </div>
                 </div>
 
