@@ -5,8 +5,9 @@ import Tabs from '../Tabs/Tabs';
 import Welcome from '../Welcome/Welcome';
 import Helmet from "react-helmet";
 import Sidebar from '../Sidebar/Sidebar';
-import axios from 'axios';
 import env from '../../environment.json';
+import PostService from "../../services/post-services";
+import ImageService from "../../services/image-service";
 import $ from 'jquery';
 
 class Start extends Component {
@@ -28,14 +29,15 @@ class Start extends Component {
 
 
     componentDidMount(){      //WILL RUN ON PAGE RELOAD
-        let userData = userStore.getState().root.user;   
+        let userData = userStore.getState().root.user;
 
-        axios.get(`${env.ApiMonthLink}posts/${userData._id}`)         //POSTS API HIT
+        PostService.postGet(`${userData._id}`)      //POSTS API HIT
         .then((result)=>{
             this.setState({
                 ...this.state,
                 posts : result.data.data
-            })
+            });
+            console.log(result.data);
         },error => {
             console.log(error);
         });
@@ -55,12 +57,12 @@ class Start extends Component {
         formData.append('file',this.state.imgUpload);
         const config = {     
             headers: { 'content-type': 'multipart/form-data' }
-        }
+        };
 
         // POST CREATE HIT
-        axios.post('https://meetgreet-upload.herokuapp.com/upload',formData,config).then(Imgcreate=>{
-            axios.post(`${env.ApiMonthLink}posts/${userData._id}/create`,
-            {title: this.state.postText, imageUrl : "https://meetgreet-upload.herokuapp.com/images/"+Imgcreate.data}).then(()=>{
+        ImageService.upload(`${formData}`,`${config}`).then(Imgcreate=>{
+            PostService.postCreate(`${userData._id}`,{title: this.state.postText, imageUrl : env.ImageGet+Imgcreate.data})
+                .then(()=>{
                 document.getElementById('postText').value = "";
                 window.location.reload(false);
             },error=>{console.log(error)});
@@ -77,6 +79,7 @@ class Start extends Component {
 
     getMeta(url,index){   
         var img = new Image();
+        // Todo: Code below has to go in generic utils function
         img.addEventListener("load", function(){
             if(this.naturalWidth > this.naturalHeight){
                 document.getElementsByClassName('posty')[index].style.width = "100%";
