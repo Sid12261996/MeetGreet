@@ -1,0 +1,7 @@
+/* Welcome Screen */
+.welcome { display: flex; height: 100vh; width: 100%; position: absolute; background-color: #AD3A6E; animation-name: slide; animation-duration: 1s; animation-delay: 2s; z-index: 2; animation-fill-mode: forwards; animation-timing-function: ease-out; color: white;}
+.welcome-content {margin: auto;}
+@keyframes slide{
+    from{transform: translateY(0);}
+    to{transform: translateY(-100vh);}
+}
