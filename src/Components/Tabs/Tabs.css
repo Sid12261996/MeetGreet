@@ -4,6 +4,7 @@
 
 .TabContent a { padding: 5px; flex-basis: 20%; text-decoration: none; background-color: rgba(22,22,22,0.9); transition: background-color 0.4s;}
 .TabContent a.active {border-bottom: 2px solid #AD3A6E; background-color: rgba(20,0,0,0.9);}
+.TabContent a.active h4 {color: #FFFFFF;}
 .TabContent a:hover {background-color: rgba(20,0,0,0.9);}
-.TabContent a h4 {color: #fff;  font-family: 'Montserrat', sans-serif;}
+.TabContent a h4 {color: #bbbbbb;  font-family: 'Montserrat', sans-serif;}
 #startLogo {width: 60px; height: 45px;}
