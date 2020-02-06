@@ -4,13 +4,18 @@ import Tabs from '../Tabs/Tabs';
 import Sidebar from "../Sidebar/Sidebar";
 import ProfilePic from '../Images/profile.jpg'; //Temporary
 import './Profile.css';
+import {Route, Switch, BrowserRouter, NavLink } from 'react-router-dom';
+import $ from 'jquery';
 import userStore from "../../Store/stores/user-store";
 import Helmet from 'react-helmet';
+import Album from './Components/Album/Album';
+import Friends from './Components/Friends/Friends';
+import About from './Components/About/About';
+import NotFound from "../404/NotFound";
 
 export default class Profile extends Component {
 
     componentDidMount(){
-        this.handleFix(2,1);
     }
 
     constructor(props){
@@ -24,68 +29,30 @@ export default class Profile extends Component {
     //Profile Input Initialize
     handleSubmit = () => {
         document.getElementById('profileinputbutton').click();
-    }
+    };
 
-    //Button fixing positions on Load
-    handleFix = (a,b) => {
-        var elmnt = document.getElementById('bigCircle');
-        elmnt.style.top = a + "%";
-        elmnt.style.left = b + "%";
-    }
+    handleStatus = () => {
+        $('.fa-edit').css({'box-shadow':'inset -3px -3px 7px rgba(255,255,255,0.8),inset 3px 3px 5px rgba(94, 104, 121, 0.288)','color': 'black'});
+        $('.profileBox3').css({'height':'60%', 'transition':'.5s'});
+        $('.profileBox2').css({'display':'flex', 'height':'20%' , 'transition':'.5s'});
+        $('.StatusEdt').css({'visibility':'visible', 'transition-delay':'.4s'});
+        $('.TwoBox').css({'height':'90%' , 'transition':'.5s'});
+        $('.AlbumBox').css({'height':'0%' , 'transition':'.5s'});
+        $('.AlbumHeading, .AlbumContent').css({'visibility':'hidden', 'transition-delay':'.0s'});
+    };
 
-    //Moving buttons function
-    handleMove = () => {
-        var elmnt = document.getElementById('bigCircle');
-        var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-        dragMouseDown();
-
-        function dragMouseDown(e) {
-            e = e || window.event;
-            e.preventDefault();
-            // get the mouse cursor position at startup:
-            pos3 = e.clientX;
-            pos4 = e.clientY;
-            document.onmouseup = closeDragElement;
-            // call a function whenever the cursor moves:
-            document.onmousemove = elementDrag;
-        }
-
-        function elementDrag(e) {
-            e = e || window.event;
-            e.preventDefault();
-            // calculate the new cursor position:
-            pos1 = pos3 - e.clientX;
-            pos2 = pos4 - e.clientY;
-            pos3 = e.clientX;
-            pos4 = e.clientY;
-            // set the element's new position:
-            if(elmnt.offsetTop - pos2 > 0 && elmnt.offsetLeft - pos1 > 0){
-                elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-                elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-            }
-            else if(elmnt.offsetTop - pos2 < 0 && elmnt.offsetLeft - pos1 < 0) {
-                elmnt.style.top = 0 + "px";
-                elmnt.style.left = 0 + "px";
-            }
-            else if(elmnt.offsetTop - pos2 < 0 && elmnt.offsetLeft - pos1 > 0) {
-                elmnt.style.top = 0 + "px";
-                elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-            }
-            else if(elmnt.offsetTop - pos2 > 0 && elmnt.offsetLeft - pos1 < 0) {
-                elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-                elmnt.style.left = 0 + "px";
-            }
-          }
-        
-          function closeDragElement() {
-            // stop moving when mouse button is released:
-            document.onmouseup = null;
-            document.onmousemove = null;
-          }
-
-    }
+    handleCrossStatus = () => {
+        $('.fa-edit').css({'box-shadow':'none','color': '#3f3f3f'});
+        $('.profileBox3').css({'height':'80%', 'transition':'.5s'});
+        $('.profileBox2').css({'height':'0%' , 'transition':'.5s'});
+        $('.StatusEdt').css({'visibility':'hidden', 'transition-delay':'.0s'});
+        $('.TwoBox').css({'height':'60%' , 'transition':'.5s'});
+        $('.AlbumBox').css({'height':'30%' , 'transition':'.5s'});
+        $('.AlbumHeading, .AlbumContent').css({'visibility':'visible', 'transition-delay':'.4s'});
+    };
 
     render() {
+        console.log(this.props);
         let userData = userStore.getState().root.user;      //GETTING USER DETAILS
         return (
             <div>
@@ -101,7 +68,7 @@ export default class Profile extends Component {
                             <div className="solarProfile">
                                 <img id="profilePic" src={ProfilePic} alt="Profile"/>
                                 <div className="choose-propic" onClick={this.handleSubmit}>
-                                    <i className="fas fa-edit"></i>
+                                    <i className="far fa-edit mainDP"></i>
                                     <form autoComplete="off" encType="multipart/form-data">
                                         <input type="file" id="profileinputbutton" name="file" />
                                     </form>
@@ -125,7 +92,83 @@ export default class Profile extends Component {
                         {/* PROFILE SCREEN RIGHT PART*/}
                         <div className="profileDetails">
                             <div className="profileBox">
-                                <h1>{userData.Name}</h1>
+                                <div className="profileBox1">
+                                    <div className="Name">
+                                        <h1>{userData.Name}</h1>
+                                    </div>
+                                    <div className="Status">
+                                        <div className="StatusText">
+                                            <div className="StatusTextBox">
+                                                <h6>This space is for status only.</h6>
+                                            </div>
+                                            <div className="StatusEditBtn">
+                                                <i className="far fa-edit" onClick={this.handleStatus}></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="profileBox2">
+                                    <div className="StatusEdt">
+                                        <div className="StatusHeading">
+                                            <h5>Status</h5>
+                                            <i className="fas fa-times" onClick={this.handleCrossStatus}></i>
+                                        </div>
+                                        <div className="StatusInput">
+                                            <div className="StatusBox">
+                                                <textarea name=""status cols="30" rows="2" maxLength="50" contentEditable="true"></textarea>
+                                            </div>
+                                            <div className="StatusButton">
+                                                <button className="StatusBtn">Done</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="profileBox3">
+                                    <div className="TwoBox">
+                                        <div className="TwoBoxHeading">
+                                            <div className="AboutHeading">
+                                                <h5>About</h5>
+                                            </div>
+                                            <div className="FriendsHeading">
+                                                <h5>Friends</h5>
+                                            </div>
+                                        </div>
+                                        <div className="TwoBoxContent">
+                                            <div className="AboutContent">
+                                                <ul>
+                                                    <li><h6>3 July 2020</h6></li>
+                                                    <li><h6>Single</h6></li>
+                                                    <li><h6>Something</h6></li>
+                                                    <li><h6>Something</h6></li>
+                                                </ul>
+                                            </div>
+                                            <div className="FriendsContent">
+                                                <div className="FriendsBoxes">
+                                                    <div className="FriendsRow1">
+                                                        <div className="Friend"><h5>1</h5></div>
+                                                        <div className="Friend"><h5>2</h5></div>
+                                                        <div className="Friend"><h5>3</h5></div>
+                                                    </div>
+                                                    <div className="FriendsRow2">
+                                                        <div className="Friend"><h5>4</h5></div>
+                                                        <div className="Friend"><h5>5</h5></div>
+                                                        <div className="Friend"><h5>6</h5></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="AlbumBox">
+                                        <div className="AlbumHeading">
+                                            <h5>Albums</h5>
+                                        </div>
+                                        <div className="AlbumContent">
+                                            <div className="Albums"><i className="fas fa-plus"></i></div>
+                                            <div className="Albums">DP</div>
+                                            <div className="Albums">Cover</div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
