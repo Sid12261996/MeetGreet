@@ -4,76 +4,30 @@
 }
 .profile { text-align: center; display: flex; width: 100%; height: 100%; position: fixed;}
 .profileContent { height: 100%; position: absolute; right: 100px; left: 0; display: flex; overflow-y: auto;}
-.profileContainer {flex-basis: 60%; height: 100vh; position: relative;}
-.profileContainer {background-image: url('../Images/Background.jpg'); background-repeat: no-repeat; height: 100%; background-attachment: fixed; background-size: contain; width: 60%;}
-.profileDetails {flex-basis: 40%; padding: 0; margin: 0; box-sizing: border-box;}
 
-.profileBox { height: 100%; background-color: #FAFAFA; overflow-y: hidden; overflow-x: hidden;}
-.profileBox1 { height: 20%; }
-.profileBox1 .Name {height: 50%; display: flex; justify-content: center; align-items: flex-end;}
-.profileBox1 .Status {height: 50%; display: flex; justify-content: center; align-items: center;}
-.profileBox1 .Status .StatusText { box-shadow: -3px -3px 7px rgba(255,255,255,0.8), 3px 3px 5px rgba(94, 104, 121, 0.288); width: 90%; height: 80%; border-radius: 5px; display: flex;}
-.StatusTextBox { height: 100%; width: 90%; display: grid; place-items: center; }
-.StatusEditBtn { height: 100%; width: 10%; display: flex;}
-.StatusEditBtn i {color: #3f3f3f; font-size: 24px; margin: auto; padding: 5px; border-radius: 5px; cursor: pointer;}
-.StatusEditBtn i:hover {color: black;}
-.profileBox2 { height: 0%; display: flex; align-items: center; flex-direction: column; justify-content: center;}
-.StatusEdt {height: 60%; width: 100%; visibility: hidden;}
-.StatusEdt .StatusHeading { height: 40%; display: flex; justify-content: space-between; align-items: center; padding : 20px; }
-.StatusHeading h5 {margin-left: 5px; border-bottom: 2px solid #AD3A6E; font-family: 'Montserrat', sans-serif;}
-.StatusHeading i {margin-right: 5px; font-size: 20px; color: #ad3a6e; cursor: pointer;}
-.StatusEdt .StatusInput { height: 60%; display: flex; width: 100%;}
-.StatusBox { width: 80%; display: grid; place-items: center;}
-.StatusButton {width: 20%; display: flex; justify-content: flex-start; align-items: center;}
-.StatusBtn { height: 40px; width: 75%; border: none; box-shadow: -3px -3px 7px rgba(255,255,255,0.8), 3px 3px 5px rgba(94, 104, 121, 0.288); background-color: #FAFAFA; border-radius: 5px;}
-.StatusBtn:hover {box-shadow: inset -3px -3px 7px rgba(255,255,255,0.8),inset 3px 3px 5px rgba(94, 104, 121, 0.288);}
-.StatusBtn:focus {outline: none;}
-.StatusEdt .StatusInput textarea { resize: none; width: 90%; border: none; box-shadow: -3px -3px 7px rgba(255,255,255,0.8), 3px 3px 5px rgba(94, 104, 121, 0.288); padding: 5px 10px; border-radius: 5px; background-color: #FAFAFA;}
-.StatusEdt .StatusInput textarea:focus { outline: none; box-shadow: inset -3px -3px 7px rgba(255,255,255,0.8),inset 3px 3px 5px rgba(94, 104, 121, 0.288);}
-.profileBox3 { height: 80%; width: 100%; padding: 20px;}
-.TwoBox { width: 100%; height: 60%; }
-.TwoBoxHeading { width: 100%; height: 20%; display: flex;}
-.AboutHeading, .FriendsHeading {width: 50%; height: 100%; display: flex; align-items: center; justify-content: flex-start;}
-.TwoBoxContent { width: 100%; height: 80%; display: flex;}
-.AboutContent, .FriendsContent { width: 50%; height: 100%; }
-.AboutContent { display: flex; justify-content: flex-start; align-items: center; padding: 20px;}
-.AboutContent ul {list-style: none;}
-.AboutContent ul li {line-height: 40px; display: flex;}
-.AboutContent ul li::before {content: '\2022'; color: #AD3A6E; font-weight: bold; display: inline-block; margin-left: -1em; width: 1em; font-size: 24px;}
-.AboutContent ul li h6 {line-height: 30px;}
-.FriendsBoxes {width: 100%; height: 100%;}
-.FriendsRow1, .FriendsRow2 { width: 100%; height: 50%; display: flex;}
-.Friend {width: 33%; height: 100%; display: flex;}
-.Friend h5 {margin: auto; box-shadow: -3px -3px 7px rgba(255,255,255,0.8), 3px 3px 5px rgba(94, 104, 121, 0.288); padding: 25px 30px; border-radius: 5px; cursor: pointer;}
-.Friend h5:hover {box-shadow: inset -3px -3px 7px rgba(255,255,255,0.8),inset 3px 3px 5px rgba(94, 104, 121, 0.288);}
-.AboutHeading h5, .FriendsHeading h5 {border-bottom: 2px solid #AD3A6E; font-family: 'Montserrat', sans-serif;}
-.AlbumBox {width: 100%; height: 30%;}
-.AlbumHeading {width: 100%; height: 20%; display: flex; align-items: center; justify-content: flex-start;}
-.AlbumHeading h5 {border-bottom: 2px solid #AD3A6E; font-family: 'Montserrat', sans-serif;}
-.AlbumContent {width: 100%; height: 80%; display: flex; justify-content: space-around; align-items: center;}
-.Albums { width: 30%; height: 90%; box-shadow: -3px -3px 7px rgba(255,255,255,0.8), 3px 3px 5px rgba(94, 104, 121, 0.288); border-radius: 5px; cursor: pointer;}
-.Albums:nth-child(1) {background-color: rgba(173,58,110,0.6); box-shadow: -3px -3px 7px rgba(255,255,255,0.8), 3px 3px 5px rgba(173, 58, 110, 0.3);}
-.Albums:nth-child(1) i {color: rgba(255,255,255,0.9); font-size: 30px; transition: transform .2s;}
-.Albums:nth-child(1):hover {box-shadow: inset -3px -3px 7px rgba(173,58,110,0.6),inset 3px 3px 5px rgba(94, 104, 121, 0.288);}
-.Albums:nth-child(1):hover i { transform: rotateZ(180deg);}
-/*Change Below*/
-.Albums {display: grid; place-items: center;}
-.Albums:hover {box-shadow: inset -3px -3px 7px rgba(255,255,255,0.8),inset 3px 3px 5px rgba(94, 104, 121, 0.288);}
+/*LEFT*/
+.profileLeft {width: 50%; height: 100%; background-color: #ad3a6e;}
+.userDetails {width: 100%; height: 30%; padding: 30px 50px;}
+.userInfo {width: 100%; height: 100%; background-color: #FFF; display: flex; border-radius: 5px;}
+.userProfile {width: 30%; height: 100%; }
 
 /* Profile Pic */
-.solarProfile {position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); display: block; width: 300px; height: 300px; cursor: pointer; border-radius: 50%; overflow: hidden; z-index: 20; box-shadow: 0px 0px 6px 0px #000;}
-#profilePic { width: 300px; height: 300px;}
+.solarProfile {width: 100%; height: 100%; cursor: pointer; border-radius: 50%; overflow: hidden; transform: scale(1.2, 1.3) translateX(-15px); box-shadow: -2px -2px 1px rgba(167,50,103,0.2), 1px 1px 2px rgba(0, 0, 0, 0.8); }
+#profilePic { width: 100%; height: 100%;}
 .choose-propic {z-index: 2; transition: 0.2s;}
 #profileinputbutton {width: 0;}
-.choose-propic {width: 100%; background-color: rgba(0, 0, 0, 0.5); height: 80px; border-bottom-left-radius: 50%; border-bottom-right-radius: 50%;}
+.choose-propic {width: 100%; background-color: rgba(0, 0, 0, 0.5); height: 50px; border-bottom-left-radius: 50%; border-bottom-right-radius: 50%;}
 .solarProfile:hover .choose-propic {animation: slidepropic 0.2s ease-in forwards;}
-.solarProfile:hover .mainDP {font-size: 40px; color: white; margin-top: 10px;}
+.solarProfile:hover .mainDP {font-size: 26px; color: white; margin-top: 10px;}
 @keyframes slidepropic {
     from { transform: translateY(0);}
-    to { transform: translateY(-80px);}
+    to { transform: translateY(-50px);}
 }
 
-#bigCircle {display: grid; width: 60px; height: 60px; background-color: transparent; position: absolute; border-radius: 50%; cursor: pointer; place-items: center; top: 2%; left: 1%;}
-.mediumCircleButton {display: grid; background-color: transparent; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; transition: 0.5s; border: none; place-items: center;}
-.fa-ellipsis-v {font-size: 20px; color: rgba(255, 255, 255, 0.9); width: 50px; height: 50px; display: flex; justify-content: center; align-items: center;}
-#bigCircle:hover .mediumCircleButton {box-shadow: 0px 0px 6px 0px #000;}
+.user {width: 70%; height: 100%; display: flex; justify-content: flex-start; align-items: center; padding: 20px;}
+.userData {width: 100%; height: 62%; background-color: #ad3a6e; display: grid; place-items: center; padding: 20px 50px;}
+.white {width: 100%; height: 100%; background-color: #FFF; border-radius: 5px;}
+
+/*RIGHT*/
+.profileRight {width: 50%; height: 100%; background-image: url("../Images/Cover.jpg"); background-size: cover; background-repeat: no-repeat;}
+.statusHighLight {width: 100%; height: 15%; background-color: rgba(0,0,0,0.4); display: grid; place-items: center; color: #FFFFFF;}
