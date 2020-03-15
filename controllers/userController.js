@@ -2,6 +2,7 @@ const mongoose = require('mongoose'),
     Users = require('../models/userModel'),
     bcrypt = require('bcrypt'),
     jwtKey = require('../environment').env.jwtKey,
+    response = require('../utils/http-utils'),
     jwt = require('jsonwebtoken');
 
 exports.Login = (req, res) => {
@@ -73,7 +74,8 @@ exports.Register = (req, res) => {
                                 Country: req.body.Country,
                                 // Security: req.body.Security,
                                 inCommunity: req.body.inCommunity,
-                                JobProfile: req.body.JobProfile
+                                JobProfile: req.body.JobProfile,
+                                ImageUrl: "1584281001.31178ProfileCircle.png"
                             });
 
 
@@ -91,7 +93,16 @@ exports.Register = (req, res) => {
                 }
             }
         ).catch(err => {
-        console.log(err)
+        console.log(err);
         res.status(500).json({message: 'Validation Errors', Errors: err})
     })
+};
+
+exports.UserPicUpdate = async (userId,NewPicUrl) => {
+    try {
+        let profilePicResult = await Users.findByIdAndUpdate({_id:userId},{ImageUrl: NewPicUrl});
+        return response.Ok(profilePicResult);
+    } catch (e) {
+        return response.BadRequest(e);
+    }
 };

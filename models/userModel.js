@@ -16,6 +16,7 @@ const User = new schema({
     _id: schema.Types.ObjectId,
     Email:{type: schema.Types.String, required: true, minlength: 6},
     Name: String,
+    LastName: String,
     Age: {type: schema.Types.Number},
     Gender: {type: String, enum: ["Male", "Female","Other"]},
     Password: {type: String, required: true, minlength: 6},
@@ -28,7 +29,8 @@ const User = new schema({
     inCommunity: Boolean,
     // Post: ["Status", "Images", "Shared-post", "Videos"],
     JobProfile: [String],
-    ImageUrl:String
+    ImageUrl: String,
+    CoverUrl: String
 });
 
 module.exports = mongo.model('Users', User);
