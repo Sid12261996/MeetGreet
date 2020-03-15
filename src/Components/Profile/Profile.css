@@ -6,13 +6,47 @@
 .profileContent { height: 100%; position: absolute; right: 100px; left: 0; display: flex; overflow-y: auto;}
 
 /*LEFT*/
-.profileLeft {width: 50%; height: 100%; background-color: #ad3a6e;}
+.profileLeft {width: 50%; height: 100%; background-image: url("../Images/ProfileLeftBg.png"); background-attachment: fixed; background-repeat: no-repeat; background-size: cover;}
 .userDetails {width: 100%; height: 30%; padding: 30px 50px;}
-.userInfo {width: 100%; height: 100%; background-color: #FFF; display: flex; border-radius: 5px;}
+.userInfo {width: 100%; height: 100%; background-color: #FFF; display: flex; border-radius: 30px;}
 .userProfile {width: 30%; height: 100%; }
+.user {width: 70%; height: 100%; display: flex; justify-content: flex-start; align-items: center; padding: 20px; margin-left: 20px;}
+.userData { text-align: center; }
+.userData h1 { font-family: 'Montserrat', sans-serif; font-weight: bold;}
+.userData h5 { font-style: italic;}
+
+.userContent {width: 100%; height: 62%; display: flex; align-items: center;}
+.contentBox { width: 100%; height: 90%; transform: scaleX(1.2); background-color: #F5F5F5; display: flex; justify-content: flex-end; align-items: center;}
+.contentBox2 { background-color: #FFF; height: 80%; width: 85%; display: flex;}
+.contentLeft { width: 40%; height: 100%;}
+.contentRight { width: 50%; height: 100%; display: flex; flex-direction: column; justify-content: space-between;}
+.contentEnd { width: 10%; height: 100%; background-color: #F5F5F5;}
+.Right1 { width: 100%; height: 47%;}
+.Right2 { width: 100%; height: 47%;}
+.contentRightPData { display: flex; white-space: nowrap;}
+.contentRightPData .album { height: 80%; background-color: #F5F5F5; white-space: nowrap; margin: 0 10px; width: 80%;}
+.contentRightVData { display: flex; white-space: nowrap;}
+.contentRightVData .album { height: 80%; white-space: nowrap; margin: 0 10px; width: 30%;}
+.album img { height: 100%; width: 80px;}
+.contentPlus1 { width: 100%; height: 50%; display: grid; place-items: center; color: #AD3A6E; font-size: 26px;}
+.contentPlus2 { width: 100%; height: 50%; display: grid; place-items: center; color: #AD3A6E; font-size: 26px;}
+.contentPlus1 i:hover, .contentPlus2 i:hover {cursor: pointer;}
+
+/*Sizing Of Above*/
+.contentLeftHeading { width: 100%; height: 12%; display: flex; justify-content: flex-start; align-items: center; padding-left: 5px;}
+.contentLeftHeading h5, .contentRightPhotos h5, .contentRightVideos h5 { color: #AD3A6E;}
+.contentRightPhotos, .contentRightVideos { width: 100%; height: 25%; display: flex; justify-content: flex-start; align-items: center; padding-left: 5px;}
+.contentLeftData { width: 100%; height: 88%;}
+.contentRightPData, .contentRightVData { width: 100%; height: 75%; overflow-x: auto;}
+
+/*Scroll Design*/
+.contentRightPData::-webkit-scrollbar, .contentRightVData::-webkit-scrollbar, .profileRight::-webkit-scrollbar { height: 10px; width: 10px;}
+.contentRightPData::-webkit-scrollbar-track, .contentRightVData::-webkit-scrollbar-track, .profileRight::-webkit-scrollbar-track { background: #d1d1d1; }
+.contentRightPData::-webkit-scrollbar-thumb, .contentRightVData::-webkit-scrollbar-thumb, .profileRight::-webkit-scrollbar-thumb { background: #8B8B8B; border-radius: 10px; }
+.contentRightPData::-webkit-scrollbar-thumb:hover, .contentRightVData::-webkit-scrollbar-thumb:hover, .profileRight::-webkit-scrollbar-thumb:hover { background: #555; }
 
 /* Profile Pic */
-.solarProfile {width: 100%; height: 100%; cursor: pointer; border-radius: 50%; overflow: hidden; transform: scale(1.2, 1.3) translateX(-15px); box-shadow: -2px -2px 1px rgba(167,50,103,0.2), 1px 1px 2px rgba(0, 0, 0, 0.8); }
+.solarProfile {width: 100%; height: 100%; cursor: pointer; border-radius: 50%; overflow: hidden; transform: scale(1.2, 1.3) translateX(-15px); }
 #profilePic { width: 100%; height: 100%;}
 .choose-propic {z-index: 2; transition: 0.2s;}
 #profileinputbutton {width: 0;}
@@ -24,10 +58,9 @@
     to { transform: translateY(-50px);}
 }
 
-.user {width: 70%; height: 100%; display: flex; justify-content: flex-start; align-items: center; padding: 20px;}
-.userData {width: 100%; height: 62%; background-color: #ad3a6e; display: grid; place-items: center; padding: 20px 50px;}
-.white {width: 100%; height: 100%; background-color: #FFF; border-radius: 5px;}
-
 /*RIGHT*/
-.profileRight {width: 50%; height: 100%; background-image: url("../Images/Cover.jpg"); background-size: cover; background-repeat: no-repeat;}
+.profileRight {width: 50%; height: 100%; overflow-y: auto;}
 .statusHighLight {width: 100%; height: 15%; background-color: rgba(0,0,0,0.4); display: grid; place-items: center; color: #FFFFFF;}
+.statusHighLight:hover {background-color: rgba(0,0,0,0.8); cursor: pointer;}
+.coverPic {width: 100%; height: 100vh; background-image: url("../Images/Cover.jpg"); background-size: cover; background-repeat: no-repeat;}
+.Feeds {width: 100%; height: 500px;}
