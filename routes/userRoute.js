@@ -19,5 +19,15 @@ router.put('/:userId/:NewImgUrl/userPicUpdate', async (req, res) => {
     }
 });
 
+router.get('/:userId/fetchUserData', async (req, res) => {
+    try {
+        let ctx = await userController.fetchData(req.params.userId);
+        ctx(req, res);
+    } catch (e) {
+        console.log('Route is catching Error', e);
+        res.status(500).json(e);
+    }
+});
+
 
 module.exports = router;

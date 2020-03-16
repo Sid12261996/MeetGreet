@@ -5,15 +5,14 @@ const express = require('express'),
     Url = require('./environment'),
     mongoose = require('mongoose'),
     userRoute = require('./routes/userRoute'),
-    JwtToken = require('./AuthVerify/AuthVerify')
-    postRoute = require('./routes/post-route')
-;
+    JwtToken = require('./AuthVerify/AuthVerify'),
+    postRoute = require('./routes/post-route');
 app.use(cors());
 
 
 //Mongo Connection
 
-mongoose.connect(Url.env.MongoUrl || process.env.MongoUrl, {useNewUrlParser: true}).catch(err=>console.error(err));
+mongoose.connect(Url.env.MongoUrl || process.env.MongoUrl, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false}).catch(err=>console.error(err));
 mongoose.Promise = global.Promise;
 
 app.use(bodyParser.urlencoded({extended: false}));

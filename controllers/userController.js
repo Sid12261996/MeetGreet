@@ -107,3 +107,12 @@ exports.UserPicUpdate = async (userId,NewPicUrl) => {
         return response.BadRequest(e);
     }
 };
+
+exports.fetchData = async (userId) => {
+    try {
+        let fetchResult = await Users.findById({_id:userId});
+        return response.Ok(fetchResult);
+    } catch (e) {
+        return response.BadRequest(e);
+    }
+};
