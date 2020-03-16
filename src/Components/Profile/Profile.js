@@ -8,10 +8,13 @@ import userStore from "../../Store/stores/user-store";
 import Helmet from 'react-helmet';
 import env from "../../environment";
 import ImageService from "../../services/image-service";
+import auth from '../../auth/auth';
+import userService from "../../services/user-services";
 
 export default class Profile extends Component {
 
     componentDidMount(){
+        console.log(this.props);
         const URL = `${env.ImageBaseUrl}`;
         this.setState({
             ...this.state,
@@ -39,7 +42,28 @@ export default class Profile extends Component {
 
     // Profile Pic Update
     onChange = (e) => {
-        alert("This feature is unavailable");
+
+        let userData = userStore.getState().root.user;
+        let files = e.target.files[0];
+        let formData = new FormData();
+        formData.append('file', files);
+        const config = {
+            headers: { 'content-type': 'multipart/form-data' }
+        };
+        ImageService.upload(formData,config).then(DPUrl=>{
+            ImageService.ProfilePic(userData._id, DPUrl.data).then(()=> {
+                $('#DPForm').submit(()=>{
+                    this.preventDefault();
+                });
+                userService.fetchData(userData._id).then((currentUser)=>{
+                    auth.updateAuthencity(true, currentUser,()=>{
+                        userStore.dispatch({type: 'USERS_DATA', result: currentUser.data.data});
+                        console.log(userStore.getState().root.user);
+                        $('.choose-propic').load(`${env.MGLink}${this.props.match.path}`,null,null);
+                    });
+                },er=> {console.log(er);});
+            },error=> {console.log(error);});
+        },err=>{console.log(err);});
     };
 
     //Function Not Available
@@ -68,7 +92,7 @@ export default class Profile extends Component {
                                         {/* PROFILE PIC CIRCLE DIV */}
                                         <div className="solarProfile">
                                             <img id="profilePic" src={`${this.state.ProfilePic}images/${userData.ImageUrl}`} alt="Profile"/>
-                                            <form autoComplete="off" encType="multipart/form-data" onSubmit={this.handlePicSubmit} id="DPForm">
+                                            <form autoComplete="off" encType="multipart/form-data" id="DPForm">
                                             <div className="choose-propic" onClick={this.handleSubmit}>
                                                 <i className="far fa-edit mainDP"></i>
                                                     <input type="file" id="profileinputbutton" name="file" onChange={(e)=>{this.onChange(e)}} />

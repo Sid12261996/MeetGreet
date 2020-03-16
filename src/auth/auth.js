@@ -58,6 +58,16 @@ class Auth extends PlayingWithCache {
         return cb();
     };
 
+    updateAuthencity = (authenticity, result, cb) => {
+        this.authenticated = authenticity;
+        if (authenticity) {
+            Auth.setCache('user', result.data.data);
+        } else {
+            Auth.removeCache();
+        }
+        return cb();
+    };
+
     isAuthenticated() {
         return this.authenticated;
     }
