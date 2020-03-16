@@ -9,7 +9,7 @@ router.post('/register',userController.Register);
 //User Login API endpoint
 router.post('/login',userController.Login);
 
-router.post('/:userId/:NewImgUrl/userPicUpdate', async (req, res) => {
+router.put('/:userId/:NewImgUrl/userPicUpdate', async (req, res) => {
     try {
         let ctx = await userController.UserPicUpdate(req.params.userId, req.params.NewImgUrl);
         ctx(req, res);
