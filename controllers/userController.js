@@ -3,6 +3,7 @@ const mongoose = require('mongoose'),
     bcrypt = require('bcrypt'),
     jwtKey = require('../environment').env.jwtKey,
     response = require('../utils/http-utils'),
+    env = require('../environment').env,
     jwt = require('jsonwebtoken');
 
 exports.Login = (req, res) => {
@@ -75,7 +76,7 @@ exports.Register = (req, res) => {
                                 // Security: req.body.Security,
                                 inCommunity: req.body.inCommunity,
                                 JobProfile: req.body.JobProfile,
-                                ImageUrl: "1584281001.31178ProfileCircle.png"
+                                ImageUrl: env.DefaultDP
                             });
 
 
