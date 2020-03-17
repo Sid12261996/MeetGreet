@@ -1,6 +1,7 @@
 {
   "env":{
     "MongoUrl":"mongodb+srv://MeetGDemo:MeetTeam@18@meetgdemo-kjmtn.mongodb.net/beta",
-    "jwtKey":"wejghcdhbbusqikmle872ndmoi23982dn;kd23,d[jnudxbhyewkgcfhoiqlfi;qndfghj34tzcf3"
+    "jwtKey":"wejghcdhbbusqikmle872ndmoi23982dn;kd23,d[jnudxbhyewkgcfhoiqlfi;qndfghj34tzcf3",
+    "DefaultDP": "1584281001.31178ProfileCircle.png"
   }
 }
