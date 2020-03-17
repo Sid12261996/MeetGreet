@@ -1,7 +1,7 @@
 import axios from 'axios';
 import env from '../environment';
 
-const Url = `${env.ApiMonthLink}`;
+const Url = `${env.ApiLink}`;
 
 class postService {
     static postCreate = (userId,data) => {
