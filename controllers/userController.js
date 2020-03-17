@@ -2,6 +2,8 @@ const mongoose = require('mongoose'),
     Users = require('../models/userModel'),
     bcrypt = require('bcrypt'),
     jwtKey = require('../environment').env.jwtKey,
+    response = require('../utils/http-utils'),
+    env = require('../environment').env,
     jwt = require('jsonwebtoken');
 
 exports.Login = (req, res) => {
@@ -50,8 +52,8 @@ exports.Register = (req, res) => {
         .then(data => {
 
                 if (data.length > 0) {
-
-                    res.json({message: "UserName or Email already Exists"});
+                    console.log('I am called');
+                    res.status(400).json({message: "UserName or Email already taken"});
                 } else {
                     bcrypt.hash(req.body.Password, 10, (err, hash) => {
                         if (err) {
@@ -73,7 +75,8 @@ exports.Register = (req, res) => {
                                 Country: req.body.Country,
                                 // Security: req.body.Security,
                                 inCommunity: req.body.inCommunity,
-                                JobProfile: req.body.JobProfile
+                                JobProfile: req.body.JobProfile,
+                                ImageUrl: env.DefaultDP
                             });
 
 
@@ -83,7 +86,7 @@ exports.Register = (req, res) => {
                             res.json({message: 'Successfully Saved', result});
                         }).catch(err => {
                             console.log(err);
-                            res.status(500).json({message: 'Validation Errors', Errors: err})
+                            res.status(400).json({message: 'Validation Errors', Errors: err})
                         })
                     });
 
@@ -91,7 +94,25 @@ exports.Register = (req, res) => {
                 }
             }
         ).catch(err => {
-        console.log(err)
+        console.log(err);
         res.status(500).json({message: 'Validation Errors', Errors: err})
     })
+};
+
+exports.UserPicUpdate = async (userId,NewPicUrl) => {
+    try {
+        let profilePicResult = await Users.findByIdAndUpdate({_id:userId},{ImageUrl: NewPicUrl});
+        return response.Ok(profilePicResult);
+    } catch (e) {
+        return response.BadRequest(e);
+    }
+};
+
+exports.fetchData = async (userId) => {
+    try {
+        let fetchResult = await Users.findById({_id:userId});
+        return response.Ok(fetchResult);
+    } catch (e) {
+        return response.BadRequest(e);
+    }
 };
