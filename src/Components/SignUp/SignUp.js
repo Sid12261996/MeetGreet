@@ -66,7 +66,7 @@ class SignUp extends Component {
                                 <td></td>
                             </tr>
                             <tr>
-                                <td className="thead">Username</td>
+                                <td className="thead">Email</td>
                                 <td><input className="input-field" onChange={this.handleChange} id="Email" type="text"
                                            name="Email" required/></td>
                                 <td></td>
@@ -105,7 +105,7 @@ class SignUp extends Component {
 
                     </Modal.Body>
                     <Modal.Footer className="modal-footer d-flex justify-content-center">
-                        <input type="submit" className="modal-btn" value="Register"/>
+                        <input type="submit" className="modal-btn" value="Sign Up"/>
                     </Modal.Footer>
                 </form>
             </Modal>

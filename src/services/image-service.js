@@ -2,16 +2,16 @@ import axios from "axios";
 import env from "../environment";
 
 const URL = `${env.ImageBaseUrl}`;
-const ApiLink = `${env.url}`;
+const ApiLink = `${env.ApiLink}`;
 
 class imageService {
 
     static upload = (formData,config) => {
-        return axios.post(`${URL}`, formData,config);
+        return axios.post(`${URL}upload`, formData, config);
     };
 
     static ProfilePic = (userId,PPUrl) => {
-        return axios.post(`${ApiLink}user/${userId}/${PPUrl}/userPicUpdate`);
+        return axios.put(`${ApiLink}user/${userId}/${PPUrl}/userPicUpdate`);
     };
 }
 

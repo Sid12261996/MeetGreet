@@ -1,7 +1,8 @@
 import axios from "axios";
 import env from "../environment"
 
-const userURL = `${env.ApiMonthLink}user/`;
+const userURL = `${env.ApiLink}user/`;
+// const localUrl = `${env.url}user/`;
 
 class userService {
 
@@ -13,6 +14,10 @@ class userService {
    static register = (user) => {
         return axios.post(`${userURL}register`, user);
     };
+
+   static fetchData = (userid) => {
+       return axios.get(`${userURL}${userid}/fetchUserData`);
+   };
 }
 
 export default userService;
