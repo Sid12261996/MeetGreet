@@ -32,8 +32,47 @@ exports.Create = async (post, userId) => {
 exports.getAll = async (userId) => {
     try {
         // let allPosts = await Posts.find({'privacy.restrictedUsers': {$nin: mongoose.Types.ObjectId(userId)}});
-        let allPosts = await Posts.find({}).limit(20);
+        let aggregate = [];
+        if (userId.toLowerCase() === 'all') {
+            aggregate = [{
+                $lookup: {
+                    from: 'users',
+                    let: {authorId: "$author"},
+                    pipeline: [
+                        {$match: {$expr: {$eq: ["$_id", "$$authorId"]}}},
+                        {$project: {Name: 1, LastName: 1, CoverUrl: 1, ImageUrl: 1}}
+                    ],
+                    as: 'authorInfo'
+                }
+            }, {
+                $unwind: {
+                    path: '$authorInfo'
+                }
+            }]
+        } else {
+            aggregate = [{
+                $lookup: {
+                    from: 'users',
+                    let: {authorId: "$author"},
+                    pipeline: [
+                        {$match: {$expr: {$eq: ["$_id", "$$authorId"]}}},
+                        {$project: {Name: 1, LastName: 1, CoverUrl: 1, ImageUrl: 1}}
+                    ],
+                    as: 'authorInfo'
+                }
+            }, {
+                $unwind: {
+                    path: '$authorInfo'
+                }
+            }, {
+                $match: {
+                    author: mongoose.Types.ObjectId(userId)
+                }
+            }]
+        }
+        let allPosts = await Posts.aggregate(aggregate).limit(50);
         // console.log(allPosts);
+        allPosts.reverse();
         return response.Ok(allPosts);
     } catch (e) {
         return response.BadRequest(e);
