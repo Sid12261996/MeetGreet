@@ -36,10 +36,6 @@ export default class Profile extends Component {
         document.getElementById('profileinputbutton').click();
     };
 
-    // handlePicSubmit = () => {
-    //
-    // };
-
     // Profile Pic Update
     onChange = (e) => {
 

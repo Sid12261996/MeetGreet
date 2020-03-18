@@ -48,7 +48,7 @@ class Index extends Component {
     render() {
         let addModalClose = () => this.setState({addModalShow: false});
         return (
-            <div>
+            <div className="IndexHolder">
                 {/* Page Title */}
                 <Helmet>
                     <title>Login | MeetGreet</title>
@@ -85,11 +85,11 @@ class Index extends Component {
                                     <form onSubmit={this.handleSubmit}>
                                         <div className='formGroup'>
                                             <label htmlFor="Email">Email</label>
-                                            <input type="email" id='username' onChange={this.handleChange} value={this.state.username} required/>
+                                            <input type="email" id='username' onChange={this.handleChange} value={this.state.username != null ? this.state.username : ""} required/>
                                         </div>
                                         <div className='formGroup'>
                                             <label htmlFor="Password">Password</label>
-                                            <input type="password" id='password' onChange={this.handleChange} value={this.state.password} required/>
+                                            <input type="password" id='password' onChange={this.handleChange} value={this.state.password != null ? this.state.password : ""} required/>
                                         </div>
                                         <div className='formSubmit'>
                                             <input type="submit" className='SubmitButton' value='Login'/>
