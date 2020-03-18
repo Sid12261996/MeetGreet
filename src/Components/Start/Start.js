@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import './Start.css';
 import userStore from "../../Store/stores/user-store";
 import Tabs from '../Tabs/Tabs';
-import Welcome from '../Welcome/Welcome';
 import Helmet from "react-helmet";
 import Sidebar from '../Sidebar/Sidebar';
 import env from '../../environment.json';
 import PostService from "../../services/post-services";
 import ImageService from "../../services/image-service";
+import auth from '../../auth/auth';
 import $ from 'jquery';
+import userService from "../../services/user-services";
 
 class Start extends Component {
 
@@ -16,6 +17,7 @@ class Start extends Component {
         super(props);
         this.state = {
             imgUpload: '',
+            imgGetUrl: '',
             posts: '',
             postText : '',
             welcome: 0
@@ -30,12 +32,14 @@ class Start extends Component {
 
     componentDidMount(){      //WILL RUN ON PAGE RELOAD
         let userData = userStore.getState().root.user;
+        const ImageFetch = `${env.ImageBaseUrl}images/`;
 
         PostService.postGet(`${userData._id}`)      //POSTS API HIT
         .then((result)=>{
             this.setState({
                 ...this.state,
-                posts : result.data.data
+                posts : result.data.data,
+                imgGetUrl : ImageFetch
             });
             console.log(result.data);
         },error => {
@@ -53,7 +57,6 @@ class Start extends Component {
         });
 
         let userData = userStore.getState().root.user;
-        const ImageFetch = `${env.ImageBaseUrl}images/`;
         let formData = new FormData();
         formData.append('file',this.state.imgUpload);
         const config = {     
@@ -62,12 +65,21 @@ class Start extends Component {
 
         // POST CREATE HIT
         ImageService.upload(formData,config).then(Imgcreate=>{
-            PostService.postCreate(userData._id,{title: this.state.postText, imageUrl : ImageFetch+Imgcreate.data})
+            PostService.postCreate(userData._id,{title: this.state.postText, imageUrl : this.state.imgGetUrl+Imgcreate.data})
                 .then(()=>{
                 document.getElementById('postText').value = "";
                 window.location.reload(false);
-            },error=>{console.log(error)});
-        },err=>{console.log(err)});
+                //     console.log('Done');
+                //     userService.fetchData(userData._id).then((currentUser)=>{
+                //         auth.updateAuthencity(true, currentUser, ()=>{
+                //             userStore.dispatch({type: 'USERS_DATA', result: currentUser.data.data});
+                //             console.log(userStore.getState().root.user);
+                //             console.log('Done');
+                //             $('.post').load(`${env.MGLink}${this.props.match.path}`,null,null);
+                //         });
+                //     },er=>{console.log(er);});
+            },err=>{console.log(err)});
+        },error=>{console.log(error)});
     };
 
     onChange = (e) => {
@@ -110,7 +122,6 @@ class Start extends Component {
 
     render() {
         const posts = this.state.posts;                     //GETTING POSTS FROM STATE
-        const ImageFetch = `${env.ImageBaseUrl}images/`;
         return (
             <div>
 
@@ -118,9 +129,6 @@ class Start extends Component {
                 <Helmet>
                     <title>Start</title>
                 </Helmet>
-
-                {/* WELCOME SCREEN*/}
-                <Welcome />
                 
                 {/* START SCREEN */}
                 <div className="start">
@@ -150,7 +158,7 @@ class Start extends Component {
                                         <div className="post" key={post._id}>   
                                             <div className="post-head">
                                                 <div className="post-pic">
-                                                    <img src={`${ImageFetch+post.authorInfo.ImageUrl}`} alt="User Profile Pic"/>
+                                                    <img src={`${this.state.imgGetUrl+post.authorInfo.ImageUrl}`} alt="User Profile Pic"/>
                                                 </div>
                                                 <h6>{post.authorName}</h6>
                                             </div>
