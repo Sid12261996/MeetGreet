@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Modal} from 'react-bootstrap';
 import './SignUp.css';
 import userService from "../../services/user-services";
+import MGLogo from '../Images/mg02col.png';
 
 class SignUp extends Component {
     constructor(props) {
@@ -32,7 +33,7 @@ class SignUp extends Component {
                 Gender: this.state.Gender
             }).then(
                 user => {
-                    console.log(user);
+                    this.props.onHide();
                     return alert('Registration Success');
                 }, err => {
                     console.error(err.response.data.Errors);
@@ -46,58 +47,61 @@ class SignUp extends Component {
 
     render() {
         return (
-            <Modal {...this.props} aria-labelledby="contained-modal-title-vcenter" centered>
+            <Modal {...this.props} className="main-modal" centered>
                 <Modal.Header className="modal-head d-flex justify-content-center">
                     <Modal.Title id="contained-modal-title-vcenter">
                         <div className="heading">
-                            <h2>Welcome to MeetGreet</h2>
+                            <img src={MGLogo} alt="MeetGreet"/>
                         </div>
                     </Modal.Title>
                 </Modal.Header>
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleSubmit} autoComplete="off">
                     <Modal.Body className="modal-body">
                         <table className="TableSection">
                             <tbody className="modal-tbody">
                             <tr>
-                                <td className="thead">Name</td>
+                                <td className="thead">Full Name</td>
                                 <td><input className="input-field" onChange={this.handleChange} id="Name" type="text"
-                                           name="Name" required/></td>
+                                           name="Name" autoComplete="Name" required/></td>
                                 <td></td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td className="thead">Email</td>
+                                <td className="thead">Email / Phone</td>
                                 <td><input className="input-field" onChange={this.handleChange} id="Email" type="text"
-                                           name="Email" required/></td>
+                                           name="Email" autoComplete="Email" required/></td>
                                 <td></td>
                                 <td></td>
                             </tr>
                             <tr>
                                 <td className="thead">Password</td>
                                 <td><input className="input-field" onChange={this.handleChange} id="Password"
-                                           type="password" name="Password" required/></td>
+                                           type="password" name="Password" autoComplete="Password" required/></td>
                                 <td></td>
                                 <td></td>
                             </tr>
                             <tr>
                                 <td className="thead">Confirm Password</td>
                                 <td><input className="input-field" onChange={this.handleChange} id="ConfPassword"
-                                           type="password" name="ConfPassword" required/></td>
+                                           type="password" name="ConfPassword" autoComplete="ConfPassword" required/></td>
                                 <td></td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td>Gender</td>
+                                <td className="thead">Gender</td>
                                 <td>
-                                    <label className="radio-label"><input className="radio-inline m-2"
+                                    <label className="radio-label Gender"><input className="radio-inline m-2"
                                                                           onChange={this.handleChange} id="GenderM"
-                                                                          type="radio" name="Gender" value="Male"/>Male</label>
-                                    <label className="radio-label"><input className="radio-inline m-2"
+                                                                          type="radio" name="Gender" value="Male"/>
+                                                                          <span className="checkmark"></span>Male</label>
+                                    <label className="radio-label Gender"><input className="radio-inline m-2"
                                                                           onChange={this.handleChange} id="GenderF"
-                                                                          type="radio" name="Gender" value="Female"/>Female</label>
-                                    <label className="radio-label"><input className="radio-inline m-2"
+                                                                          type="radio" name="Gender" value="Female"/>
+                                                                          <span className="checkmark"></span>Female</label>
+                                    <label className="radio-label Gender"><input className="radio-inline m-2"
                                                                           onChange={this.handleChange} id="GenderO"
-                                                                          type="radio" name="Gender" value="Other"/>Other</label>
+                                                                          type="radio" name="Gender" value="Other"/>
+                                                                          <span className="checkmark"></span>Other</label>
                                 </td>
                             </tr>
                             </tbody>

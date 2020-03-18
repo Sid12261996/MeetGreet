@@ -52,7 +52,8 @@ class Start extends Component {
             postText : myPost
         });
 
-        let userData = userStore.getState().root.user;                  
+        let userData = userStore.getState().root.user;
+        const ImageFetch = `${env.ImageBaseUrl}images/`;
         let formData = new FormData();
         formData.append('file',this.state.imgUpload);
         const config = {     
@@ -60,8 +61,8 @@ class Start extends Component {
         };
 
         // POST CREATE HIT
-        ImageService.upload(`${formData}`,`${config}`).then(Imgcreate=>{
-            PostService.postCreate(`${userData._id}`,{title: this.state.postText, imageUrl : env.ImageGet+Imgcreate.data})
+        ImageService.upload(formData,config).then(Imgcreate=>{
+            PostService.postCreate(userData._id,{title: this.state.postText, imageUrl : ImageFetch+Imgcreate.data})
                 .then(()=>{
                 document.getElementById('postText').value = "";
                 window.location.reload(false);
