@@ -12,9 +12,10 @@
 
 /* POST */
 .post {width: 100%; margin-bottom: 20px;}
-.post-head {width: 100%; display: flex; justify-content: flex-start; padding: 5px 10px; align-items: flex-end;}
+.post-head {width: 100%; display: flex; justify-content: flex-start; padding: 5px 0px; align-items: flex-end;}
 .post-desc { display: flex; justify-content: flex-start; padding: 5px 20px;}
-.post-pic {display: block; width: 40px; height: 40px; border-radius: 50%; background-color: #eee; margin: 0 5px;}
+.post-pic {display: block; width: 40px; height: 40px; border-radius: 50%; margin-right: 10px; overflow: hidden;}
+.post-pic img {width: 40px; height: 40px; border-radius: 50%; cursor: pointer;}
 .post-body {width: 100%; display: flex;}
 
 .post-left {width: 90%; background-color: #eee; height: 400px;}
