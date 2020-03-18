@@ -110,6 +110,7 @@ class Start extends Component {
 
     render() {
         const posts = this.state.posts;                     //GETTING POSTS FROM STATE
+        const ImageFetch = `${env.ImageBaseUrl}images/`;
         return (
             <div>
 
@@ -144,11 +145,13 @@ class Start extends Component {
 
                             {
 
-                                posts && posts.reverse().map((post,index)=>{            //POSTS MAPPING AND DISPLAYING
+                                posts && posts.map((post,index)=>{            //POSTS MAPPING AND DISPLAYING
                                     return(
                                         <div className="post" key={post._id}>   
                                             <div className="post-head">
-                                                <div className="post-pic"></div>
+                                                <div className="post-pic">
+                                                    <img src={`${ImageFetch+post.authorInfo.ImageUrl}`} alt="User Profile Pic"/>
+                                                </div>
                                                 <h6>{post.authorName}</h6>
                                             </div>
                                             <div className="post-desc">
