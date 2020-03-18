@@ -9,6 +9,10 @@ class postService {
     };
 
     static postGet = (userId) => {
+        return axios.get(`${Url}posts/all`);
+    };
+
+    static postUserGet = (userId) => {
         return axios.get(`${Url}posts/${userId}`);
     };
 }
