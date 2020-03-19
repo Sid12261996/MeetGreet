@@ -7,9 +7,10 @@ import Sidebar from '../Sidebar/Sidebar';
 import env from '../../environment.json';
 import PostService from "../../services/post-services";
 import ImageService from "../../services/image-service";
-import auth from '../../auth/auth';
 import $ from 'jquery';
 import userService from "../../services/user-services";
+import auth from "../../auth/auth";
+
 
 class Start extends Component {
 
@@ -34,7 +35,7 @@ class Start extends Component {
         let userData = userStore.getState().root.user;
         const ImageFetch = `${env.ImageBaseUrl}images/`;
 
-        PostService.postGet(`${userData._id}`)      //POSTS API HIT
+        PostService.getAllPosts(`${userData._id}`)      //POSTS API HIT
         .then((result)=>{
             this.setState({
                 ...this.state,
@@ -65,7 +66,7 @@ class Start extends Component {
 
         // POST CREATE HIT
         ImageService.upload(formData,config).then(Imgcreate=>{
-            PostService.postCreate(userData._id,{title: this.state.postText, imageUrl : this.state.imgGetUrl+Imgcreate.data})
+            PostService.createPost(userData._id,{title: this.state.postText, imageUrl : this.state.imgGetUrl+Imgcreate.data})
                 .then(()=>{
                 document.getElementById('postText').value = "";
                     console.log('Done');

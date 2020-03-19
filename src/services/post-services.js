@@ -4,15 +4,15 @@ import env from '../environment';
 const Url = `${env.ApiLink}`;
 
 class postService {
-    static postCreate = (userId,data) => {
+    static createPost = (userId, data) => {
         return axios.post(`${Url}posts/${userId}/create`, data);
     };
 
-    static postGet = (userId) => {
+    static getAllPosts = (userId) => {
         return axios.get(`${Url}posts/all`);
     };
 
-    static postUserGet = (userId) => {
+    static getPostsByUserId = (userId) => {
         return axios.get(`${Url}posts/${userId}`);
     };
 }
