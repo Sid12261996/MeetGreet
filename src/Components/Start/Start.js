@@ -68,16 +68,15 @@ class Start extends Component {
             PostService.postCreate(userData._id,{title: this.state.postText, imageUrl : this.state.imgGetUrl+Imgcreate.data})
                 .then(()=>{
                 document.getElementById('postText').value = "";
-                window.location.reload(false);
-                //     console.log('Done');
-                //     userService.fetchData(userData._id).then((currentUser)=>{
-                //         auth.updateAuthencity(true, currentUser, ()=>{
-                //             userStore.dispatch({type: 'USERS_DATA', result: currentUser.data.data});
-                //             console.log(userStore.getState().root.user);
-                //             console.log('Done');
-                //             $('.post').load(`${env.MGLink}${this.props.match.path}`,null,null);
-                //         });
-                //     },er=>{console.log(er);});
+                    console.log('Done');
+                    userService.fetchData(userData._id).then((currentUser)=>{
+                        auth.updateAuthencity(true, currentUser, ()=>{
+                            userStore.dispatch({type: 'USERS_DATA', result: currentUser.data.data});
+                            console.log(userStore.getState().root.user);
+                            console.log('Done');
+                            $('.post').load(`${userService.LoadUrl}${this.props.match.path}`,null,null);
+                        });
+                    },er=>{console.log(er);});
             },err=>{console.log(err)});
         },error=>{console.log(error)});
     };
