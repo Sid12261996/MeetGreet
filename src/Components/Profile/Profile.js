@@ -15,7 +15,6 @@ import userService from "../../services/user-services";
 export default class Profile extends Component {
 
     componentDidMount(){
-        console.log(this.props);
         const URL = `${env.ImageBaseUrl}`;
         this.setState({
             ...this.state,
@@ -25,6 +24,7 @@ export default class Profile extends Component {
 
     constructor(props){
         super(props);
+        console.log(this.props);
         this.state = {
             ProfilePic: "",
             BackPic: "",
@@ -56,7 +56,7 @@ export default class Profile extends Component {
                     auth.updateAuthencity(true, currentUser,()=>{
                         userStore.dispatch({type: 'USERS_DATA', result: currentUser.data.data});
                         console.log(userStore.getState().root.user);
-                        $('.choose-propic').load(`${env.MGLink}${this.props.match.path}`,null,null);
+                        $('.choose-propic').load(`${userService.LoadUrl}${this.props.match.path}`,null,null);
                     });
                 },er=> {console.log(er);});
             },error=> {console.log(error);});
