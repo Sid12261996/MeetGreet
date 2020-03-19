@@ -9,9 +9,9 @@ router.post('/register',userController.Register);
 //User Login API endpoint
 router.post('/login',userController.Login);
 
-router.put('/:userId/:NewImgUrl/userPicUpdate', async (req, res) => {
+router.put('/:userId/userPicUpdate', async (req, res) => {
     try {
-        let ctx = await userController.UserPicUpdate(req.params.userId, req.params.NewImgUrl);
+        let ctx = await userController.UserPicUpdate(req.params.userId, req.body.NewImgUrl);
         ctx(req, res);
     } catch (e) {
         console.log('Route is catching Error', e);
