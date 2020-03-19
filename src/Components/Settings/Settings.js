@@ -10,36 +10,36 @@ export default class Settings extends Component {
     onFirstClick = () => {
             $('.rightUp').css({'height':'80%'});
             $('.first').css({'width':'80%','height':'100%','background-color':'#fff'});
-            $('.second').css({'width':'20%','height':'100%','background-color':'rgba(0,0,0,0.5)'});
+            $('.second').css({'width':'20%','height':'100%','background-color':'rgba(127,127,127,0.5)'});
             $('.rightDown').css({'height':'20%'});
-            $('.third').css({'width':'80%','height':'100%','background-color':'rgba(0,0,0,0.5)'});
-            $('.fourth').css({'width':'20%','height':'100%','background-color':'rgba(0,0,0,0.5)'});
+            $('.third').css({'width':'80%','height':'100%','background-color':'rgba(127,127,127,0.5)'});
+            $('.fourth').css({'width':'20%','height':'100%','background-color':'rgba(127,127,127,0.5)'});
     }
 
     onSecondClick = () => {
         $('.rightUp').css({'height':'80%'});
-        $('.first').css({'width':'20%','height':'100%','background-color':'rgba(0,0,0,0.5)'});
+        $('.first').css({'width':'20%','height':'100%','background-color':'rgba(127,127,127,0.5)'});
         $('.second').css({'width':'80%','height':'100%','background-color':'#fff'});
         $('.rightDown').css({'height':'20%'});
-        $('.third').css({'width':'20%','height':'100%','background-color':'rgba(0,0,0,0.5)'});
-        $('.fourth').css({'width':'80%','height':'100%','background-color':'rgba(0,0,0,0.5)'});
+        $('.third').css({'width':'20%','height':'100%','background-color':'rgba(127,127,127,0.5)'});
+        $('.fourth').css({'width':'80%','height':'100%','background-color':'rgba(127,127,127,0.5)'});
     }
 
     onThirdClick = () => {
         $('.rightUp').css({'height':'20%'});
-        $('.first').css({'width':'80%','height':'100%','background-color':'rgba(0,0,0,0.5)'});
-        $('.second').css({'width':'20%','height':'100%','background-color':'rgba(0,0,0,0.5)'});
+        $('.first').css({'width':'80%','height':'100%','background-color':'rgba(127,127,127,0.5)'});
+        $('.second').css({'width':'20%','height':'100%','background-color':'rgba(127,127,127,0.5)'});
         $('.rightDown').css({'height':'80%'});
         $('.third').css({'width':'80%','height':'100%','background-color':'#fff'});
-        $('.fourth').css({'width':'20%','height':'100%','background-color':'rgba(0,0,0,0.5)'});
+        $('.fourth').css({'width':'20%','height':'100%','background-color':'rgba(127,127,127,0.5)'});
     }
 
     onFourthClick = () => {
         $('.rightUp').css({'height':'20%'});
-        $('.first').css({'width':'20%','height':'100%','background-color':'rgba(0,0,0,0.5)'});
-        $('.second').css({'width':'80%','height':'100%','background-color':'rgba(0,0,0,0.5)'});
+        $('.first').css({'width':'20%','height':'100%','background-color':'rgba(127,127,127,0.5)'});
+        $('.second').css({'width':'80%','height':'100%','background-color':'rgba(127,127,127,0.5)'});
         $('.rightDown').css({'height':'80%'});
-        $('.third').css({'width':'20%','height':'100%','background-color':'rgba(0,0,0,0.5)'});
+        $('.third').css({'width':'20%','height':'100%','background-color':'rgba(127,127,127,0.5)'});
         $('.fourth').css({'width':'80%','height':'100%','background-color':'#fff'});
     }
 
@@ -56,18 +56,18 @@ export default class Settings extends Component {
                             <div className='rightContent'>
                                 <div className='rightUp'>
                                     <div className='first' onClick={this.onFirstClick}>
-                                        1
+                                        <h4>Personal</h4>
                                     </div>
                                     <div className='second' onClick={this.onSecondClick}>
-                                        2
+                                        <h4>Security</h4>
                                     </div>
                                 </div>
                                 <div className='rightDown'>
                                     <div className='third' onClick={this.onThirdClick}>
-                                        3
+                                        <h4>Privacy</h4>
                                     </div>
                                     <div className='fourth' onClick={this.onFourthClick}>
-                                        4
+                                        <h4>Help Center</h4>
                                     </div>
                                 </div>
                             </div>
