@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Tabs from '../Tabs/Tabs';
 import Sidebar from "../Sidebar/Sidebar";
+import DefaultPic from '../Images/Profile/ProfileCircle.png';
 import AlbumPic from '../Images/AlbumDummy.png'; //Temporary
 import './Profile.css';
 import $ from 'jquery';
@@ -87,7 +88,7 @@ export default class Profile extends Component {
                                     <div className="userProfile">
                                         {/* PROFILE PIC CIRCLE DIV */}
                                         <div className="solarProfile">
-                                            <img id="profilePic" src={`${this.state.ProfilePic}images/${userData.ImageUrl}`} alt="Profile"/>
+                                            <img id="profilePic" src={`${this.state.ProfilePic}images/${userData.ImageUrl}` != null ? `${this.state.ProfilePic}images/${userData.ImageUrl}` : `${DefaultPic}`} alt="Profile"/>
                                             <form autoComplete="off" encType="multipart/form-data" id="DPForm">
                                             <div className="choose-propic" onClick={this.handleSubmit}>
                                                 <i className="far fa-edit mainDP"></i>
