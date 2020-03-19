@@ -67,7 +67,7 @@ class SignUp extends Component {
                                 <td></td>
                             </tr>
                             <tr>
-                                <td className="thead">Email / Phone</td>
+                                <td className="thead">Email</td>
                                 <td><input className="input-field" onChange={this.handleChange} id="Email" type="text"
                                            name="Email" autoComplete="Email" required/></td>
                                 <td></td>
