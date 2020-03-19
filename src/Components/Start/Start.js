@@ -159,7 +159,8 @@ class Start extends Component {
                                                 <div className="post-pic">
                                                     <img src={`${this.state.imgGetUrl+post.authorInfo.ImageUrl}`} alt="User Profile Pic"/>
                                                 </div>
-                                                <h6>{post.authorName}</h6>
+                                                <h6 className="AuthorName">{post.authorName}</h6>
+                                                <h6 className="PostTime">8 Hrs</h6>
                                             </div>
                                             <div className="post-desc">
                                                 <p>{post.title}</p>
