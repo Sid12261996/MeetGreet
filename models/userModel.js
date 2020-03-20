@@ -14,6 +14,9 @@ const securityLock = mongo.model('Security', securityLockSchema);
 
 const User = new schema({
     _id: schema.Types.ObjectId,
+    createdAt: {type: schema.Types.Date, required: true, default: new Date()},
+    deletedAt: {type: schema.Types.Date, required: true, default: new Date()},
+    updatedAt: {type: schema.Types.Date, default: null},
     Email: {type: schema.Types.String, required: true, minlength: 6},
     Name: String,
     LastName: String,
@@ -29,7 +32,7 @@ const User = new schema({
     inCommunity: Boolean,
     // Post: ["Status", "Images", "Shared-post", "Videos"],
     JobProfile: [String],
-    ImageUrl: {type: String, required: true, default: null},
+    ImageUrl: {type: String, default: 'default'},
     CoverUrl: String
 });
 
