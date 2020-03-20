@@ -52,15 +52,21 @@ export default class Profile extends Component {
                 $('#DPForm').submit(() => {
                     this.preventDefault();
                 });
-                userService.fetchData(userData._id).then((currentUser)=>{
-                    auth.updateAuthencity(true, currentUser,()=>{
+                userService.fetchData(userData._id).then((currentUser) => {
+                    auth.updateAuthencity(true, currentUser, () => {
                         userStore.dispatch({type: 'USERS_DATA', result: currentUser.data.data});
                         console.log(userStore.getState().root.user);
-                        $('.choose-propic').load(`${userService.LoadUrl}${this.props.match.path}`,null,null);
+                        $('.choose-propic').load(`${userService.LoadUrl}${this.props.match.path}`, null, null);
                     });
-                },er=> {console.log(er);});
-            },error=> {console.log(error);});
-        },err=>{console.log(err);});
+                }, er => {
+                    console.log(er);
+                });
+            }, error => {
+                console.log(error);
+            });
+        }, err => {
+            console.log(err);
+        });
     };
 
     //Function Not Available
@@ -70,7 +76,7 @@ export default class Profile extends Component {
 
     render() {
         let userData = userStore.getState().root.user;      //GETTING USER DETAILS
-        const imageURL = userData.ImageUrl != null ? `${this.state.ProfilePic}images/${userData.ImageUrl}` : `${DefaultPic}`;
+        const imageURL = userData.ImageUrl === 'default' ? `${this.state.ProfilePic}images/${userData.ImageUrl}` : `${DefaultPic}`;
 
         console.log(userData);
         return (

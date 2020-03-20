@@ -4,7 +4,7 @@ import userStore from "../../Store/stores/user-store";
 import Tabs from '../Tabs/Tabs';
 import Helmet from "react-helmet";
 import Sidebar from '../Sidebar/Sidebar';
-import env from '../../environment.json';
+import env from '../../environment.js';
 import PostService from "../../services/post-services";
 import ImageService from "../../services/image-service";
 import $ from 'jquery';
