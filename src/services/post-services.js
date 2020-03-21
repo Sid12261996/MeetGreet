@@ -1,7 +1,11 @@
 import axios from 'axios';
 import env from '../environment';
+import baseService from "./base-service";
+import userStore from "../Store/stores/user-store";
 
 const Url = `${env.ApiLink}`;
+baseService.axios = axios.defaults.headers.common['Authorization'] = `bearer ${userStore.getState().root.token}`;
+// const axios = baseService.axios;
 
 class postService {
     static createPost = (userId, data) => {

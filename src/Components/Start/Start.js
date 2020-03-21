@@ -10,7 +10,7 @@ import ImageService from "../../services/image-service";
 import $ from 'jquery';
 import userService from "../../services/user-services";
 import auth from "../../auth/auth";
-
+import DefaultPic from "../Images/Profile/ProfileCircle.png";
 
 class Start extends Component {
 
@@ -32,8 +32,9 @@ class Start extends Component {
 
 
     componentDidMount(){      //WILL RUN ON PAGE RELOAD
-        let userData = userStore.getState().root.user;
+        let userData = userStore.getState().root.user;          //Needs to be Removed At Release
         const ImageFetch = `${env.ImageBaseUrl}images/`;
+        console.log(userStore.getState().root);
 
         PostService.getAllPosts(`${userData._id}`)      //POSTS API HIT
         .then((result)=>{
@@ -42,7 +43,6 @@ class Start extends Component {
                 posts : result.data.data,
                 imgGetUrl : ImageFetch
             });
-            console.log(result.data);
         },error => {
             console.log(error);
         });
@@ -122,6 +122,8 @@ class Start extends Component {
 
     render() {
         const posts = this.state.posts;                     //GETTING POSTS FROM STATE
+        console.log(posts);
+
         return (
             <div>
 
@@ -157,11 +159,13 @@ class Start extends Component {
                                     return(
                                         <div className="post" key={post._id}>   
                                             <div className="post-head">
-                                                <div className="post-pic">
-                                                    <img src={`${this.state.imgGetUrl+post.authorInfo.ImageUrl}`} alt="User Profile Pic"/>
+                                                <div className="post-head-flex">
+                                                    <div className="post-pic">
+                                                        <img src={`${post.authorInfo.ImageUrl}` === "default" ? `${DefaultPic}` : `${this.state.imgGetUrl+post.authorInfo.ImageUrl}`} alt="User Profile Pic"/>
+                                                    </div>
+                                                    <h6 className="AuthorName">{post.authorName}</h6>
                                                 </div>
-                                                <h6 className="AuthorName">{post.authorName}</h6>
-                                                <h6 className="PostTime">8 Hrs</h6>
+                                                <h6 className="PostTime">{post.baseEntity.CreatedAt}</h6>
                                             </div>
                                             <div className="post-desc">
                                                 <p>{post.title}</p>
