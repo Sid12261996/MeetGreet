@@ -168,7 +168,9 @@ class Start extends Component {
                                                 <h6 className="PostTime">{post.baseEntity.CreatedAt}</h6>
                                             </div>
                                             <div className="post-desc">
-                                                <p>{post.title}</p>
+                                                <div className="div post-desc-box">
+                                                    <p>{post.title}</p>
+                                                </div>
                                             </div>                                            
                                             <div className="post-body">
                                             {

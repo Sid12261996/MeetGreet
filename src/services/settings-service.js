@@ -1,15 +1,16 @@
 import $ from "jquery";
 
-// const SettingsService = {};
-//      SettingsService.DataShift = (Blocks,width,height,bgColor) => {
-//         $(Blocks).css({'width':width,'height':height,'background-color':bgColor});
-//     };
-
      class SettingsService {
          constructor() {}
-         DataShift = (Blocks,width,height,bgColor) => {
-             $(Blocks).css({'width':width,'height':height,'background-color':bgColor});
-         };
+        HideDiv = (Div1,Div2) => {
+             $(Div1).css({'display':'none'});
+             $(Div2).css({'display':'block','width':'100%','height':'100%'});
+        }
+
+        HideDivRevert = (Div1,Div2) => {
+            $(Div1).css({'display':'none'});
+            $(Div2).css({'display':'grid','place-items':'center'});
+        }
      }
 
 export default SettingsService;

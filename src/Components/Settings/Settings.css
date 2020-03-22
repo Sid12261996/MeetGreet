@@ -8,5 +8,8 @@
 .rightContent {width: 100%; height: 100%;}
 .rightUp, .rightDown {width: 100%; height: 50%; display: flex; transition: .5s;}
 .first, .second, .third, .fourth {width: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: .5s;}
+.settings-heading1, .settings-heading2, .settings-heading3, .settings-heading4 {width: 100%; height: 100%; display: grid; place-items: center;}
 .settings-data1, .settings-data2, .settings-data3, .settings-data4 {display: none;}
+.SHeading {display: flex; justify-content: center; width: 100%; height: 10%; align-items: center;}
+.SHeading h4 { color: #ad3a6e; font-size: 34px; font-family: 'Montserrat', sans-serif;}
 .first:hover, .second:hover, .third:hover, .fourth:hover {background-color: #F5F5F5; box-shadow: 0px 2px 8px rgba(127,127,127,0.5);}
