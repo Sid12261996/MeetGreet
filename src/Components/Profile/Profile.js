@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Tabs from '../Tabs/Tabs';
 import Sidebar from "../Sidebar/Sidebar";
 import DefaultPic from '../Images/Profile/ProfileCircle.png';
@@ -14,7 +14,7 @@ import userService from "../../services/user-services";
 
 export default class Profile extends Component {
 
-    componentDidMount(){
+    componentDidMount() {
         const URL = `${env.ImageBaseUrl}`;
         this.setState({
             ...this.state,
@@ -22,7 +22,7 @@ export default class Profile extends Component {
         });
     }
 
-    constructor(props){
+    constructor(props) {
         super(props);
         console.log(this.props);
         this.state = {
@@ -47,20 +47,26 @@ export default class Profile extends Component {
         const config = {
             headers: { 'content-type': 'multipart/form-data' }
         };
-        ImageService.upload(formData,config).then(DPUrl=>{
-            ImageService.ProfilePic(userData._id, DPUrl.data).then(()=> {
-                $('#DPForm').submit(()=>{
+        ImageService.upload(formData, config).then(DPUrl => {
+            ImageService.ProfilePic(userData._id, DPUrl.data).then(() => {
+                $('#DPForm').submit(() => {
                     this.preventDefault();
                 });
-                userService.fetchData(userData._id).then((currentUser)=>{
-                    auth.updateAuthencity(true, currentUser,()=>{
+                userService.fetchData(userData._id).then((currentUser) => {
+                    auth.updateAuthencity(true, currentUser, () => {
                         userStore.dispatch({type: 'USERS_DATA', result: currentUser.data.data});
                         console.log(userStore.getState().root.user);
-                        $('.choose-propic').load(`${userService.LoadUrl}${this.props.match.path}`,null,null);
+                        $('.choose-propic').load(`${userService.LoadUrl}${this.props.match.path}`, null, null);
                     });
-                },er=> {console.log(er);});
-            },error=> {console.log(error);});
-        },err=>{console.log(err);});
+                }, er => {
+                    console.log(er);
+                });
+            }, error => {
+                console.log(error);
+            });
+        }, err => {
+            console.log(err);
+        });
     };
 
     //Function Not Available
@@ -70,6 +76,7 @@ export default class Profile extends Component {
 
     render() {
         let userData = userStore.getState().root.user;      //GETTING USER DETAILS
+
         console.log(userData);
         return (
             <div>
@@ -81,19 +88,22 @@ export default class Profile extends Component {
                 {/* PROFILE SCREEN */}
                 <div className="profile">   {/* PROFILE DIV 100% WIDTH */}
                     <div className="profileContent">    {/* INSIDE DIV WITH 100% - 100px WIDTH */}
-                            {/* PROFILE SCREEN LEFT PART */}
+                        {/* PROFILE SCREEN LEFT PART */}
                         <div className="profileLeft">
                             <div className="userDetails">
                                 <div className="userInfo">
                                     <div className="userProfile">
                                         {/* PROFILE PIC CIRCLE DIV */}
                                         <div className="solarProfile">
-                                            <img id="profilePic" src={`${this.state.ProfilePic}images/${userData.ImageUrl}` != null ? `${this.state.ProfilePic}images/${userData.ImageUrl}` : `${DefaultPic}`} alt="Profile"/>
+                                            <img id="profilePic" src={`${userData.ImageUrl}` !== "default" ? `${this.state.ProfilePic}images/${userData.ImageUrl}` : `${DefaultPic}`} alt="Profile"/>
                                             <form autoComplete="off" encType="multipart/form-data" id="DPForm">
-                                            <div className="choose-propic" onClick={this.handleSubmit}>
-                                                <i className="far fa-edit mainDP"></i>
-                                                    <input type="file" id="profileinputbutton" name="file" onChange={(e)=>{this.onChange(e)}} />
-                                            </div>
+                                                <div className="choose-propic" onClick={this.handleSubmit}>
+                                                    <i className="far fa-edit mainDP"></i>
+                                                    <input type="file" id="profileinputbutton" name="file"
+                                                           onChange={(e) => {
+                                                               this.onChange(e)
+                                                           }}/>
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
@@ -160,10 +170,10 @@ export default class Profile extends Component {
                         </div>
                     </div>
                     {/* SIDEBAR */}
-                    <Sidebar />
+                    <Sidebar/>
                 </div>
                 {/* TABSBAR */}
-                <Tabs />
+                <Tabs/>
             </div>
         )
     }

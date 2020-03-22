@@ -1,26 +1,30 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './Start.css';
 import userStore from "../../Store/stores/user-store";
 import Tabs from '../Tabs/Tabs';
 import Helmet from "react-helmet";
 import Sidebar from '../Sidebar/Sidebar';
-import env from '../../environment.json';
+import env from '../../environment.js';
 import PostService from "../../services/post-services";
 import ImageService from "../../services/image-service";
-import auth from '../../auth/auth';
 import $ from 'jquery';
 import userService from "../../services/user-services";
+import auth from "../../auth/auth";
+import DefaultPic from "../Images/Profile/ProfileCircle.png";
+import * as moment from "moment";
+import {unitOfTime} from "moment";
 
 class Start extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             imgUpload: '',
             imgGetUrl: '',
             posts: '',
-            postText : '',
-            welcome: 0
+            postText: '',
+            welcome: 0,
+            currentDate: new Date()
         };
 
         //BINDING FUNCTIONS
@@ -30,21 +34,21 @@ class Start extends Component {
     }
 
 
-    componentDidMount(){      //WILL RUN ON PAGE RELOAD
-        let userData = userStore.getState().root.user;
+    componentDidMount() {      //WILL RUN ON PAGE RELOAD
+        let userData = userStore.getState().root.user;          //Needs to be Removed At Release
         const ImageFetch = `${env.ImageBaseUrl}images/`;
+        console.log(userStore.getState().root);
 
-        PostService.postGet(`${userData._id}`)      //POSTS API HIT
-        .then((result)=>{
-            this.setState({
-                ...this.state,
-                posts : result.data.data,
-                imgGetUrl : ImageFetch
+        PostService.getAllPosts(`${userData._id}`)      //POSTS API HIT
+            .then((result) => {
+                this.setState({
+                    ...this.state,
+                    posts: result.data.data,
+                    imgGetUrl: ImageFetch
+                });
+            }, error => {
+                console.log(error);
             });
-            console.log(result.data);
-        },error => {
-            console.log(error);
-        });
 
     }
 
@@ -53,64 +57,87 @@ class Start extends Component {
         let myPost = $('#postText').val();       //POST CHANGE FUNCTION
         this.setState({
             ...this.state,
-            postText : myPost
+            postText: myPost
         });
 
         let userData = userStore.getState().root.user;
         let formData = new FormData();
-        formData.append('file',this.state.imgUpload);
-        const config = {     
-            headers: { 'content-type': 'multipart/form-data' }
+        formData.append('file', this.state.imgUpload);
+        const config = {
+            headers: {'content-type': 'multipart/form-data'}
         };
 
         // POST CREATE HIT
-        ImageService.upload(formData,config).then(Imgcreate=>{
-            PostService.postCreate(userData._id,{title: this.state.postText, imageUrl : this.state.imgGetUrl+Imgcreate.data})
-                .then(()=>{
-                document.getElementById('postText').value = "";
+        ImageService.upload(formData, config).then(Imgcreate => {
+            PostService.createPost(userData._id, {
+                title: this.state.postText,
+                imageUrl: this.state.imgGetUrl + Imgcreate.data
+            })
+                .then(() => {
+                    document.getElementById('postText').value = "";
                     console.log('Done');
-                    userService.fetchData(userData._id).then((currentUser)=>{
-                        auth.updateAuthencity(true, currentUser, ()=>{
+                    userService.fetchData(userData._id).then((currentUser) => {
+                        auth.updateAuthencity(true, currentUser, () => {
                             userStore.dispatch({type: 'USERS_DATA', result: currentUser.data.data});
                             console.log(userStore.getState().root.user);
                             console.log('Done');
-                            $('.post').load(`${userService.LoadUrl}${this.props.match.path}`,null,null);
+                            $('.post').load(`${userService.LoadUrl}${this.props.match.path}`, null, null);
                         });
-                    },er=>{console.log(er);});
-            },err=>{console.log(err)});
-        },error=>{console.log(error)});
+                    }, er => {
+                        console.log(er);
+                    });
+                }, err => {
+                    console.log(err)
+                });
+        }, error => {
+            console.log(error)
+        });
     };
 
     onChange = (e) => {
         let files = e.target.files[0];
         this.setState({
             ...this.state,
-            imgUpload : files
+            imgUpload: files
         });
     };
+    unitsOfTime = ['years', 'days', 'hours', 'minutes', 'seconds'];
 
-    getMeta(url,index){   
+    handleDate(CreatedAt, index = 0) {
+        // console.log(this.state.currentDate, CreatedAt, moment(CreatedAt).local());
+        const now = moment(this.state.currentDate);
+        // let toPrint = now - moment(CreatedAt);
+        const unitOfTime = this.unitsOfTime[index];
+        let toPrint = now.diff(moment(CreatedAt).local(), unitOfTime).toString() + ' ' + unitOfTime;
+        if (toPrint === '0 ' + unitOfTime) {
+            index++;
+            // console.log('Time is ', toPrint);
+            // unitsOfTime.splice(0, 1);
+            // console.log(unitsOfTime);
+            toPrint = this.handleDate(CreatedAt, index);
+        }
+        return `${toPrint}`;
+    }
+
+    getMeta(url, index) {
         var img = new Image();
         // Todo: Code below has to go in generic utils function
-        img.addEventListener("load", function(){
-            if(this.naturalWidth > this.naturalHeight){
+        img.addEventListener("load", function () {
+            if (this.naturalWidth > this.naturalHeight) {
                 document.getElementsByClassName('posty')[index].style.width = "100%";
                 document.getElementsByClassName('posty')[index].style.height = "400px";
                 document.getElementsByClassName('posty')[index].style.filter = "blur(0px)";
-            }
-            else if(this.naturalWidth < this.naturalHeight){
-                if(this.naturalWidth > 673){
+            } else if (this.naturalWidth < this.naturalHeight) {
+                if (this.naturalWidth > 673) {
                     document.getElementsByClassName('posty')[index].style.width = '300px';
                     document.getElementsByClassName('posty')[index].style.height = "400px";
                     document.getElementsByClassName('posty')[index].style.filter = "blur(0px)";
-                }
-                else{
-                    document.getElementsByClassName('posty')[index].style.width = this.naturalWidth+'px';
+                } else {
+                    document.getElementsByClassName('posty')[index].style.width = this.naturalWidth + 'px';
                     document.getElementsByClassName('posty')[index].style.height = "400px";
                     document.getElementsByClassName('posty')[index].style.filter = "blur(0px)";
                 }
-            }
-            else if(this.naturalHeight === this.naturalWidth){
+            } else if (this.naturalHeight === this.naturalWidth) {
                 document.getElementsByClassName('posty')[index].style.width = "400px";
                 document.getElementsByClassName('posty')[index].style.height = "400px";
                 document.getElementsByClassName('posty')[index].style.filter = "blur(0px)";
@@ -121,6 +148,8 @@ class Start extends Component {
 
     render() {
         const posts = this.state.posts;                     //GETTING POSTS FROM STATE
+        console.log(posts);
+
         return (
             <div>
 
@@ -128,7 +157,7 @@ class Start extends Component {
                 <Helmet>
                     <title>Start</title>
                 </Helmet>
-                
+
                 {/* START SCREEN */}
                 <div className="start">
                     <div className="mainContent">
@@ -139,10 +168,15 @@ class Start extends Component {
                                 <form autoComplete="off" onSubmit={this.handleSubmit} encType="multipart/form-data">
 
                                     <div className="generatePost">
-                                        <input autoComplete="off" type="text" id="postText" placeholder="Click Me and start typing.."/>
-                                        <div className="choose-pic" onClick={()=>{document.getElementById('fileinputbutton').click()}}>
-                                            <h6>Image</h6>  
-                                            <input type="file" id="fileinputbutton" name="file" onChange={(e)=>{this.onChange(e)}} required/>   
+                                        <input autoComplete="off" type="text" id="postText"
+                                               placeholder="Click Me and start typing.."/>
+                                        <div className="choose-pic" onClick={() => {
+                                            document.getElementById('fileinputbutton').click()
+                                        }}>
+                                            <h6>Image</h6>
+                                            <input type="file" id="fileinputbutton" name="file" onChange={(e) => {
+                                                this.onChange(e)
+                                            }} required/>
                                         </div>
                                     </div>
 
@@ -152,30 +186,38 @@ class Start extends Component {
 
                             {
 
-                                posts && posts.map((post,index)=>{            //POSTS MAPPING AND DISPLAYING
-                                    return(
-                                        <div className="post" key={post._id}>   
+                                posts && posts.map((post, index) => {            //POSTS MAPPING AND DISPLAYING
+                                    return (
+                                        <div className="post" key={post._id}>
                                             <div className="post-head">
-                                                <div className="post-pic">
-                                                    <img src={`${this.state.imgGetUrl+post.authorInfo.ImageUrl}`} alt="User Profile Pic"/>
+                                                <div className="post-head-flex">
+                                                    <div className="post-pic">
+                                                        <img
+                                                            src={`${post.authorInfo.ImageUrl}` === "default" ? `${DefaultPic}` : `${this.state.imgGetUrl + post.authorInfo.ImageUrl}`}
+                                                            alt="User Profile Pic"/>
+                                                    </div>
+                                                    <h6 className="AuthorName">{post.authorName}</h6>
                                                 </div>
-                                                <h6 className="AuthorName">{post.authorName}</h6>
-                                                <h6 className="PostTime">8 Hrs</h6>
+                                                <h6 className="PostTime">{this.handleDate(post.baseEntity.CreatedAt)} ago</h6>
                                             </div>
                                             <div className="post-desc">
-                                                <p>{post.title}</p>
-                                            </div>                                            
+                                                <div className="div post-desc-box">
+                                                    <p>{post.title}</p>
+                                                </div>
+                                            </div>
                                             <div className="post-body">
-                                            {
-                                                this.getMeta(post.imageUrl,index)
-                                            }
+                                                {
+                                                    this.getMeta(post.imageUrl, index)
+                                                }
                                                 <div className="post-left">
-                                                    <img className="posty" src={post.imageUrl} alt="Post1" />
+                                                    <img className="posty" src={post.imageUrl} alt="Post1"/>
                                                 </div>
                                                 <div className="post-right">
                                                     <div className="like"><i className="fas fa-thumbs-up"></i></div>
-                                                    <div className="dislike"><i className="fas fa-thumbs-down"></i></div>
-                                                    <div className="report"><i className="fas fa-exclamation-triangle"></i></div>
+                                                    <div className="dislike"><i className="fas fa-thumbs-down"></i>
+                                                    </div>
+                                                    <div className="report"><i
+                                                        className="fas fa-exclamation-triangle"></i></div>
                                                     <div className="comment"><i className="fas fa-comment"></i></div>
                                                     <div className="share"><i className="fas fa-share"></i></div>
                                                 </div>
@@ -184,17 +226,18 @@ class Start extends Component {
                                     )
                                 })
                             }
-    
+
                         </div>
                     </div>
                     {/* SIDEBAR */}
-                    <Sidebar />
+                    <Sidebar/>
                 </div>
                 {/* TABSBAR */}
-                <Tabs />
+                <Tabs/>
             </div>
         )
     }
+
 }
 
 export default Start;

@@ -6,4 +6,4 @@ import App from './App';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
-// todo: environment.json file needs to be cleansed up urgently
+// todo: environment.js file needs to be cleansed up urgently

@@ -1,5 +1,6 @@
 const initState = {
-    user : []
+    user : [],
+    token : []
 };
 
 const userReducer = (state = initState,action) => {
@@ -9,7 +10,8 @@ const userReducer = (state = initState,action) => {
     else {
         return {
             ...state,
-            user: action.result
+            user: action.result,
+            token: action.token
         }
     }
 };

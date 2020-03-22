@@ -1,18 +1,20 @@
-import axios from 'axios';
 import env from '../environment';
+import baseService from "./base-service";
 
 const Url = `${env.ApiLink}`;
+const axios = baseService.axios();
+// const axios = baseService.axios;
 
 class postService {
-    static postCreate = (userId,data) => {
+    static createPost = (userId, data) => {
         return axios.post(`${Url}posts/${userId}/create`, data);
     };
 
-    static postGet = (userId) => {
+    static getAllPosts = (userId) => {
         return axios.get(`${Url}posts/all`);
     };
 
-    static postUserGet = (userId) => {
+    static getPostsByUserId = (userId) => {
         return axios.get(`${Url}posts/${userId}`);
     };
 }
