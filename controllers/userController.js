@@ -75,8 +75,7 @@ exports.Register = (req, res) => {
                                 Country: req.body.Country,
                                 // Security: req.body.Security,
                                 inCommunity: req.body.inCommunity,
-                                JobProfile: req.body.JobProfile,
-                                ImageUrl: env.DefaultDP
+                                JobProfile: req.body.JobProfile
                             });
 
 
