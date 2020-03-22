@@ -8,7 +8,5 @@ const baseService = {
     }
 };
 
-baseService.axios = axios.defaults.headers.common['Authorization'] = `bearer ${userStore.getState().root.token}`;
-// baseService.axios = axios;
 
 export default baseService
