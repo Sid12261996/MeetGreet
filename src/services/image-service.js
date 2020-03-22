@@ -1,8 +1,10 @@
-import axios from "axios";
 import env from "../environment";
+import baseService from "./base-service";
 
 const URL = `${env.ImageBaseUrl}`;
 const ApiLink = `${env.ApiLink}`;
+// baseService.axios = axios.defaults.headers.common['Authorization'] = `bearer ${userStore.getState().root.token}`;
+const axios = baseService.axios();
 
 class imageService {
 

@@ -33,7 +33,7 @@ class Index extends Component {
             result => {
                 if (result) {
                     auth.setAuthenticity(true, result, () => {
-                        userStore.dispatch({type: 'USERS_DATA', result: result.data.currentUser});
+                        userStore.dispatch({type: 'USERS_DATA', result: result.data.currentUser, token: result.data.token});
                         this.props.history.push("/start");
                     });
                 }

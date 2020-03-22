@@ -45,22 +45,28 @@ export default class Profile extends Component {
         let formData = new FormData();
         formData.append('file', files);
         const config = {
-            headers: {'content-type': 'multipart/form-data'}
+            headers: { 'content-type': 'multipart/form-data' }
         };
         ImageService.upload(formData, config).then(DPUrl => {
             ImageService.ProfilePic(userData._id, DPUrl.data).then(() => {
                 $('#DPForm').submit(() => {
                     this.preventDefault();
                 });
-                userService.fetchData(userData._id).then((currentUser)=>{
-                    auth.updateAuthencity(true, currentUser,()=>{
+                userService.fetchData(userData._id).then((currentUser) => {
+                    auth.updateAuthencity(true, currentUser, () => {
                         userStore.dispatch({type: 'USERS_DATA', result: currentUser.data.data});
                         console.log(userStore.getState().root.user);
-                        $('.choose-propic').load(`${userService.LoadUrl}${this.props.match.path}`,null,null);
+                        $('.choose-propic').load(`${userService.LoadUrl}${this.props.match.path}`, null, null);
                     });
-                },er=> {console.log(er);});
-            },error=> {console.log(error);});
-        },err=>{console.log(err);});
+                }, er => {
+                    console.log(er);
+                });
+            }, error => {
+                console.log(error);
+            });
+        }, err => {
+            console.log(err);
+        });
     };
 
     //Function Not Available
@@ -70,7 +76,6 @@ export default class Profile extends Component {
 
     render() {
         let userData = userStore.getState().root.user;      //GETTING USER DETAILS
-        const imageURL = userData.ImageUrl != null ? `${this.state.ProfilePic}images/${userData.ImageUrl}` : `${DefaultPic}`;
 
         console.log(userData);
         return (
@@ -90,7 +95,7 @@ export default class Profile extends Component {
                                     <div className="userProfile">
                                         {/* PROFILE PIC CIRCLE DIV */}
                                         <div className="solarProfile">
-                                            <img id="profilePic" src={imageURL} alt="Profile"/>
+                                            <img id="profilePic" src={`${userData.ImageUrl}` !== "default" ? `${this.state.ProfilePic}images/${userData.ImageUrl}` : `${DefaultPic}`} alt="Profile"/>
                                             <form autoComplete="off" encType="multipart/form-data" id="DPForm">
                                                 <div className="choose-propic" onClick={this.handleSubmit}>
                                                     <i className="far fa-edit mainDP"></i>
