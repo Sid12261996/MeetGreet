@@ -92,6 +92,46 @@ export default class Settings extends Component {
 											<div className="SHeading">
 												<h4>Personal</h4>
 											</div>
+											<div className="SDataWrapper">
+												<div className="SData">
+													<ul>
+														<li>
+															<h5>NAME</h5>
+															<p>After updating Name, user can change it again after a month.</p>
+															<div className="userName">
+																<form>
+																	<div className="newUserName">
+																		<label htmlFor="newName">Full Name</label>
+																		<input type="text" name="newName" />
+																	</div>
+																	<input type="submit" value="OK"/>
+																</form>
+															</div>
+														</li>
+														<li>
+															<h5>PROFESSION</h5>
+															<p>Your Profession that defines you.</p>
+															<div className="userProfession">
+																<form>
+																	<div className="newUserProfession">
+																		<label htmlFor="newProfession">Profession</label>
+																		<input type="text" name="newProfession" />
+																	</div>
+																	<input type="submit" value="OK"/>
+																</form>
+															</div>
+														</li>
+														<li>
+															<h5>NOTIFICATION SETTINGS</h5>
+															<p>Under Research.</p>
+														</li>
+														<li>
+															<h5>ADVERTISEMENT SETTINGS</h5>
+															<p>Under Research.</p>
+														</li>
+													</ul>
+												</div>
+											</div>
 										</div>
 									</div>
 									<div className='second' onClick={this.onSecondClick}>

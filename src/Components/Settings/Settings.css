@@ -13,3 +13,43 @@
 .SHeading {display: flex; justify-content: center; width: 100%; height: 10%; align-items: center;}
 .SHeading h4 { color: #ad3a6e; font-size: 34px; font-family: 'Montserrat', sans-serif;}
 .first:hover, .second:hover, .third:hover, .fourth:hover {background-color: #F5F5F5; box-shadow: 0px 2px 8px rgba(127,127,127,0.5);}
+
+.SDataWrapper {width: 100%; height: 90%; display: flex; justify-content: flex-end;}
+.SData { width: 80%; overflow-y: auto; margin-right: 20px; text-align: left; animation: fade 1s ease-in forwards;}
+.SData ul li {padding: 20px 0; color: #7C7C7C; position: relative; list-style: none;}
+.SData ul li::before { content: ''; width: 2px; height: 100%; background-color: #ad3a6e; position: absolute; left: -31px;}
+.SData ul li:last-child::before {height: 0;}
+.SData ul li h5 { color: #7C7C7C; font-family: 'Montserrat', sans-serif; margin-bottom: 20px;}
+.SData ul li h5::after { content: ''; width: 20px; height: 20px; background-color: #ad3a6e; position: absolute; left: -40px; border-radius: 50%;}
+.userName form {display: flex; align-items: center; width: 80%; justify-content: space-between;}
+.userName form input[type="text"] { width: 300px;}
+.userName form .newUserName label {margin-right: 10px;}
+.userProfession form {display: flex; align-items: center; width: 80%; justify-content: space-between;}
+.userProfession form input[type="text"] { width: 300px;}
+.userProfession form .newUserProfession label {margin-right: 10px;}
+.userProfession form input[type="submit"] { display: block; margin: auto; border: 2px solid #782c4c; border-radius: 5px; width: 5rem; height: 2rem; color: #782c4c; cursor: pointer; background-color: white; font-size: 16px; font-family: 'Montserrat', sans-serif;}
+.userProfession form input[type="submit"]:hover { border: none; background-image: linear-gradient(to bottom, #782c4c, #AD3A6E); color: white; box-shadow: 0px 2px 8px rgba(173,58,110,.4);}
+.userProfession form input[type="submit"]:focus {outline: none;}
+.userName form input[type="submit"] { display: block; margin: auto; border: 2px solid #782c4c; border-radius: 5px; width: 5rem; height: 2rem; color: #782c4c; cursor: pointer; background-color: white; font-size: 16px; font-family: 'Montserrat', sans-serif;}
+.userName form input[type="submit"]:hover { border: none; background-image: linear-gradient(to bottom, #782c4c, #AD3A6E); color: white; box-shadow: 0px 2px 8px rgba(173,58,110,.4);}
+.userName form input[type="submit"]:focus {outline: none;}
+
+@keyframes fade {
+    from{
+        opacity: 0;
+        pointer-events: none;
+    }
+    to{
+        opacity: 1;
+        pointer-events: all;
+    }
+}
+
+/*Scrollbar*/
+.SData::-webkit-scrollbar { height: 10px; width: 10px;}
+.SData::-webkit-scrollbar-track { background: #d1d1d1; }
+.SData::-webkit-scrollbar-thumb { background: #8B8B8B; border-radius: 10px; }
+.SData::-webkit-scrollbar-thumb:hover { background: #555; }
+
+input[type="text"] { border: none; border-bottom: 2px solid #ad3a6e; padding: 5px 5px;}
+input[type="text"]:focus {outline: none;}
