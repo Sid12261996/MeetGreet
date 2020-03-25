@@ -24,7 +24,7 @@
 .post-pic img {width: 45px; height: 45px; border-radius: 50%; cursor: pointer;}
 .post-body {width: 100%; display: flex;}
 
-.post-left {width: 90%; background-color: rgba(0,0,0,0.9); height: 400px;}
+.post-left {width: 90%; background-color: rgba(22,22,22,0.9); height: 400px;}
 
 .post-left video {height: 400px;}
 .post-right {width: 10%; background-color: #FFFFFF;}
