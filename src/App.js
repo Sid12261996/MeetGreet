@@ -15,9 +15,9 @@ class App extends Component {
                 <div className="wrapper">
                 <Switch>
                     <Route exact path="/" component={Index} />
-                    <ProtectedRoute path="/start" component={Start} />
-                    <ProtectedRoute path="/settings" component={Settings} />
-                    <ProtectedRoute path="/profile" component={Profile} />
+                    <ProtectedRoute path="/:id/start" component={Start} />
+                    <ProtectedRoute path="/:id/settings" component={Settings} />
+                    <ProtectedRoute path="/:id/profile" component={Profile} />
                     <Route path="*" component={NotFound} />
                 </Switch>
                 </div>

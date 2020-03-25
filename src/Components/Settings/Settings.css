@@ -21,18 +21,51 @@
 .SData ul li:last-child::before {height: 0;}
 .SData ul li h5 { color: #7C7C7C; font-family: 'Montserrat', sans-serif; margin-bottom: 20px;}
 .SData ul li h5::after { content: ''; width: 20px; height: 20px; background-color: #ad3a6e; position: absolute; left: -40px; border-radius: 50%;}
-.userName form {display: flex; align-items: center; width: 80%; justify-content: space-between;}
+
+/*PERSONAL*/
+
+.userName form {display: flex; align-items: center; width: 90%; justify-content: space-between;}
 .userName form input[type="text"] { width: 300px;}
+.userName form .newUserName {display: flex; align-items: center; width: 70%; justify-content: space-between;}
 .userName form .newUserName label {margin-right: 10px;}
-.userProfession form {display: flex; align-items: center; width: 80%; justify-content: space-between;}
-.userProfession form input[type="text"] { width: 300px;}
-.userProfession form .newUserProfession label {margin-right: 10px;}
-.userProfession form input[type="submit"] { display: block; margin: auto; border: 2px solid #782c4c; border-radius: 5px; width: 5rem; height: 2rem; color: #782c4c; cursor: pointer; background-color: white; font-size: 16px; font-family: 'Montserrat', sans-serif;}
-.userProfession form input[type="submit"]:hover { border: none; background-image: linear-gradient(to bottom, #782c4c, #AD3A6E); color: white; box-shadow: 0px 2px 8px rgba(173,58,110,.4);}
-.userProfession form input[type="submit"]:focus {outline: none;}
-.userName form input[type="submit"] { display: block; margin: auto; border: 2px solid #782c4c; border-radius: 5px; width: 5rem; height: 2rem; color: #782c4c; cursor: pointer; background-color: white; font-size: 16px; font-family: 'Montserrat', sans-serif;}
+.userName form input[type="submit"] { display: block; border: 2px solid #782c4c; border-radius: 5px; width: 5rem; height: 2rem; color: #782c4c; cursor: pointer; background-color: white; font-size: 16px; font-family: 'Montserrat', sans-serif;}
 .userName form input[type="submit"]:hover { border: none; background-image: linear-gradient(to bottom, #782c4c, #AD3A6E); color: white; box-shadow: 0px 2px 8px rgba(173,58,110,.4);}
 .userName form input[type="submit"]:focus {outline: none;}
+
+.userProfession form {display: flex; align-items: center; width: 90%; justify-content: space-between;}
+.userProfession form input[type="text"] { width: 300px;}
+.userProfession form .newUserProfession {display: flex; align-items: center; width: 70%; justify-content: space-between;}
+.userProfession form .newUserProfession label {margin-right: 10px;}
+.userProfession form input[type="submit"] { display: block; border: 2px solid #782c4c; border-radius: 5px; width: 5rem; height: 2rem; color: #782c4c; cursor: pointer; background-color: white; font-size: 16px; font-family: 'Montserrat', sans-serif;}
+.userProfession form input[type="submit"]:hover { border: none; background-image: linear-gradient(to bottom, #782c4c, #AD3A6E); color: white; box-shadow: 0px 2px 8px rgba(173,58,110,.4);}
+.userProfession form input[type="submit"]:focus {outline: none;}
+
+/*SECURITY*/
+
+.userEmail form {display: flex; align-items: center; width: 90%; justify-content: space-between;}
+.userEmail form input[type="text"] { width: 300px;}
+.userEmail form .newUserEmail label {margin-right: 10px;}
+.userEmail form .newUserEmail {display: flex; align-items: center; width: 70%; justify-content: space-between;}
+.userEmail form input[type="submit"] { display: block; border: 2px solid #782c4c; border-radius: 5px; width: 5rem; height: 2rem; color: #782c4c; cursor: pointer; background-color: white; font-size: 16px; font-family: 'Montserrat', sans-serif;}
+.userEmail form input[type="submit"]:hover { border: none; background-image: linear-gradient(to bottom, #782c4c, #AD3A6E); color: white; box-shadow: 0px 2px 8px rgba(173,58,110,.4);}
+.userEmail form input[type="submit"]:focus {outline: none;}
+
+.userPassword form {display: flex; align-items: flex-start; width: 100%; justify-content: flex-start; flex-direction: column;}
+.userPassword form div {margin: 4px 0;}
+.userPassword form input[type="text"] { width: 300px;}
+.userPassword form .DivPass1, .userPassword form .DivPass2 { display: flex; align-items: center; width: 90%; justify-content: space-between;}
+.userPassword form .currentUserPassword, .userPassword form .newUserPassword, .userPassword form .newUserCPassword {width: 70%; display: flex; justify-content: space-between;}
+.userPassword form .currentUserPassword label, .userPassword form .newUserPassword label, .userPassword form .newUserCPassword label {margin-right: 10px;}
+.userPassword form input[type="submit"] { display: block; border: 2px solid #782c4c; border-radius: 5px; width: 5rem; height: 2rem; color: #782c4c; cursor: pointer; background-color: white; font-size: 16px; font-family: 'Montserrat', sans-serif;}
+.userPassword form input[type="submit"]:hover { border: none; background-image: linear-gradient(to bottom, #782c4c, #AD3A6E); color: white; box-shadow: 0px 2px 8px rgba(173,58,110,.4);}
+.userPassword form input[type="submit"]:focus {outline: none;}
+
+/*PRIVACY*/
+
+/*HELP CENTER*/
+.HelpButtons {display: block; border: 2px solid #782c4c; border-radius: 5px; width: 5rem; height: 2rem; color: #782c4c; cursor: pointer; background-color: white; font-size: 16px; font-family: 'Montserrat', sans-serif;}
+.HelpButtons:hover {border: none; background-image: linear-gradient(to bottom, #782c4c, #AD3A6E); color: white; box-shadow: 0px 2px 8px rgba(173,58,110,.4);}
+.HelpButtons:focus {outline: none;}
 
 @keyframes fade {
     from{
@@ -51,5 +84,5 @@
 .SData::-webkit-scrollbar-thumb { background: #8B8B8B; border-radius: 10px; }
 .SData::-webkit-scrollbar-thumb:hover { background: #555; }
 
-input[type="text"] { border: none; border-bottom: 2px solid #ad3a6e; padding: 5px 5px;}
-input[type="text"]:focus {outline: none;}
+input[type="text"] { border: none; border-bottom: 2px solid #7C7C7C; padding: 5px 5px;}
+input[type="text"]:focus {outline: none; border-bottom: 2px solid #ad3a6e;}
