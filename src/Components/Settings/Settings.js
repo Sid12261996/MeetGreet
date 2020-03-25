@@ -71,6 +71,10 @@ export default class Settings extends Component {
 		settingsService.HideDivRevert('.settings-data1','.settings-heading1');
 	};
 
+	handleFirstSubmit = (e) => {
+		e.preventDefault();
+	};
+
 
 	render() {
 		return (
@@ -99,7 +103,7 @@ export default class Settings extends Component {
 															<h5>NAME</h5>
 															<p>After updating Name, user can change it again after a month.</p>
 															<div className="userName">
-																<form>
+																<form onSubmit={this.handleFirstSubmit}>
 																	<div className="newUserName">
 																		<label htmlFor="newName">Full Name</label>
 																		<input type="text" name="newName" />
@@ -112,7 +116,7 @@ export default class Settings extends Component {
 															<h5>PROFESSION</h5>
 															<p>Your Profession that defines you.</p>
 															<div className="userProfession">
-																<form>
+																<form onSubmit={this.handleFirstSubmit}>
 																	<div className="newUserProfession">
 																		<label htmlFor="newProfession">Profession</label>
 																		<input type="text" name="newProfession" />
@@ -142,6 +146,52 @@ export default class Settings extends Component {
 											<div className="SHeading">
 												<h4>Security</h4>
 											</div>
+											<div className="SDataWrapper">
+												<div className="SData">
+													<ul>
+														<li>
+															<h5>EMAIL</h5>
+															<p>Your Email is important for security purpose as well as for login.</p>
+															<div className="userEmail">
+																<form onSubmit={this.handleFirstSubmit}>
+																	<div className="newUserEmail">
+																		<label htmlFor="newEmail">New Email</label>
+																		<input type="text" name="newEmail" />
+																	</div>
+																	<input type="submit" value="OK"/>
+																</form>
+															</div>
+														</li>
+														<li>
+															<h5>PASSWORD</h5>
+															<p>Password should be of maximum 8 letters including 1 unique letter and 1 number.</p>
+															<div className="userPassword">
+																<form onSubmit={this.handleFirstSubmit}>
+																	<div className="DivPass1">
+																		<div className="currentUserPassword">
+																			<label htmlFor="currentPassword">Current Password</label>
+																			<input type="text" name="currentPassword" />
+																		</div>
+																	</div>
+																	<div className="DivPass2">
+																		<div className="newUserPassword">
+																			<label htmlFor="newPassword">New Password</label>
+																			<input type="text" name="newPassword" />
+																		</div>
+																	</div>
+																	<div className="DivPass2">
+																		<div className="newUserCPassword">
+																			<label htmlFor="newCPassword">Confirm New Password</label>
+																			<input type="text" name="newCPassword" />
+																		</div>
+																		<input type="submit" value="OK"/>
+																	</div>
+																</form>
+															</div>
+														</li>
+													</ul>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -163,6 +213,27 @@ export default class Settings extends Component {
 										<div className="settings-data4">
 											<div className="SHeading">
 												<h4>Help Center</h4>
+											</div>
+											<div className="SDataWrapper">
+												<div className="SData">
+													<ul>
+														<li>
+															<h5>Cookie Policy</h5>
+															<p>Please visit our Cookie Policy page to know more.</p>
+															<button className="HelpButtons" onClick={this.handleFirstSubmit}>View</button>
+														</li>
+														<li>
+															<h5>Terms & Services</h5>
+															<p>Please visit our Terms & Services page to know more.</p>
+															<button className="HelpButtons" onClick={this.handleFirstSubmit}>View</button>
+														</li>
+														<li>
+															<h5>Data Policy</h5>
+															<p>Please visit our Data Policy page to know more.</p>
+															<button className="HelpButtons" onClick={this.handleFirstSubmit}>View</button>
+														</li>
+													</ul>
+												</div>
 											</div>
 										</div>
 									</div>
