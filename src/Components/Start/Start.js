@@ -7,6 +7,7 @@ import Sidebar from '../Sidebar/Sidebar';
 import env from '../../environment.js';
 import PostService from "../../services/post-services";
 import ImageService from "../../services/image-service";
+import baseService from "../../services/base-service";
 import $ from 'jquery';
 import userService from "../../services/user-services";
 import auth from "../../auth/auth";
@@ -38,6 +39,7 @@ class Start extends Component {
         let userData = userStore.getState().root.user;          //Needs to be Removed At Release
         const ImageFetch = `${env.ImageBaseUrl}images/`;
         console.log(userStore.getState().root);
+        baseService.axios();
 
         PostService.getAllPosts(`${userData._id}`)      //POSTS API HIT
             .then((result) => {
@@ -101,8 +103,8 @@ class Start extends Component {
             imgUpload: files
         });
     };
-    unitsOfTime = ['years', 'days', 'hours', 'minutes', 'seconds'];
 
+    unitsOfTime = ['years', 'days', 'hours', 'minutes', 'seconds'];
     handleDate(CreatedAt, index = 0) {
         // console.log(this.state.currentDate, CreatedAt, moment(CreatedAt).local());
         const now = moment(this.state.currentDate);
@@ -117,7 +119,7 @@ class Start extends Component {
             toPrint = this.handleDate(CreatedAt, index);
         }
         return `${toPrint}`;
-    }
+    };
 
     getMeta(url, index) {
         var img = new Image();
@@ -214,10 +216,8 @@ class Start extends Component {
                                                 </div>
                                                 <div className="post-right">
                                                     <div className="like"><i className="fas fa-thumbs-up"></i></div>
-                                                    <div className="dislike"><i className="fas fa-thumbs-down"></i>
-                                                    </div>
-                                                    <div className="report"><i
-                                                        className="fas fa-exclamation-triangle"></i></div>
+                                                    <div className="dislike"><i className="fas fa-thumbs-down"></i></div>
+                                                    <div className="report"><i className="fas fa-exclamation-triangle"></i></div>
                                                     <div className="comment"><i className="fas fa-comment"></i></div>
                                                     <div className="share"><i className="fas fa-share"></i></div>
                                                 </div>

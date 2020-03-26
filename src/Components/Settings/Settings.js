@@ -204,6 +204,45 @@ export default class Settings extends Component {
 											<div className="SHeading">
 												<h4>Privacy</h4>
 											</div>
+											<div className="SDataWrapper">
+												<div className="SData">
+													<ul>
+														<li>
+															<h5>USER STATUS</h5>
+															<p>User status will be visible to all your friends.</p>
+															<div className="userStatus">
+																<form onSubmit={this.handleFirstSubmit}>
+																	<div className="newUserStatus">
+																		<label className="radio-input"><span className="status">Online</span><input type="radio" name="newProfession" />
+																		<span className="checkmark2"></span></label>
+																	</div>
+																	<div className="newUserStatus">
+																		<label className="radio-input"><span className="status">Offline</span><input type="radio" name="newProfession" />
+																		<span className="checkmark2"></span></label>
+																	</div>
+																	<div className="newUserStatus">
+																		<label className="radio-input"><span className="status">Busy</span><input type="radio" name="newProfession" />
+																		<span className="checkmark2"></span></label>
+																	</div>
+																	<input type="submit" value="OK"/>
+																</form>
+															</div>
+														</li>
+														<li>
+															<h5>BLOCKING</h5>
+															<p>This feature will be available in next Phase.</p>
+														</li>
+														<li>
+															<h5>ACTIVE STATUS</h5>
+															<p>Under Research.</p>
+														</li>
+														<li>
+															<h5>PUBLIC STATUS</h5>
+															<p>Under Research.</p>
+														</li>
+													</ul>
+												</div>
+											</div>
 										</div>
 									</div>
 									<div className='fourth' onClick={this.onFourthClick}>
