@@ -103,8 +103,8 @@ class Start extends Component {
             imgUpload: files
         });
     };
-    unitsOfTime = ['years', 'days', 'hours', 'minutes', 'seconds'];
 
+    unitsOfTime = ['years', 'days', 'hours', 'minutes', 'seconds'];
     handleDate(CreatedAt, index = 0) {
         // console.log(this.state.currentDate, CreatedAt, moment(CreatedAt).local());
         const now = moment(this.state.currentDate);
@@ -119,7 +119,7 @@ class Start extends Component {
             toPrint = this.handleDate(CreatedAt, index);
         }
         return `${toPrint}`;
-    }
+    };
 
     getMeta(url, index) {
         var img = new Image();
@@ -216,10 +216,8 @@ class Start extends Component {
                                                 </div>
                                                 <div className="post-right">
                                                     <div className="like"><i className="fas fa-thumbs-up"></i></div>
-                                                    <div className="dislike"><i className="fas fa-thumbs-down"></i>
-                                                    </div>
-                                                    <div className="report"><i
-                                                        className="fas fa-exclamation-triangle"></i></div>
+                                                    <div className="dislike"><i className="fas fa-thumbs-down"></i></div>
+                                                    <div className="report"><i className="fas fa-exclamation-triangle"></i></div>
                                                     <div className="comment"><i className="fas fa-comment"></i></div>
                                                     <div className="share"><i className="fas fa-share"></i></div>
                                                 </div>
