@@ -7,6 +7,7 @@ import Sidebar from '../Sidebar/Sidebar';
 import env from '../../environment.js';
 import PostService from "../../services/post-services";
 import ImageService from "../../services/image-service";
+import baseService from "../../services/base-service";
 import $ from 'jquery';
 import userService from "../../services/user-services";
 import auth from "../../auth/auth";
@@ -38,6 +39,7 @@ class Start extends Component {
         let userData = userStore.getState().root.user;          //Needs to be Removed At Release
         const ImageFetch = `${env.ImageBaseUrl}images/`;
         console.log(userStore.getState().root);
+        baseService.axios();
 
         PostService.getAllPosts(`${userData._id}`)      //POSTS API HIT
             .then((result) => {
