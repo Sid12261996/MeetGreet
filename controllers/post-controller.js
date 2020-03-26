@@ -3,6 +3,8 @@ const response = require('../utils/http-utils'),
     privacy = require('../models/privacy').Posts,
     Posts = require('../models/posts-model'),
     applicationUser = require('../models/userModel'),
+    baseEntity = require('../models/base-entity'),
+    moment = require('moment'),
     mongoose = require('mongoose');
 
 exports.Create = async (post, userId) => {
@@ -10,6 +12,7 @@ exports.Create = async (post, userId) => {
     // console.log(userId);
     let user = await applicationUser.findById(userId, {Name: 1});
     let newPost = new Posts({
+        baseEntity: {CreatedAt: moment.utc().toDate(), UpdatedAt: moment.utc().toDate(), DeletedAt: null},
         title: post.title,
         imageUrl: post.imageUrl,
         videoUrl: post.videoUrl,
@@ -24,6 +27,7 @@ exports.Create = async (post, userId) => {
         // console.log(saved, 'saved');
         return response.Ok(saved);
     } catch (e) {
+        console.log(e);
         return response.BadRequest(e);
     }
 
@@ -89,3 +93,4 @@ exports.get = async (id, userId) => {
         return response.BadRequest(e);
     }
 };
+
