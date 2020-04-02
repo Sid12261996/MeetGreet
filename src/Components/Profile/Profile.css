@@ -1,43 +1,25 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat|Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Lato&display=swap');
 *{
-    font-family: 'Roboto', sans-serifz;
+    font-family: 'Lato', sans-serifz;
 }
 .profile { text-align: center; display: flex; width: 100%; height: 100%; position: fixed;}
 .profileContent { height: 100%; position: absolute; right: 100px; left: 0; display: flex; overflow-y: auto;}
 
 /*LEFT*/
-.profileLeft {width: 50%; height: 100%; background-image: url("../Images/ProfileLeftBg.png"); background-attachment: fixed; background-repeat: no-repeat; background-size: cover;}
-.userDetails {width: 100%; height: 30%; padding: 30px 50px;}
+.profileLeft {width: 50%; height: 100%; background-image: url("../Images/ProfileLeftBg.png"); background-attachment: fixed; background-repeat: no-repeat; background-size: cover; }
+.userWrapper { width: 100%; height: 40%; }
+.userDetails { width: 100%; height: 80%; padding: 30px 50px; }
+.headingInfo { width: 100%; height: 20%; display: flex; justify-content: center;}
+.headingInfo h3 { width: 33%; height: 100%; font-size: 20px; display: flex; align-items: flex-end; justify-content: center; color: #ad3a6e; padding-bottom: 5px;}
+.aboutHeading { border-bottom: 2px solid #ad3a6e; background-color: #FAFAFA;}
 .userInfo {width: 100%; height: 100%; background-color: #FFF; display: flex; border-radius: 30px;}
 .userProfile {width: 30%; height: 100%; }
 .user {width: 70%; height: 100%; display: flex; justify-content: flex-start; align-items: center; padding: 20px; margin-left: 20px;}
 .userData { text-align: center; }
-.userData h1 { font-family: 'Roboto', sans-serif; font-weight: bold; font-size: 22px;}
+.userData h1 { font-family: 'Lato', sans-serif; font-weight: bold; font-size: 22px;}
 .userData h5 { font-style: italic; font-size: 18px;}
 
-.userContent {width: 100%; height: 62%; display: flex; align-items: center;}
-.contentBox { width: 100%; height: 100%; transform: scaleX(1.2); background-color: #F5F5F5; display: flex; justify-content: flex-end; align-items: center; box-shadow: 2px -2px 5px rgba(127,127,127,0.2);}
-.contentBox2 { background-color: #FFF; height: 80%; width: 85%; display: flex;}
-.contentLeft { width: 40%; height: 100%;}
-.contentRight { width: 50%; height: 100%; display: flex; flex-direction: column; justify-content: space-between;}
-.contentEnd { width: 10%; height: 100%; background-color: #F5F5F5;}
-.Right1 { width: 100%; height: 47%;}
-.Right2 { width: 100%; height: 47%;}
-.contentRightPData { display: flex; white-space: nowrap;}
-.contentRightPData .album { height: 80%; background-color: #F5F5F5; white-space: nowrap; margin: 0 10px; width: 80%;}
-.contentRightVData { display: flex; white-space: nowrap;}
-.contentRightVData .album { height: 80%; white-space: nowrap; margin: 0 10px; width: 30%;}
-.album img { height: 100%; width: 80px;}
-.contentPlus1 { width: 100%; height: 50%; display: grid; place-items: center; color: #AD3A6E; font-size: 26px;}
-.contentPlus2 { width: 100%; height: 50%; display: grid; place-items: center; color: #AD3A6E; font-size: 26px;}
-.contentPlus1 i:hover, .contentPlus2 i:hover {cursor: pointer;}
-
-/*Sizing Of Above*/
-.contentLeftHeading { width: 100%; height: 12%; display: flex; justify-content: flex-start; align-items: center; padding-left: 5px;}
-.contentLeftHeading h5, .contentRightPhotos h5, .contentRightVideos h5 { color: #AD3A6E; font-size: 18px;}
-.contentRightPhotos, .contentRightVideos { width: 100%; height: 25%; display: flex; justify-content: flex-start; align-items: center; padding-left: 5px;}
-.contentLeftData { width: 100%; height: 88%;}
-.contentRightPData, .contentRightVData { width: 100%; height: 75%; overflow-x: auto;}
+.userContent {width: 100%; height: 50%; display: flex; align-items: center; background-color: #FFFFFF; box-shadow: inset 0px 2px 5px rgba(127,127,127,0.2);}
 
 /*Scroll Design*/
 .contentRightPData::-webkit-scrollbar, .contentRightVData::-webkit-scrollbar, .profileRight::-webkit-scrollbar { height: 10px; width: 10px;}
