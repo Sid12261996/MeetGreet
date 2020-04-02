@@ -198,9 +198,12 @@ class Start extends Component {
                                                             src={`${post.authorInfo.ImageUrl}` === "default" ? `${DefaultPic}` : `${this.state.imgGetUrl + post.authorInfo.ImageUrl}`}
                                                             alt="User Profile Pic"/>
                                                     </div>
-                                                    <h6 className="AuthorName">{post.authorName}</h6>
+                                                    <div className="NameAndTime">
+                                                        <h6 className="AuthorName">{post.authorName}</h6>
+                                                        <h6 className="PostTime">{this.handleDate(post.baseEntity.CreatedAt)} ago</h6>
+                                                    </div>
                                                 </div>
-                                                <h6 className="PostTime">{this.handleDate(post.baseEntity.CreatedAt)} ago</h6>
+                                                <div className="Mood"></div>
                                             </div>
                                             <div className="post-desc">
                                                 <div className="div post-desc-box">

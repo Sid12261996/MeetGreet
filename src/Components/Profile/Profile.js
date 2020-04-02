@@ -90,6 +90,7 @@ export default class Profile extends Component {
                     <div className="profileContent">    {/* INSIDE DIV WITH 100% - 100px WIDTH */}
                         {/* PROFILE SCREEN LEFT PART */}
                         <div className="profileLeft">
+                            <div className="userWrapper">
                             <div className="userDetails">
                                 <div className="userInfo">
                                     <div className="userProfile">
@@ -114,46 +115,15 @@ export default class Profile extends Component {
                                         </div>
                                     </div>
                                 </div>
+                                </div>
+                                <div className="headingInfo">
+                                    <h3 className="aboutHeading">ABOUT</h3>
+                                    <h3 className="photosHeading">PHOTOS</h3>
+                                    <h3 className="videosHeading">VIDEOS</h3>
+                                </div>
                             </div>
                             <div className="userContent">
-                                <div className="contentBox">
-                                    <div className="contentBox2">
-                                        <div className="contentLeft">
-                                            <div className="contentLeftHeading"><h5>About</h5></div>
-                                            <div className="contentLeftData"></div>
-                                        </div>
-                                        <div className="contentRight">
-                                            <div className="Right1">
-                                                <div className="contentRightPhotos"><h5>Photos</h5></div>
-                                                <div className="contentRightPData">
-                                                    <div className="album"><img src={AlbumPic} alt="AlbumPic"/></div>
-                                                    <div className="album"><img src={AlbumPic} alt="AlbumPic"/></div>
-                                                    <div className="album"><img src={AlbumPic} alt="AlbumPic"/></div>
-                                                    <div className="album"><img src={AlbumPic} alt="AlbumPic"/></div>
-                                                    <div className="album"><img src={AlbumPic} alt="AlbumPic"/></div>
-                                                </div>
-                                            </div>
-                                            <div className="Right2">
-                                                <div className="contentRightVideos"><h5>Videos</h5></div>
-                                                <div className="contentRightVData">
-                                                    <div className="album"><img src={AlbumPic} alt="AlbumPic"/></div>
-                                                    <div className="album"><img src={AlbumPic} alt="AlbumPic"/></div>
-                                                    <div className="album"><img src={AlbumPic} alt="AlbumPic"/></div>
-                                                    <div className="album"><img src={AlbumPic} alt="AlbumPic"/></div>
-                                                    <div className="album"><img src={AlbumPic} alt="AlbumPic"/></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="contentEnd">
-                                            <div className="contentPlus1">
-                                                <i className="fas fa-plus" onClick={this.handleNotAvailable}></i>
-                                            </div>
-                                            <div className="contentPlus2">
-                                                <i className="fas fa-plus" onClick={this.handleNotAvailable}></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
 
