@@ -1,7 +1,8 @@
-import axios from "axios";
 import env from "../environment"
+import baseService from "./base-service";
 
 const userURL = `${env.ApiLink}user/`;
+const axios = baseService.axios();
 
 class userService {
     static LoadUrl = `${env.MGLink}`;
