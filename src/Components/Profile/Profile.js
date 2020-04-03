@@ -14,22 +14,29 @@ import userService from "../../services/user-services";
 
 export default class Profile extends Component {
 
-    componentDidMount() {
-        const URL = `${env.ImageBaseUrl}`;
-        this.setState({
-            ...this.state,
-            ProfilePic: URL
-        });
-    }
-
     constructor(props) {
         super(props);
         console.log(this.props);
         this.state = {
             ProfilePic: "",
-            BackPic: "",
-            ImageUpload: ''
+            CoverPic: "",
+            ImageUpload: '',
+            userData: {}
         }
+    }
+
+    componentDidMount() {
+        const URL = `${env.ImageBaseUrl}`;
+        userService.fetchData(this.props.match.params.id).then( result => {
+            console.log(result.data.data);
+            this.setState({
+                ...this.state,
+                ProfilePic: URL,
+                userData: result.data.data
+            });
+        },error=> {
+            console.log(error);
+        });
     }
 
     //Profile Input Initialize
@@ -39,8 +46,7 @@ export default class Profile extends Component {
 
     // Profile Pic Update
     onChange = (e) => {
-
-        let userData = userStore.getState().root.user;
+        let userData = this.state.userData;
         let files = e.target.files[0];
         let formData = new FormData();
         formData.append('file', files);
@@ -53,9 +59,11 @@ export default class Profile extends Component {
                     this.preventDefault();
                 });
                 userService.fetchData(userData._id).then((currentUser) => {
+                    $('.solarProfile').css({'box-shadow' : '0 0 8px rgba(173,58,110,0.8)'});
                     auth.updateAuthencity(true, currentUser, () => {
                         userStore.dispatch({type: 'USERS_DATA', result: currentUser.data.data});
                         console.log(userStore.getState().root.user);
+                        $('.solarProfile').css({'box-shadow' : '0 0 5px rgba(127,127,127,0.5)'});
                         $('.choose-propic').load(`${userService.LoadUrl}${this.props.match.path}`, null, null);
                     });
                 }, er => {
@@ -69,15 +77,41 @@ export default class Profile extends Component {
         });
     };
 
+    handleAbout = () => {
+        $('.about').css({'display':'flex'});
+        $('.aboutHeading').css({ 'border-bottom' : '2px solid #ad3a6e', 'background-color' : '#FAFAFA', 'cursor': 'default'});
+        $('.photos').css({'display':'none'});
+        $('.photosHeading').css({ 'border-bottom' : '2px solid #f5f5f5', 'background-color' : '#F5F5F5', 'cursor': 'pointer'});
+        $('.videos').css({'display':'none'});
+        $('.videosHeading').css({ 'border-bottom' : '2px solid #f5f5f5', 'background-color' : '#F5F5F5', 'cursor': 'pointer'});
+    };
+
+    handlePhotos = () => {
+        $('.about').css({'display':'none'});
+        $('.aboutHeading').css({ 'border-bottom' : '2px solid #f5f5f5', 'background-color' : '#F5F5F5', 'cursor': 'pointer'});
+        $('.photos').css({'display':'flex'});
+        $('.photosHeading').css({ 'border-bottom' : '2px solid #ad3a6e', 'background-color' : '#FAFAFA', 'cursor': 'default'});
+        $('.videos').css({'display':'none'});
+        $('.videosHeading').css({ 'border-bottom' : '2px solid #f5f5f5', 'background-color' : '#F5F5F5', 'cursor': 'pointer'});
+    };
+
+    handleVideos = () => {
+        $('.about').css({'display':'none'});
+        $('.aboutHeading').css({ 'border-bottom' : '2px solid #f5f5f5', 'background-color' : '#F5F5F5', 'cursor': 'pointer'});
+        $('.photos').css({'display':'none'});
+        $('.photosHeading').css({ 'border-bottom' : '2px solid #f5f5f5', 'background-color' : '#F5F5F5', 'cursor': 'pointer'});
+        $('.videos').css({'display':'flex'});
+        $('.videosHeading').css({ 'border-bottom' : '2px solid #ad3a6e', 'background-color' : '#FAFAFA', 'cursor': 'default'});
+    };
+
     //Function Not Available
     handleNotAvailable = () => {
         alert('This feature is currently unavailable.');
     };
 
     render() {
-        let userData = userStore.getState().root.user;      //GETTING USER DETAILS
-
-        console.log(userData);
+        let userData = this.state.userData;      //GETTING USER DETAILS
+        console.log(this.state.userData);
         return (
             <div>
                 {/* SCREEN TITLE */}
@@ -117,13 +151,59 @@ export default class Profile extends Component {
                                 </div>
                                 </div>
                                 <div className="headingInfo">
-                                    <h3 className="aboutHeading">ABOUT</h3>
-                                    <h3 className="photosHeading">PHOTOS</h3>
-                                    <h3 className="videosHeading">VIDEOS</h3>
+                                    <h3 className="aboutHeading" onClick={this.handleAbout}>ABOUT</h3>
+                                    <h3 className="photosHeading" onClick={this.handlePhotos}>PHOTOS</h3>
+                                    <h3 className="videosHeading" onClick={this.handleVideos}>VIDEOS</h3>
                                 </div>
                             </div>
                             <div className="userContent">
-
+                                <div className="about">About</div>
+                                <div className="photos">
+                                    <div className="photosHolder">
+                                        Album
+                                    </div>
+                                    <div className="photosHolder">
+                                        Album
+                                    </div>
+                                    <div className="photosHolder">
+                                        Album
+                                    </div>
+                                    <div className="photosHolder">
+                                        Album
+                                    </div>
+                                    <div className="photosHolder">
+                                        Album
+                                    </div>
+                                    <div className="photosHolder">
+                                        Album
+                                    </div>
+                                    <div className="photosHolder">
+                                        Album
+                                    </div>
+                                    <div className="photosHolder">
+                                        Album
+                                    </div>
+                                    <div className="photosHolder">
+                                        Album
+                                    </div>
+                                    <div className="photosHolder">
+                                        Album
+                                    </div>
+                                    <div className="photosHolder">
+                                        Album
+                                    </div>
+                                    <div className="photosHolder">
+                                        Album
+                                    </div>
+                                    <div className="photosHolder">
+                                        Album
+                                    </div>
+                                </div>
+                                <div className="videos">
+                                    <div className="videosHolder">
+                                        Album
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
