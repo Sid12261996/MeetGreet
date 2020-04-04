@@ -64,7 +64,7 @@ export default class Profile extends Component {
                         userStore.dispatch({type: 'USERS_DATA', result: currentUser.data.data});
                         console.log(userStore.getState().root.user);
                         $('.solarProfile').css({'box-shadow' : '0 0 5px rgba(127,127,127,0.5)'});
-                        $('.choose-propic').load(`${userService.LoadUrl}${this.props.match.path}`, null, null);
+                        $('.choose-propic, .photosHolder').load(`${userService.LoadUrl}${this.props.match.path}`, null, null);
                     });
                 }, er => {
                     console.log(er);
@@ -79,29 +79,29 @@ export default class Profile extends Component {
 
     handleAbout = () => {
         $('.about').css({'display':'flex'});
-        $('.aboutHeading').css({ 'border-bottom' : '2px solid #ad3a6e', 'background-color' : '#FAFAFA', 'cursor': 'default'});
+        $('.aboutHeading').css({ 'border-bottom' : '2px solid #ad3a6e', 'background-color' : '#FAFAFA', 'cursor': 'default', 'opacity' : '1'});
         $('.photos').css({'display':'none'});
-        $('.photosHeading').css({ 'border-bottom' : '2px solid #f5f5f5', 'background-color' : '#F5F5F5', 'cursor': 'pointer'});
+        $('.photosHeading').css({ 'border-bottom' : '2px solid #f5f5f5', 'background-color' : '#F5F5F5', 'cursor': 'pointer', 'opacity' : '0.6'});
         $('.videos').css({'display':'none'});
-        $('.videosHeading').css({ 'border-bottom' : '2px solid #f5f5f5', 'background-color' : '#F5F5F5', 'cursor': 'pointer'});
+        $('.videosHeading').css({ 'border-bottom' : '2px solid #f5f5f5', 'background-color' : '#F5F5F5', 'cursor': 'pointer', 'opacity' : '0.6'});
     };
 
     handlePhotos = () => {
         $('.about').css({'display':'none'});
-        $('.aboutHeading').css({ 'border-bottom' : '2px solid #f5f5f5', 'background-color' : '#F5F5F5', 'cursor': 'pointer'});
+        $('.aboutHeading').css({ 'border-bottom' : '2px solid #f5f5f5', 'background-color' : '#F5F5F5', 'cursor': 'pointer', 'opacity' : '0.6'});
         $('.photos').css({'display':'flex'});
-        $('.photosHeading').css({ 'border-bottom' : '2px solid #ad3a6e', 'background-color' : '#FAFAFA', 'cursor': 'default'});
+        $('.photosHeading').css({ 'border-bottom' : '2px solid #ad3a6e', 'background-color' : '#FAFAFA', 'cursor': 'default', 'opacity' : '1'});
         $('.videos').css({'display':'none'});
-        $('.videosHeading').css({ 'border-bottom' : '2px solid #f5f5f5', 'background-color' : '#F5F5F5', 'cursor': 'pointer'});
+        $('.videosHeading').css({ 'border-bottom' : '2px solid #f5f5f5', 'background-color' : '#F5F5F5', 'cursor': 'pointer', 'opacity' : '0.6'});
     };
 
     handleVideos = () => {
         $('.about').css({'display':'none'});
-        $('.aboutHeading').css({ 'border-bottom' : '2px solid #f5f5f5', 'background-color' : '#F5F5F5', 'cursor': 'pointer'});
+        $('.aboutHeading').css({ 'border-bottom' : '2px solid #f5f5f5', 'background-color' : '#F5F5F5', 'cursor': 'pointer', 'opacity' : '0.6'});
         $('.photos').css({'display':'none'});
-        $('.photosHeading').css({ 'border-bottom' : '2px solid #f5f5f5', 'background-color' : '#F5F5F5', 'cursor': 'pointer'});
+        $('.photosHeading').css({ 'border-bottom' : '2px solid #f5f5f5', 'background-color' : '#F5F5F5', 'cursor': 'pointer', 'opacity' : '0.6'});
         $('.videos').css({'display':'flex'});
-        $('.videosHeading').css({ 'border-bottom' : '2px solid #ad3a6e', 'background-color' : '#FAFAFA', 'cursor': 'default'});
+        $('.videosHeading').css({ 'border-bottom' : '2px solid #ad3a6e', 'background-color' : '#FAFAFA', 'cursor': 'default', 'opacity' : '1'});
     };
 
     //Function Not Available
@@ -159,48 +159,14 @@ export default class Profile extends Component {
                             <div className="userContent">
                                 <div className="about">About</div>
                                 <div className="photos">
+                                    <i className="fas fa-plus addPAlbum" onClick={this.handleNotAvailable}></i>
                                     <div className="photosHolder">
-                                        Album
-                                    </div>
-                                    <div className="photosHolder">
-                                        Album
-                                    </div>
-                                    <div className="photosHolder">
-                                        Album
-                                    </div>
-                                    <div className="photosHolder">
-                                        Album
-                                    </div>
-                                    <div className="photosHolder">
-                                        Album
-                                    </div>
-                                    <div className="photosHolder">
-                                        Album
-                                    </div>
-                                    <div className="photosHolder">
-                                        Album
-                                    </div>
-                                    <div className="photosHolder">
-                                        Album
-                                    </div>
-                                    <div className="photosHolder">
-                                        Album
-                                    </div>
-                                    <div className="photosHolder">
-                                        Album
-                                    </div>
-                                    <div className="photosHolder">
-                                        Album
-                                    </div>
-                                    <div className="photosHolder">
-                                        Album
-                                    </div>
-                                    <div className="photosHolder">
-                                        Album
+                                        <img id="profileAlbum" src={`${userData.ImageUrl}` !== "default" ? `${this.state.ProfilePic}images/${userData.ImageUrl}` : `${DefaultPic}`} alt="ProfileAlbum" onClick={this.handleNotAvailable}/>
+                                        <span className="transparent"><p>Profile Pics</p></span>
                                     </div>
                                 </div>
                                 <div className="videos">
-                                    <div className="videosHolder">
+                                    <div className="videosHolder" onClick={this.handleNotAvailable}>
                                         Album
                                     </div>
                                 </div>
