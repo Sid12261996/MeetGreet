@@ -1,7 +1,6 @@
 const mongo = require('mongoose'),
     moment = require('moment'),
-    schema = mongo.Schema
-;
+    schema = mongo.Schema;
 
 //model
 
