@@ -11,6 +11,7 @@ import env from "../../environment";
 import ImageService from "../../services/image-service";
 import auth from '../../auth/auth';
 import userService from "../../services/user-services";
+import AlbumModel from "./Components/AlbumModel/AlbumModel";
 
 export default class Profile extends Component {
 
@@ -21,7 +22,9 @@ export default class Profile extends Component {
             ProfilePic: "",
             CoverPic: "",
             ImageUpload: '',
-            userData: {}
+            userData: {},
+            Loader: false,
+            showModel : false
         }
     }
 
@@ -53,18 +56,30 @@ export default class Profile extends Component {
         const config = {
             headers: { 'content-type': 'multipart/form-data' }
         };
+        this.setState({
+            ...this.state,
+            Loader: true
+        });
         ImageService.upload(formData, config).then(DPUrl => {
             ImageService.ProfilePic(userData._id, DPUrl.data).then(() => {
                 $('#DPForm').submit(() => {
                     this.preventDefault();
                 });
+                if(this.state.Loader === true) {
+                    $('.solarProfile').css({'border' : '2px solid rgba(173,58,110,1)'});
+                }
                 userService.fetchData(userData._id).then((currentUser) => {
-                    $('.solarProfile').css({'box-shadow' : '0 0 8px rgba(173,58,110,0.8)'});
                     auth.updateAuthencity(true, currentUser, () => {
                         userStore.dispatch({type: 'USERS_DATA', result: currentUser.data.data});
                         console.log(userStore.getState().root.user);
-                        $('.solarProfile').css({'box-shadow' : '0 0 5px rgba(127,127,127,0.5)'});
-                        $('.choose-propic, .photosHolder').load(`${userService.LoadUrl}${this.props.match.path}`, null, null);
+                        window.location.reload(false);
+                        this.setState({
+                            ...this.state,
+                            Loader: false
+                        });
+                        if(this.state.Loader === false) {
+                            $('.solarProfile').css({'border' : 'none'});
+                        };
                     });
                 }, er => {
                     console.log(er);
@@ -104,6 +119,13 @@ export default class Profile extends Component {
         $('.videosHeading').css({ 'border-bottom' : '2px solid #ad3a6e', 'background-color' : '#FAFAFA', 'cursor': 'default', 'opacity' : '1'});
     };
 
+    hideModel = () => {
+      this.setState({
+          ...this.state,
+          showModel : false
+      });
+    };
+
     //Function Not Available
     handleNotAvailable = () => {
         alert('This feature is currently unavailable.');
@@ -114,6 +136,7 @@ export default class Profile extends Component {
         console.log(this.state.userData);
         return (
             <div>
+                <AlbumModel show={this.state.showModel} onHide={() => this.hideModel()} />
                 {/* SCREEN TITLE */}
                 <Helmet>
                     <title>Profile</title>
@@ -133,7 +156,7 @@ export default class Profile extends Component {
                                             <img id="profilePic" src={`${userData.ImageUrl}` !== "default" ? `${this.state.ProfilePic}images/${userData.ImageUrl}` : `${DefaultPic}`} alt="Profile"/>
                                             <form autoComplete="off" encType="multipart/form-data" id="DPForm">
                                                 <div className="choose-propic" onClick={this.handleSubmit}>
-                                                    <i className="far fa-edit mainDP"></i>
+                                                    <i className="fas fa-pencil-alt mainDP"></i>
                                                     <input type="file" id="profileinputbutton" name="file"
                                                            onChange={(e) => {
                                                                this.onChange(e)
@@ -161,7 +184,8 @@ export default class Profile extends Component {
                                 <div className="photos">
                                     <i className="fas fa-plus addPAlbum" onClick={this.handleNotAvailable}></i>
                                     <div className="photosHolder">
-                                        <img id="profileAlbum" src={`${userData.ImageUrl}` !== "default" ? `${this.state.ProfilePic}images/${userData.ImageUrl}` : `${DefaultPic}`} alt="ProfileAlbum" onClick={this.handleNotAvailable}/>
+                                        <img id="profileAlbum" src={`${userData.ImageUrl}` !== "default" ? `${this.state.ProfilePic}images/${userData.ImageUrl}` : `${DefaultPic}`} alt="ProfileAlbum" onClick={() => {this.setState({...this.state, showModel : true})}} />
+                                        <span className="black-trans" onClick={() => {this.setState({...this.state, showModel : true})}}></span>
                                         <span className="transparent"><p>Profile Pics</p></span>
                                     </div>
                                 </div>
