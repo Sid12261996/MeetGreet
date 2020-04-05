@@ -185,7 +185,7 @@ export default class Profile extends Component {
                                     <i className="fas fa-plus addPAlbum" onClick={this.handleNotAvailable}></i>
                                     <div className="photosHolder">
                                         <img id="profileAlbum" src={`${userData.ImageUrl}` !== "default" ? `${this.state.ProfilePic}images/${userData.ImageUrl}` : `${DefaultPic}`} alt="ProfileAlbum" onClick={() => {this.setState({...this.state, showModel : true})}} />
-                                        <span className="black-trans" onClick={() => {this.setState({...this.state, showModel : true})}}></span>
+                                        <span className="black-trans" onClick={ () => {this.setState({...this.state, showModel : true})}}> </span>
                                         <span className="transparent"><p>Profile Pics</p></span>
                                     </div>
                                 </div>
