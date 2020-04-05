@@ -4,7 +4,6 @@ const environment = {
     ApiLink: "https://meetgreet-api.herokuapp.com/api/",
     MGLink: "https://meetgreet-beta.herokuapp.com",
     ImageBaseUrl: "https://meetgreet-upload.herokuapp.com/",
-
     // ApiLink: "https://meetgreet-api-nov.herokuapp.com/api/"
 };
 
