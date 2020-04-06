@@ -3,6 +3,11 @@ import {Modal} from 'react-bootstrap';
 import "./AlbumModel.css";
 
 class AlbumModel extends Component {
+
+    //Function Not Available
+    handleNotAvailable = () => {
+        alert('This feature is currently unavailable.');
+    };
     render() {
         return (
             <Modal
@@ -11,23 +16,22 @@ class AlbumModel extends Component {
                 size="xl"
                 // onHide={() => setShow(false)}
                 dialogClassName="modal-90w"
-                aria-labelledby="example-custom-modal-styling-title"
             >
-                <Modal.Header closeButton onClick={this.props.onHide}>
-                    <Modal.Title id="example-custom-modal-styling-title">
-                        Custom Modal Styling
+                <Modal.Header>
+                    <Modal.Title>
+                        <div className="modelHeadWrapper">
+                            <span><h1 className='modelHead'>Add Photos</h1></span>
+                            <div className="headButtons">
+                                <h3 className="ModelBrowseBtn" onClick={this.handleNotAvailable}>Browse</h3>
+                                <h3 className="ModelDoneBtn" onClick={this.props.onHide}>Done</h3>
+                                <i className="fas fa-times" onClick={this.props.onHide}></i>
+                            </div>
+                        </div>
+
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body className="modelBody">
-                    <p>
-                        Ipsum molestiae natus adipisci modi eligendi? Debitis amet quae unde
-                        commodi aspernatur enim, consectetur. Cumque deleniti temporibus
-                        ipsam atque a dolores quisquam quisquam adipisci possimus
-                        laboriosam. Quibusdam facilis doloribus debitis! Sit quasi quod
-                        accusamus eos quod. Ab quos consequuntur eaque quo rem! Mollitia
-                        reiciendis porro quo magni incidunt dolore amet atque facilis ipsum
-                        deleniti rem!
-                    </p>
+
                 </Modal.Body>
             </Modal>
         );

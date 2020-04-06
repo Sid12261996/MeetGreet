@@ -17,11 +17,13 @@ class Index extends Component {
         this.state = {
             addModalShow: false,
             username: null,
-            password: null
+            password: null,
+            loginError: ''
         }
     }
 
     handleChange = (e) => {
+        $('#PassError').css({'display':'none'});
         this.setState({
             [e.target.id]: e.target.value
         });
@@ -40,9 +42,11 @@ class Index extends Component {
                 }
             }, err => {
                 document.getElementById("password").value = "";
-                $('#password').css('border', '3px solid rgba(187,0,0,0.6)');
-                document.getElementById('PassError').innerHTML = err.response.data.message;
-                $('#PassError').css({'background-color':'rgba(187,0,0,0.8)','margin':'0 10% 5%','padding':'20px', 'color': '#fff'});
+                this.setState({
+                    ...this.state,
+                    loginError: err.response.data.message
+                });
+                $('#PassError').css({'display':'flex','animation' : 'slideError 5s ease-in forwards'});
             }
         );
     };
@@ -57,6 +61,7 @@ class Index extends Component {
                 
                 {/* First Wrapper */}
                 <div className="Index">
+                    <span><p id='PassError'>{this.state.loginError}</p></span>
                     <div className='IndexLeft'>
                             <div className="rotating-box">
                                 <div className="single-rb">
@@ -82,7 +87,6 @@ class Index extends Component {
                                     <div className='SignImage'>
                                         <img src={Logo} alt="logo"/>
                                     </div>
-                                    <span><p id='PassError'></p></span>
                                     <form onSubmit={this.handleSubmit}>
                                         <div className='formGroup'>
                                             <label htmlFor="Email">Email</label>

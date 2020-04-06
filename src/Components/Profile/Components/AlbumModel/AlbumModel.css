@@ -1,2 +1,14 @@
 .modelBody { height: 70vh;}
 .modal-content {border-radius: 0; opacity: 0.9;}
+.modelHead {font-family: 'Montserrat', sans-serif; font-size: 24px;}
+.modal-title, .modal-header {width: 100%;}
+.modelHeadWrapper {display: flex; justify-content: space-between; align-items: center; width: 100%;}
+.headButtons {display: flex; width: 18%; justify-content: space-between; align-items: center;}
+.headButtons h3 {font-size: 14px; font-family: 'Lato', sans-serif; display: flex; padding: 10px 0; justify-content: center; position: relative; align-items: center; height: 100%; margin: 0; font-weight: bold;}
+.headButtons h3:hover, .headButtons i:hover {cursor: pointer; }
+.ModelBrowseBtn {background-color: #CDCDCD;}
+.ModelBrowseBtn::before {content: ''; position: absolute; top: 0; left: 0; width: 36px; height: 36px; border-radius: 50%; transform: translateX(-50%); z-index: -1; background-color: #CDCDCD;}
+.ModelBrowseBtn::after {content: ''; position: absolute; top: 0; right: 0; width: 36px; height: 36px; border-radius: 50%; transform: translateX(50%); z-index: -1; background-color: #CDCDCD;}
+.ModelDoneBtn { background-color: #FFD843;}
+.ModelDoneBtn::before {content: ''; position: absolute; top: 0; left: 0; width: 36px; height: 36px; border-radius: 50%; transform: translateX(-50%); z-index: -1; background-color: #FFD843;}
+.ModelDoneBtn::after {content: ''; position: absolute; top: 0; right: 0; width: 36px; height: 36px; border-radius: 50%; transform: translateX(50%); z-index: -1; background-color: #FFD843;}
