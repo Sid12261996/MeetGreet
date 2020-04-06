@@ -182,7 +182,10 @@ export default class Profile extends Component {
                             <div className="userContent">
                                 <div className="about">About</div>
                                 <div className="photos">
-                                    <i className="fas fa-plus addPAlbum" onClick={this.handleNotAvailable}></i>
+                                    <div className="addPAlbum" onClick={this.handleNotAvailable}>
+                                        <i className="fas fa-plus"></i>
+                                        <p className='addBtn'>ADD</p>
+                                    </div>
                                     <div className="photosHolder">
                                         <img id="profileAlbum" src={`${userData.ImageUrl}` !== "default" ? `${this.state.ProfilePic}images/${userData.ImageUrl}` : `${DefaultPic}`} alt="ProfileAlbum" onClick={() => {this.setState({...this.state, showModel : true})}} />
                                         <span className="black-trans" onClick={ () => {this.setState({...this.state, showModel : true})}}> </span>
@@ -190,6 +193,10 @@ export default class Profile extends Component {
                                     </div>
                                 </div>
                                 <div className="videos">
+                                    <div className="addPAlbum" onClick={this.handleNotAvailable}>
+                                        <i className="fas fa-plus"></i>
+                                        <p className='addBtn'>ADD</p>
+                                    </div>
                                     <div className="videosHolder" onClick={this.handleNotAvailable}>
                                         Album
                                     </div>

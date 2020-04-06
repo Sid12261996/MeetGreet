@@ -45,8 +45,14 @@
 .RegisterButton:focus {outline: none;}
 .signinUsing {display: flex; justify-content: space-between; margin-top: 20px;}
 .g-icon {margin: 0 20px;}
-#PassError {display: flex; justify-content: center;}
+#PassError {display: none; justify-content: center; background-color: #D66B9C; position: absolute; top: 10px; right: 20px; z-index: 20; width: 200px; height: 50px; color: white; align-items: center; opacity: 0; box-shadow: 0 0 8px rgba(112,19,61,0.5);}
 .polygon {width: 100%; height: 100%; clip-path: polygon(100% 0, 0 50%, 100% 100%); background-color: #77274b; z-index: 9;}
+@keyframes slideError {
+  0% {opacity: 0;}
+  20% {opacity: 1}
+  95% {opacity: 1;}
+  100% {opacity: 0;}
+}
 
 /*Connect*/
 .fa-google-plus-g { color:#dd4b39; font-size: 25px;}
