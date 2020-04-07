@@ -1,5 +1,5 @@
 .modelBody { height: 70vh;}
-.modal-content {border-radius: 0; opacity: 0.9;}
+.modelAlbum .modal-content {border-radius: 0; opacity: 0.9;}
 .modelHead {font-family: 'Montserrat', sans-serif; font-size: 24px;}
 .modal-title, .modal-header {width: 100%;}
 .modelHeadWrapper {display: flex; justify-content: space-between; align-items: center; width: 100%;}

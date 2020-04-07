@@ -8,8 +8,9 @@
 .checkmark {position: absolute; top: 15%; left: 5px; height: 20px; width: 20px; border-radius: 50%; border: 2px solid #782c4c;}
 .modal-tbody tr .input-field {padding: 2px 4px;}
 .modal-tbody tr .input-field:focus {outline: none;}
-.modal-content {border-radius: 5%;}
-.modal-head { border: none;}
+.modal-content {border-radius: 1%;}
+.modal-head { border: none; padding: 10px 0 0 0;}
+.heading {display: flex; justify-content: center;}
 .modal-head .heading img { width: 200px;}
 .modal-body { border: none;}
 .modal-footer { border: none;}

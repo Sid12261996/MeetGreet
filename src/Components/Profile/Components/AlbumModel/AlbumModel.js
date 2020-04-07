@@ -16,6 +16,7 @@ class AlbumModel extends Component {
                 size="xl"
                 // onHide={() => setShow(false)}
                 dialogClassName="modal-90w"
+                className="modelAlbum"
             >
                 <Modal.Header>
                     <Modal.Title>
