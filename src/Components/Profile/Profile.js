@@ -2,16 +2,14 @@ import React, {Component} from 'react';
 import Tabs from '../Tabs/Tabs';
 import Sidebar from "../Sidebar/Sidebar";
 import DefaultPic from '../Images/Profile/ProfileCircle.png';
-import AlbumPic from '../Images/AlbumDummy.png'; //Temporary
+import 'react-image-crop/dist/ReactCrop.css';
 import './Profile.css';
 import $ from 'jquery';
-import userStore from "../../Store/stores/user-store";
 import Helmet from 'react-helmet';
 import env from "../../environment";
-import ImageService from "../../services/image-service";
-import auth from '../../auth/auth';
 import userService from "../../services/user-services";
 import AlbumModel from "./Components/AlbumModel/AlbumModel";
+import CropModel from './Components/CropModel/CropModel'
 
 export default class Profile extends Component {
 
@@ -24,7 +22,9 @@ export default class Profile extends Component {
             ImageUpload: '',
             userData: {},
             Loader: false,
-            showModel : false
+            showModel : false,
+            showCModel: false,
+            src: null
         }
     }
 
@@ -49,47 +49,17 @@ export default class Profile extends Component {
 
     // Profile Pic Update
     onChange = (e) => {
-        let userData = this.state.userData;
-        let files = e.target.files[0];
-        let formData = new FormData();
-        formData.append('file', files);
-        const config = {
-            headers: { 'content-type': 'multipart/form-data' }
+        if (e.target.files && e.target.files.length > 0) {
+            const reader = new FileReader();
+            reader.addEventListener('load', () =>
+                this.setState({...this.state, src: reader.result })
+            );
+            reader.readAsDataURL(e.target.files[0]);
         };
         this.setState({
             ...this.state,
-            Loader: true
-        });
-        ImageService.upload(formData, config).then(DPUrl => {
-            ImageService.ProfilePic(userData._id, DPUrl.data).then(() => {
-                $('#DPForm').submit(() => {
-                    this.preventDefault();
-                });
-                if(this.state.Loader === true) {
-                    $('.solarProfile').css({'border' : '2px solid rgba(173,58,110,1)'});
-                }
-                userService.fetchData(userData._id).then((currentUser) => {
-                    auth.updateAuthencity(true, currentUser, () => {
-                        userStore.dispatch({type: 'USERS_DATA', result: currentUser.data.data});
-                        console.log(userStore.getState().root.user);
-                        window.location.reload(false);
-                        this.setState({
-                            ...this.state,
-                            Loader: false
-                        });
-                        if(this.state.Loader === false) {
-                            $('.solarProfile').css({'border' : 'none'});
-                        };
-                    });
-                }, er => {
-                    console.log(er);
-                });
-            }, error => {
-                console.log(error);
-            });
-        }, err => {
-            console.log(err);
-        });
+            showCModel: true
+        })
     };
 
     handleAbout = () => {
@@ -126,6 +96,13 @@ export default class Profile extends Component {
       });
     };
 
+    hideCModel = () => {
+        this.setState({
+            ...this.state,
+            showCModel : false
+        });
+    };
+
     //Function Not Available
     handleNotAvailable = () => {
         alert('This feature is currently unavailable.');
@@ -137,6 +114,7 @@ export default class Profile extends Component {
         return (
             <div>
                 <AlbumModel show={this.state.showModel} onHide={() => this.hideModel()} />
+                <CropModel src={this.state.src} crop={this.state.crop} show={this.state.showCModel} onHide={() => this.hideCModel()} userdata={this.state.userData}/>
                 {/* SCREEN TITLE */}
                 <Helmet>
                     <title>Profile</title>

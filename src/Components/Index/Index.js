@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './Index.css';
 import {Link} from 'react-router-dom';
-import Front1 from '../Images/1.png';
-import Front2 from '../Images/2.jpg';
 import SignUp from '../SignUp/SignUp';
 import Logo from '../Images/mg02col.png';
 import userService from "../../services/user-services";
@@ -63,22 +61,7 @@ class Index extends Component {
                 <div className="Index">
                     <span><p id='PassError'>{this.state.loginError}</p></span>
                     <div className='IndexLeft'>
-                            <div className="rotating-box">
-                                <div className="single-rb">
-                                    <div className="front-side">
-                                        <img src={Front1} alt="Welcome"/>
-                                    </div>
-                                    <div className="back-side">
-                                        <img src="#" alt=""/>
-                                    </div>
-                                    <div className="left-side">
-                                        <img src={Front2} alt="MeetCube2"/>
-                                    </div>
-                                    <div className="right-side">
-                                        <img src="#" alt=""/>
-                                    </div>
-                                </div>
-                            </div>
+                            {/*To be filled*/}
                     </div>
                     <div className='IndexRight'>
                         <div className='polyContent'>
