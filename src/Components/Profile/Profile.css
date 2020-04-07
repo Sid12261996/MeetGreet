@@ -9,26 +9,30 @@
 .profileLeft {width: 50%; height: 100%; background-attachment: fixed; background-repeat: no-repeat; background-size: cover; }
 .userWrapper { width: 100%; height: 40%; }
 .userDetails { width: 100%; height: 80%; padding: 30px 50px; }
-.userInfo {width: 100%; height: 100%; background-color: #FFF; display: flex; border-radius: 30px;}
+.userInfo {width: 100%; height: 100%; display: flex; border-radius: 30px;}
 .userProfile {width: 30%; height: 100%; }
 .user {width: 70%; height: 100%; display: flex; justify-content: flex-start; align-items: center; padding: 20px; margin-left: 20px;}
-.userData { text-align: center; }
-.userData h1 { font-family: 'Lato', sans-serif; font-weight: bold; font-size: 22px;}
-.userData h5 { font-style: italic; font-size: 18px;}
+.userData { text-align: center;}
+.userData h1 { font-family: 'Lato', sans-serif; font-weight: bold; font-size: 24px;}
+.userData h3 { font-style: italic; font-size: 20px;}
+
+@media (max-width: 1336px) {
+    .userDetails { width: 100%; height: 80%; padding: 40px 60px; }
+}
 
 .userContent {width: 100%; height: 50%; display: flex; align-items: center; background-color: #FFFFFF; box-shadow: inset 0px 2px 5px rgba(127,127,127,0.2);}
 .about {display: flex; width: 100%; height: 100%;}
-.photos, .videos { display: none; width: 100%; height: 100%; flex-wrap: wrap; overflow-y: auto; position: relative;}
+.photos, .videos, .feeds { display: none; width: 100%; height: 100%; flex-wrap: wrap; overflow-y: auto; position: relative;}
 .headingInfo { width: 100%; height: 20%; display: flex; justify-content: center;}
-.headingInfo h3 { width: 33%; height: 100%; font-size: 14px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 5px; font-weight: 600; font-family: 'Montserrat', sans-serif;}
+.headingInfo h3 { width: 25%; height: 100%; font-size: 14px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 5px; font-weight: 600; font-family: 'Montserrat', sans-serif;}
 .aboutHeading { border-bottom: 2px solid #ad3a6e; background-color: #FAFAFA; color: #ad3a6e;}
-.photosHeading, .videosHeading { border-bottom: 2px solid #F5F5F5; background-color: #F5F5F5; color: #ad3a6e; opacity: 0.6;}
-.aboutHeading:hover, .photosHeading:hover, .videosHeading:hover { cursor: pointer;}
+.photosHeading, .videosHeading, .feedsHeading { border-bottom: 2px solid #F5F5F5; background-color: #F5F5F5; color: #ad3a6e; opacity: 0.6;}
+.aboutHeading:hover, .photosHeading:hover, .videosHeading:hover, .feedsHeading:hover { cursor: pointer;}
 .photosHolder {width: 22%; height: 50%; margin: 4% 1.5% 0; border-radius: 5px; position: relative;}
-#profileAlbum {width: 100%; height: 80%; border-radius: 5px; box-shadow: 0 2px 8px rgba(127,127,127,0.5);}
+#profileAlbum {width: 100%; height: 80%; border-radius: 5px; box-shadow: 0 2px 10px rgba(127,127,127,0.8);}
 #profileAlbum:hover {cursor: pointer;}
-.addPAlbum {width: 60px; height: 40px; box-shadow: 0 2px 4px rgba(173,58,110,0.5); display: flex; justify-content: space-around; align-items: center; background-color: #ad3a6e; color: #FFF; font-size: 14px; position: absolute; bottom: 10px; right: 0; z-index: 4;}
-.addPAlbum::before {content: ''; width: 40px; height: 40px; border-radius: 50%; background-color: #ad3a6e; position: absolute; top: 0; left: 0; transform: translateX(-50%); z-index: -1;}
+.addPAlbum {width: 50px; height: 40px; box-shadow: 0 2px 4px rgba(173,58,110,0.5); display: flex; justify-content: space-around; align-items: center; background-color: #ad3a6e; color: #FFF; font-size: 12px; position: absolute; bottom: 10px; right: 0; z-index: 4; font-weight: bold;}
+.addPAlbum::before {content: ''; width: 30px; height: 40px; border-radius: 50%; background-color: #ad3a6e; position: absolute; top: 0; left: 0; transform: translateX(-50%); z-index: -1;}
 .addBtn {margin: 0; font-family: 'Lato', sans-serif;}
 .addPAlbum:hover {cursor: pointer;}
 .transparent { width: 100%; height: 20%; display: flex; align-items: flex-start; justify-content: center; margin-top: 5px; text-overflow: ellipsis;}
@@ -36,8 +40,8 @@
 #profileAlbum:hover ~ .black-trans::after {width: 40%;}
 .black-trans:hover::after {width: 40%;}
 .transparent p {font-family: 'Lato', sans-serif; font-size: 16px;}
-.videosHolder {width: 22%; height: 40%; background-color: #00aced; margin: 4% 1.5% 0; border-radius: 5px;}
-.videosHolder:hover {background-color: rgba(0, 172, 237, 0.5); cursor: pointer;}
+.videosHolder {width: 22%; height: 40%; background-color: #f2f2f2; margin: 4% 1.5% 0; border-radius: 5px;}
+.videosHolder:hover {background-color: #f5f5f5; cursor: pointer;}
 
 /*Scroll Design*/
 .photos::-webkit-scrollbar, .videos::-webkit-scrollbar, .contentRightPData::-webkit-scrollbar, .contentRightVData::-webkit-scrollbar, .profileRight::-webkit-scrollbar { height: 10px; width: 10px;}
@@ -56,6 +60,7 @@
 /*RIGHT*/
 .profileRight {width: 50%; height: 100%; overflow-y: auto;}
 .statusHighLight {width: 100%; height: 15%; background-color: rgba(0,0,0,0.4); display: grid; place-items: center; color: #FFFFFF;}
+.statusHighLight h3 {font-size: 24px;}
 .statusHighLight:hover {background-color: rgba(0,0,0,0.8); cursor: pointer;}
 .coverPic {width: 100%; height: 100vh; background-image: url("../Images/Cover.jpg"); background-size: cover; background-repeat: no-repeat; z-index: -1;}
 .Feeds {width: 100%; height: 500px;}

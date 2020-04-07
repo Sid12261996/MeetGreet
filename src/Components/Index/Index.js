@@ -62,6 +62,7 @@ class Index extends Component {
                     <span><p id='PassError'>{this.state.loginError}</p></span>
                     <div className='IndexLeft'>
                             {/*To be filled*/}
+                            <h1>Stay Tuned....</h1>
                     </div>
                     <div className='IndexRight'>
                         <div className='polyContent'>

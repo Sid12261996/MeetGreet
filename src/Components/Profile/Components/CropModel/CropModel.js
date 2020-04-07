@@ -14,10 +14,12 @@ class CropModel extends Component {
         this.state = {
             crop: {
                 unit: '%',
-                width: 50,
+                width: 100,
+                height: 100,
                 aspect: 4 / 4,
             },
-            croppedImageUrl: ''
+            croppedImageUrl: '',
+            fileName: ''
         }
     }
 
@@ -66,19 +68,31 @@ class CropModel extends Component {
             crop.height
         );
 
-        const base64Image = canvas.toDataURL('image/jpeg');
-        return new Promise((resolve,reject) => {
-            resolve(base64Image);
+        return new Promise((resolve, reject) => {
+            canvas.toBlob(blob => {
+                if (!blob) {
+                    //reject(new Error('Canvas is empty'));
+                    console.error('Canvas is empty');
+                    return;
+                }
+                // blob.name = fileName;
+                // window.URL.revokeObjectURL(this.fileUrl);
+                // this.fileUrl = window.URL.createObjectURL(blob);
+                this.setState({
+                    ...this.state,
+                    fileName: fileName
+                });
+                resolve(blob);
+            }, 'image/jpeg');
         });
     }
 
     changeProfileDP = () => {
         let userData = this.props.userdata;
         let files = this.state.croppedImageUrl;
-        var image = new Image();
-        image.src = files;
+        var formObj = new File([files] , this.state.fileName);
         let formData = new FormData();
-        formData.append('file', image);
+        formData.append('file', formObj);
         const config = {
             headers: { 'content-type': 'multipart/form-data' }
         };
@@ -88,8 +102,8 @@ class CropModel extends Component {
                     auth.updateAuthencity(true, currentUser, () => {
                         userStore.dispatch({type: 'USERS_DATA', result: currentUser.data.data});
                         console.log(userStore.getState().root.user);
-                        // this.props.onHide();
-                        // window.location.reload(false);
+                        this.props.onHide();
+                        window.location.reload(false);
                     });
                 }, er => {
                     console.log(er);
@@ -114,7 +128,7 @@ class CropModel extends Component {
             <Modal
                 {...this.props}
                 show={this.props.show}
-                size="xl"
+                size="lg"
                 // onHide={() => setShow(false)}
                 dialogClassName="modal-90w"
             >
@@ -131,6 +145,7 @@ class CropModel extends Component {
                         <ReactCrop
                             src={src}
                             crop={crop}
+                            locked
                             ruleOfThirds
                             onImageLoaded={this.onImageLoaded}
                             onComplete={this.onCropComplete}
@@ -138,16 +153,9 @@ class CropModel extends Component {
                             className="CropBlock"
                         />
                     )}
-                    {croppedImageUrl && (
-                        <div className="showCropImage">
-                            <div className="fixedSizedImage">
-                                <img alt="Crop" src={croppedImageUrl} className="croppedImg"/>
-                            </div>
-                            <div className="sendCropBtn">
-                                <button className='btn btn-success' onClick={this.changeProfileDP}>Done</button>
-                            </div>
-                        </div>
-                    )}
+                    <div className="modalCropBtn">
+                        <button onClick={this.changeProfileDP}>Done</button>
+                    </div>
                 </Modal.Body>
             </Modal>
         );
