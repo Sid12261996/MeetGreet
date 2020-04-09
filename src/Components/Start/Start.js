@@ -146,7 +146,34 @@ class Start extends Component {
             }
         });
         img.src = url;
-    }
+    };
+
+    handleText = () => {
+        $('.fa-quote-left').css({'background-color' : '#FAFAFA', 'border-bottom' : '2px solid #AD3A6E', 'opacity' : '1', 'cursor': 'default'});
+        $('.text').css({'display': 'flex'});
+        $('.fa-images').css({'background-color' : '#FFFFFF', 'border-bottom' : '2px solid #FFFFFF', 'opacity' : '0.4', 'cursor': 'pointer'});
+        $('.image').css({'display': 'none'});
+        $('.fa-film').css({'background-color' : '#FFFFFF', 'border-bottom' : '2px solid #FFFFFF', 'opacity' : '0.4', 'cursor': 'pointer'});
+        $('.video').css({'display': 'none'});
+    };
+
+    handleImage = () => {
+        $('.fa-images').css({'background-color' : '#FAFAFA', 'border-bottom' : '2px solid #AD3A6E', 'opacity' : '1', 'cursor': 'default'});
+        $('.image').css({'display': 'flex'});
+        $('.fa-quote-left').css({'background-color' : '#FFFFFF', 'border-bottom' : '2px solid #FFFFFF', 'opacity' : '0.4', 'cursor': 'pointer'});
+        $('.text').css({'display': 'none'});
+        $('.fa-film').css({'background-color' : '#FFFFFF', 'border-bottom' : '2px solid #FFFFFF', 'opacity' : '0.4', 'cursor': 'pointer'});
+        $('.video').css({'display': 'none'});
+    };
+
+    handleVideo = () => {
+        $('.fa-film').css({'background-color' : '#FAFAFA', 'border-bottom' : '2px solid #AD3A6E', 'opacity' : '1', 'cursor': 'default'});
+        $('.video').css({'display': 'flex'});
+        $('.fa-quote-left').css({'background-color' : '#FFFFFF', 'border-bottom' : '2px solid #FFFFFF', 'opacity' : '0.4', 'cursor': 'pointer'});
+        $('.text').css({'display': 'none'});
+        $('.fa-images').css({'background-color' : '#FFFFFF', 'border-bottom' : '2px solid #FFFFFF', 'opacity' : '0.4', 'cursor': 'pointer'});
+        $('.image').css({'display': 'none'});
+    };
 
     render() {
         const posts = this.state.posts;                     //GETTING POSTS FROM STATE
@@ -167,23 +194,64 @@ class Start extends Component {
 
                             {/* CREATE POST TOOLBAR */}
                             <div className="create-toolbar">
-                                <form autoComplete="off" onSubmit={this.handleSubmit} encType="multipart/form-data">
-
-                                    <div className="generatePost">
-                                        <input autoComplete="off" type="text" id="postText"
-                                               placeholder="Click Me and start typing.."/>
-                                        <div className="choose-pic" onClick={() => {
-                                            document.getElementById('fileinputbutton').click()
-                                        }}>
-                                            <h6>Image</h6>
-                                            <input type="file" id="fileinputbutton" name="file" onChange={(e) => {
-                                                this.onChange(e)
-                                            }} required/>
+                                <div className="toolbox-heading">
+                                    <i className="fas fa-quote-left" onClick={this.handleText}></i>
+                                    <i className="far fa-images" onClick={this.handleImage}></i>
+                                    <i className="fas fa-film" onClick={this.handleVideo}></i>
+                                </div>
+                                <div className="toolbox-wrapper">
+                                    <div className="text">
+                                        <div className="postTextItems">
+                                            <div className="MoodList">
+                                                <i className="fas fa-theater-masks"></i>
+                                                <div className="MoodStyles">
+                                                    <span><i className="far fa-smile-beam"></i></span>
+                                                    <span><i className="far fa-sad-tear"></i></span>
+                                                    <span><i className="far fa-angry"></i></span>
+                                                    <span><i className="far fa-surprise"></i></span>
+                                                </div>
+                                            </div>
+                                            <div className="postTextInput">
+                                                <textarea name="textPost" id="textPost" cols="70" rows="2" maxLength="30" placeholder="What you want to say?"></textarea>
+                                                <button className="postBtn">POST</button>
+                                            </div>
                                         </div>
                                     </div>
-
-                                    <button type="submit" className="post-btn">POST</button>
-                                </form>
+                                    <div className="image">
+                                        <div className="postTextItems">
+                                            <div className="MoodList">
+                                                <i className="fas fa-theater-masks"></i>
+                                                <div className="MoodStyles">
+                                                    <span><i className="far fa-smile-beam"></i></span>
+                                                    <span><i className="far fa-sad-tear"></i></span>
+                                                    <span><i className="far fa-angry"></i></span>
+                                                    <span><i className="far fa-surprise"></i></span>
+                                                </div>
+                                            </div>
+                                            <div className="postTextInput">
+                                                <textarea name="textPost" id="textPost" cols="70" rows="2" maxLength="30" placeholder="Testing.. This is Image.."></textarea>
+                                                <button className="postBtn">POST</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="video">
+                                        <div className="postTextItems">
+                                            <div className="MoodList">
+                                                <i className="fas fa-theater-masks"></i>
+                                                <div className="MoodStyles">
+                                                    <span><i className="far fa-smile-beam"></i></span>
+                                                    <span><i className="far fa-sad-tear"></i></span>
+                                                    <span><i className="far fa-angry"></i></span>
+                                                    <span><i className="far fa-surprise"></i></span>
+                                                </div>
+                                            </div>
+                                            <div className="postTextInput">
+                                                <textarea name="textPost" id="textPost" cols="70" rows="2" placeholder="Testing.. This is Video.."></textarea>
+                                                <button className="postBtn">POST</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             {
