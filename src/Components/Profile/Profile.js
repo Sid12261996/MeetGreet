@@ -24,7 +24,8 @@ export default class Profile extends Component {
             Loader: false,
             showModel : false,
             showCModel: false,
-            src: null
+            src: null,
+            DOBView: true
         }
     }
 
@@ -120,6 +121,25 @@ export default class Profile extends Component {
         });
     };
 
+    handleView = () => {
+      if(this.state.DOBView === true){
+          $('.fa-eye').css({'display': 'none'});
+          $('.fa-eye-slash').css({'display': 'flex'});
+          this.setState({
+              ...this.state,
+              DOBView: false
+          });
+      }
+      else {
+          $('.fa-eye').css({'display': 'flex'});
+          $('.fa-eye-slash').css({'display': 'none'});
+          this.setState({
+              ...this.state,
+              DOBView: true
+          });
+      }
+    };
+
     //Function Not Available
     handleNotAvailable = () => {
         alert('This feature is currently unavailable.');
@@ -177,10 +197,85 @@ export default class Profile extends Component {
                             </div>
                             <div className="userContent">
                                 <div className="about">
-                                    <h5>About</h5>
+                                    <div className="mostViewed">
+                                        <div className="mostViewedCard">
+                                            <div className="mostViewedHeading">
+                                                <h5>Most Viewed Posts</h5>
+                                            </div>
+                                            <div className="mostViewedContent">
+                                                <div className="contentRow">
+                                                    <div className="viewedData"></div>
+                                                    <div className="viewedData"></div>
+                                                </div>
+                                                <div className="contentRow">
+                                                    <div className="viewedData"></div>
+                                                    <div className="viewedData"></div>
+                                                </div>
+                                                <div className="contentRow">
+                                                    <div className="viewedData"></div>
+                                                    <div className="viewedData"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="aboutRight">
+                                        <div className="dataCards dataCards1">
+                                            <div className="meHeading">
+                                                <h5>Me</h5>
+                                            </div>
+                                            <div className="meContent">
+                                                <div className="contentDetails">
+                                                    <div className="workPlace">
+                                                        <h5>Workplace:</h5>
+                                                    </div>
+                                                    <div className="DOB">
+                                                        <h5>Date of Birth:</h5>
+                                                    </div>
+                                                </div>
+                                                <div className="contentAnsShow">
+                                                    <div className="workPlaceAns">
+                                                        <h5>Update Settings</h5>
+                                                    </div>
+                                                    <div className="DOBAns">
+                                                        <h5>Update Settings</h5>
+                                                    </div>
+                                                </div>
+                                                <div className="dateVisible">
+                                                    <i className="fas fa-eye-slash" onClick={this.handleView}></i>
+                                                    <i className="fas fa-eye" onClick={this.handleView}></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="dataCards dataCards2">
+                                            <div className="friendsContent">
+                                                <div className="friendsHeading"><h5>Friends</h5></div>
+                                                <div className="friendsNumber"><h2>184</h2></div>
+                                            </div>
+                                            <div className="twoFriends">
+                                                <div className="friend1">
+                                                    <div className="friends1Pic"></div>
+                                                    <h5>Amanda Cerny</h5>
+                                                </div>
+                                                <div className="friend2">
+                                                    <div className="friends2Pic"></div>
+                                                    <h5>Galga Dot</h5>
+                                                </div>
+                                            </div>
+                                            <div className="viewBtn">
+                                                <h5 onClick={this.handleNotAvailable}>View All</h5>
+                                            </div>
+                                        </div>
+                                        <div className="dataCards dataCards3">
+                                            <div className="stationHeading"><h5>Station</h5></div>
+                                            <div className="stationContent"><h5>You dont have any station yet.</h5></div>
+                                            <div className="stationBtn">
+                                                <h5 onClick={this.handleNotAvailable}>Create</h5>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div className="feeds">
-                                    <h5>Your Feeds</h5>
+                                    <h5>Under Development.</h5>
                                 </div>
                                 <div className="photos">
                                     <div className="addPAlbum" onClick={this.handleNotAvailable}>
