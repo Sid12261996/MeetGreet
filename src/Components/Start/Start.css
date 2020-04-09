@@ -11,7 +11,7 @@
 .mainContent::-webkit-scrollbar-thumb:hover { background: #555; }
 
 /* POST */
-.post {width: 100%; margin: 20px 0; box-shadow: 0px 2px 8px rgba(0,0,0,0.15); border-radius: 5px;}
+.post {width: 100%; margin: 20px 0; box-shadow: 0px 2px 4px rgba(0,0,0,0.15); border-radius: 5px;}
 .post-head {width: 100%; display: flex; justify-content: space-between; padding: 0px 15px; align-items: center; background-color: rgba(250,250,250,1);}
 .post-head-flex {display: flex; justify-content: space-between; align-items: center; padding-top: 10px;}
 .post-head h6 {font-family: 'Montserrat', sans-serif;}
@@ -34,17 +34,27 @@
 .like:hover, .dislike:hover, .share:hover, .comment:hover, .report:hover {color: rgba(20,0,0,0.9); border-right: 2px solid #AD3A6E;}
 .fa-thumbs-up, .fa-thumbs-down, .fa-exclamation-triangle, .fa-comment, .fa-share {font-size: 24px;}
 
-.create-toolbar {margin-bottom: 10px;}
-.create-toolbar form {display: flex; justify-content: space-between;}
-.generatePost {display: flex; height: 50px; width: 100%;}
-.generatePost #postText {width: 100%; height: 50px; padding: 0 10px; border: none; border-bottom: 2px solid #AD3A6E;}
-.generatePost #postText:focus {outline-width: 0;}
-.generatePost #postText:focus::placeholder {font-size: 12px; vertical-align: super; transform: translateY(-18px); transition: 0.3s;}
-.generatePost #postText::placeholder {transition: 0.3s;}
-.choose-pic {display: flex; width: 80px; height: 50px; background-color: rgba(22,22,22,0.9);; color: white;}
-.choose-pic:hover {cursor: pointer; background-color: rgba(20,0,0,0.9);}
-.choose-pic h6 {margin: auto;}
-.posty {width: 100%; height: 400px; filter: blur(8px); -webkit-filter: blur(8px);}
-#fileinputbutton {width: 0px;}
-.post-btn { background-color:#77274b; border: 1px solid #77274b; width:80px; height:50px; color:white;}
-.post-btn:hover { background-color:#ad3a6e; border: 1px solid #ad3a6e;}
+.create-toolbar { width: 100%; box-shadow: 0px 2px 4px rgba(0,0,0,0.15);}
+.toolbox-heading { width: 100%; display: flex; justify-content: space-between; height: 8vh;}
+.toolbox-heading i { display: flex; width: 33%; justify-content: center; align-items: center; font-size: 28px;}
+.toolbox-heading .fa-quote-left {background-color: #FAFAFA; border-bottom: 2px solid #AD3A6E; cursor: default;}
+.toolbox-heading .fa-images, .toolbox-heading .fa-film { opacity: 0.4; cursor: pointer;}
+.toolbox-wrapper .text { display: flex; }
+.toolbox-wrapper .image, .toolbox-wrapper .video { display: none; }
+.postTextItems {width: 100%;}
+.MoodList {width: 100%; display: flex; align-items: center; font-size: 24px; height: 8vh;}
+.fa-theater-masks {width: 20%; opacity: 0.4;}
+.MoodStyles {width: 80%; display: flex; justify-content: flex-start;}
+.MoodStyles i { margin: 0 10px; opacity: 0.4;}
+.MoodStyles i:hover { cursor: pointer; border-radius: 50%; opacity: 1;}
+.MoodStyles .fa-smile-beam:hover { color: #f2ed6f; }
+.MoodStyles .fa-sad-tear:hover { color: #b2ebf2;}
+.MoodStyles .fa-angry:hover { color: #ff6363;}
+.MoodStyles .fa-surprise:hover { color: #efa8e4;}
+.postTextInput { display: flex; flex-direction: column; justify-content: center; align-items: center;}
+.postTextInput textarea { resize: none; border-radius: 10px; padding: 10px; border: 1px solid #8B8B8B;}
+.postTextInput textarea:focus {outline: none;}
+.postTextInput .postBtn {margin: 10px 0;}
+.postTextInput .postBtn {display: block; background-image: linear-gradient(to bottom, #782c4c, #AD3A6E); border-radius: 5px; width: 5rem; height: 2rem; color: white; cursor: pointer; font-size: 16px; font-family: 'Montserrat', sans-serif; border: none;}
+.postTextInput .postBtn:hover {border: none; box-shadow: 0px 2px 8px rgba(173,58,110,.4);}
+.postTextInput .postBtn:focus {outline: none;}

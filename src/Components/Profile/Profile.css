@@ -14,14 +14,57 @@
 .user {width: 70%; height: 100%; display: flex; justify-content: flex-start; align-items: center; padding: 20px; margin-left: 20px;}
 .userData { text-align: center;}
 .userData h1 { font-family: 'Lato', sans-serif; font-weight: bold; font-size: 24px;}
-.userData h3 { font-style: italic; font-size: 20px;}
+.userData h3 { font-style: italic; font-size: 20px; font-family: 'Lato', sans-serif;}
 
 @media (max-width: 1336px) {
     .userDetails { width: 100%; height: 80%; padding: 40px 60px; }
 }
 
 .userContent {width: 100%; height: 50%; display: flex; align-items: center; background-color: #FFFFFF; box-shadow: inset 0px 2px 5px rgba(127,127,127,0.2);}
-.about {display: flex; width: 100%; height: 100%;}
+.about {display: flex; width: 100%; height: 100%; background-image: url("../Images/ProfileLeft/About-Back.png"); background-repeat: no-repeat; background-size: cover;}
+.about .mostViewed {width: 40%; height: 100%; display: flex;}
+.mostViewedCard {width: 80%; height: 90%; box-shadow: 0 2px 4px rgba(127,127,127,0.6); background-color: white; border-radius: 5px; margin: auto;}
+.mostViewedCard .mostViewedHeading {display: flex; justify-content: flex-start; padding: 5px; width: 100%; height: 10%;}
+.mostViewedCard .mostViewedHeading h5 { font-size: 16px; font-family: 'Lato', sans-serif; font-weight: bold; color: rgba(127,127,127,0.6);}
+.mostViewedCard .mostViewedContent { width: 100%; height: 90%;}
+.mostViewedContent .contentRow {width: 100%; height: 33%; display: flex; justify-content: space-around; align-items: center;}
+.contentRow .viewedData { width: 40%; height: 90%; border: 1px dashed #97DAF1; border-radius: 5px;}
+.about .aboutRight {width: 60%; height: 100%; display: flex; flex-direction: column; justify-content: space-around; align-items: flex-start; padding: 10px;}
+.aboutRight .dataCards { width: 95%; height: 30%; box-shadow: 0 2px 4px rgba(127,127,127,0.6); background-color: white; border-radius: 5px;}
+.meHeading {width: 100%; height: 32%; display: flex; justify-content: flex-start; padding: 5px;}
+.meHeading h5 {font-size: 16px; font-family: 'Lato', sans-serif; font-weight: bold; color: rgba(127,127,127,0.6);}
+.meContent { width: 100%; height: 68%; display: flex;}
+.contentDetails { width: 40%; height: 100%;}
+.contentDetails .workPlace { width: 100%; height: 50%; display: flex; align-items: center; justify-content: flex-start;}
+.DOB h5, .workPlace h5 {font-size: 14px; font-family: 'Lato', sans-serif; font-weight: bold; color: rgba(127,127,127,0.6); margin-left: 30px;}
+.contentDetails .DOB { width: 100%; height: 50%; display: flex; align-items: center; justify-content: flex-start;}
+.contentAnsShow { width: 40%; height: 100%;}
+.contentAnsShow .workPlaceAns, .contentAnsShow .DOBAns {width: 100%; height: 50%; display: flex; justify-content: flex-start; align-items: center;}
+.workPlaceAns h5, .DOBAns h5 {font-size: 14px; font-family: 'Lato', sans-serif; font-weight: bold; color: rgba(127,127,127,1); }
+.dateVisible { width: 20%; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center;}
+.dateVisible .fa-eye-slash { width: 100%; height: 50%; font-size: 14px; display: none; align-items: flex-start; justify-content: center; padding: 5px; color: rgba(127,127,127,1);}
+.dateVisible .fa-eye { display: flex; width: 100%; height: 50%; font-size: 14px; align-items: flex-start; justify-content: center; padding: 5px; color: rgba(127,127,127,0.6);}
+.fa-eye-slash:hover, .fa-eye:hover {cursor: pointer;}
+.dataCards2 { display: flex;}
+.friendsContent { width: 30%; height: 100%;}
+.friendsContent .friendsHeading { width: 100%; height: 32%; display: flex; justify-content: flex-start; padding: 5px;}
+.friendsHeading h5 {font-size: 16px; font-family: 'Lato', sans-serif; font-weight: bold; color: rgba(127,127,127,0.6);}
+.friendsContent .friendsNumber { width: 100%; height: 68%; display: flex; justify-content: center; align-items: center;}
+.friendsNumber h2 {font-family: 'Lato', sans-serif; font-weight: bold; color: #909090;}
+.twoFriends {width: 50%; height: 100%;}
+.twoFriends .friend1, .twoFriends .friend2 {width: 100%; height: 50%; display: flex; justify-content: flex-start; align-items: center;}
+.friends1Pic {width: 35px; height: 35px; border-radius: 50%; background-color: #FF9F8C;}
+.friend1 h5, .friend2 h5  {font-size: 14px; font-family: 'Lato', sans-serif; font-weight: bold; color: rgba(127,127,127,1); margin-left: 5px; margin-top: 5px;}
+.friends2Pic {width: 35px; height: 35px; border-radius: 50%; background-color: #7FD3EF;}
+.viewBtn {width: 20%; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; }
+.viewBtn h5 {width: 100%; height: 50%; font-size: 14px; display: flex; justify-content: center; align-items: flex-end; cursor: pointer; color: #ad3a6e; font-weight: bold;}
+.stationHeading {width: 100%; height: 25%; display: flex; justify-content: flex-start; padding: 5px;}
+.stationHeading h5 {font-size: 16px; font-family: 'Lato', sans-serif; font-weight: bold; color: rgba(127,127,127,0.6);}
+.stationContent {width: 100%; height: 50%; display: flex; justify-content: center; align-items: center;}
+.stationContent h5 {font-size: 14px; font-family: 'Lato', sans-serif; color: rgba(127,127,127,1); font-weight: bold;}
+.stationBtn {width: 100%; height: 25%; display: flex; justify-content: flex-end;}
+.stationBtn h5 {width: 100%; height: 50%; font-size: 14px; cursor: pointer; color: #ad3a6e; font-weight: bold; display: flex; justify-content: flex-end; margin-right: 10px;}
+
 .photos, .videos, .feeds { display: none; width: 100%; height: 100%; flex-wrap: wrap; overflow-y: auto; position: relative;}
 .headingInfo { width: 100%; height: 20%; display: flex; justify-content: center;}
 .headingInfo h3 { width: 25%; height: 100%; font-size: 14px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 5px; font-weight: 600; font-family: 'Montserrat', sans-serif;}
@@ -63,4 +106,3 @@
 .statusHighLight h3 {font-size: 24px;}
 .statusHighLight:hover {background-color: rgba(0,0,0,0.8); cursor: pointer;}
 .coverPic {width: 100%; height: 100vh; background-image: url("../Images/Cover.jpg"); background-size: cover; background-repeat: no-repeat; z-index: -1;}
-.Feeds {width: 100%; height: 500px;}
