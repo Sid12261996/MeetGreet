@@ -10,7 +10,9 @@ const securityLockSchema = new schema({
     islogged: Boolean,
     SecurityQuestion: String
 });
+
 const securityLock = mongo.model('Security', securityLockSchema);
+
 
 const User = new schema({
     _id: schema.Types.ObjectId,
@@ -33,7 +35,9 @@ const User = new schema({
     // Post: ["Status", "Images", "Shared-post", "Videos"],
     JobProfile: [String],
     ImageUrl: {type: String, default: 'default'},
-    CoverUrl: String
+    CoverUrl: {type: schema.Types.String},
+    Status:{type: schema.Types.String}
+    
 });
 
 module.exports = mongo.model('Users', User);

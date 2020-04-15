@@ -1,6 +1,5 @@
 const router = require('express').Router(),
-    userController = require('../controllers/userController')
-    ;
+    userController = require('../controllers/userController');
 
 
 //User Registration API endpoint
@@ -8,6 +7,34 @@ router.post('/register',userController.Register);
 
 //User Login API endpoint
 router.post('/login',userController.Login);
+
+router.put('/changePassword', async (req, res) => {
+
+try{
+
+  let ctx=await userController.changePassword(req.body._id,req.body.Password);
+  ctx(req,res);
+}
+catch(e){
+    console.log('Route is catching Error',e);
+    res.status(500).json(e);
+}
+
+});
+
+
+
+router.put('/nameUpdate', async (req, res) => {
+    try {
+        let ctx = await userController.changeName(req.body._id, req.body.Name);
+        ctx(req, res);
+    } catch (e) {
+        console.log('Route is catching Error', e);
+        res.status(500).json(e);
+    }
+});
+
+
 
 router.put('/:userId/userPicUpdate', async (req, res) => {
     try {

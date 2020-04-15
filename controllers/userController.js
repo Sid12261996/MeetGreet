@@ -47,6 +47,9 @@ exports.Login = (req, res) => {
 
 };
 
+
+
+
 exports.Register = (req, res) => {
     Users.find({"Email": req.body.Email}).exec()
         .then(data => {
@@ -97,6 +100,33 @@ exports.Register = (req, res) => {
         res.status(500).json({message: 'Validation Errors', Errors: err})
     })
 };
+
+exports.changeName= async (userId,Name) =>{
+
+try{
+     let nameResult =await Users.findByIdAndUpdate({_id:userId},{Name: Name});
+     return response.Ok(nameResult);
+}
+catch(e){
+    return response.BadRequest(e);
+}
+
+}
+
+exports.changePassword = async (userId,newPassword) =>{
+
+try{
+    let salt = bcrypt.genSaltSync(10);
+    let hash = bcrypt.hashSync(newPassword, salt); 
+    let passwordResult= await Users.findByIdAndUpdate({_id: userId},{Password: hash});
+    return response.Ok(passwordResult);
+}
+catch(e){
+   return response.BadRequest(e);
+}
+
+}
+
 
 exports.UserPicUpdate = async (userId,NewPicUrl) => {
     try {
