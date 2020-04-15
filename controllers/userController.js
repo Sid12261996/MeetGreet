@@ -113,20 +113,30 @@ catch(e){
 
 }
 
-exports.changePassword = async (userId,newPassword) =>{
+exports.changePassword = async (userId,currentPassword,newPassword) =>{
 
 try{
-    let salt = bcrypt.genSaltSync(10);
-    let hash = bcrypt.hashSync(newPassword, salt); 
-    let passwordResult= await Users.findByIdAndUpdate({_id: userId},{Password: hash});
-    return response.Ok(passwordResult);
+    
+    let userData= await Users.findById({_id:userId},{Password:1});
+    
+    let flag=bcrypt.compareSync(currentPassword, userData.Password) 
+       if(flag){     
+          let salt = bcrypt.genSaltSync(10);
+          let hash = bcrypt.hashSync(newPassword, salt); 
+          let passwordResult= await Users.findByIdAndUpdate({_id: userId},{Password: hash});
+        return response.Ok(passwordResult);    
+      }
+      else{
+        return response.BadRequest("Invalid Current Password");
+      }
+
 }
 catch(e){
    return response.BadRequest(e);
 }
 
 }
-
+// bcrypt.compareSync(myPlaintextPassword, hash) 
 
 exports.UserPicUpdate = async (userId,NewPicUrl) => {
     try {

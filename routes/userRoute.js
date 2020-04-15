@@ -12,7 +12,7 @@ router.put('/changePassword', async (req, res) => {
 
 try{
 
-  let ctx=await userController.changePassword(req.body._id,req.body.Password);
+  let ctx=await userController.changePassword(req.body._id,req.body.currentPassword,req.body.newPassword);
   ctx(req,res);
 }
 catch(e){
