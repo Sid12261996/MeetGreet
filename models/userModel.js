@@ -24,7 +24,7 @@ const User = new schema({
     LastName: String,
     Age: {type: schema.Types.Number},
     DateOfBirth:{type:schema.Types.Date,default: null},
-    DOBView:{types:schema.Types.Boolean,default:true},
+    DOBView:{type:schema.Types.Boolean,default:true},
     Gender: {type: String, enum: ["Male", "Female", "Other"]},
     Password: {type: String, required: true, minlength: 6},
     MobileNo: {type: String},
