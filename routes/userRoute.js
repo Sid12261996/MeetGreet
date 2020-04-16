@@ -1,14 +1,14 @@
-const router = require('express').Router(),
-    userController = require('../controllers/userController');
-
-
+const router   =   require('express').Router(),
+userController = require('../controllers/userController');
+const JwtToken = require('../AuthVerify/AuthVerify');
+ 
 //User Registration API endpoint
 router.post('/register',userController.Register);
 
 //User Login API endpoint
 router.post('/login',userController.Login);
 
-router.put('/changePassword', async (req, res) => {
+router.put('/changePassword',JwtToken, async (req, res) => {
 
 try{
 
@@ -22,9 +22,7 @@ catch(e){
 
 });
 
-
-
-router.put('/nameUpdate', async (req, res) => {
+router.put('/nameUpdate',JwtToken,async (req, res) => {
     try {
         let ctx = await userController.changeName(req.body._id, req.body.Name);
         ctx(req, res);
@@ -33,8 +31,6 @@ router.put('/nameUpdate', async (req, res) => {
         res.status(500).json(e);
     }
 });
-
-
 
 router.put('/:userId/userPicUpdate', async (req, res) => {
     try {
@@ -55,6 +51,5 @@ router.get('/:userId/fetchUserData', async (req, res) => {
         res.status(500).json(e);
     }
 });
-
 
 module.exports = router;

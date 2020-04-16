@@ -47,9 +47,6 @@ exports.Login = (req, res) => {
 
 };
 
-
-
-
 exports.Register = (req, res) => {
     Users.find({"Email": req.body.Email}).exec()
         .then(data => {
@@ -127,7 +124,7 @@ try{
         return response.Ok(passwordResult);    
       }
       else{
-        return response.BadRequest("Invalid Current Password");
+        return response.UnAuthorized("Invalid Current Password");
       }
 
 }
