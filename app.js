@@ -28,6 +28,7 @@ app.use('/api/user', userRoute);
 app.use('/api/posts', JwtToken, postRoute);
 app.use('/api/album', albumRoute);
 
+
 //Fake route to tst JWT
 app.get('/api/protected', JwtToken, (req, res) => {
     res.send('You have successfully accessed a protected route!! JWT works!!')
