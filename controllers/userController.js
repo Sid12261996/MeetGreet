@@ -5,6 +5,8 @@ const mongoose = require('mongoose'),
     response = require('../utils/http-utils'),
     env = require('../environment').env,
     jwt = require('jsonwebtoken');
+    const moment=require('moment');
+ 
 
 exports.Login = (req, res) => {
 // Login Check
@@ -115,7 +117,6 @@ exports.changePassword = async (userId,currentPassword,newPassword) =>{
 try{
     
     let userData= await Users.findById({_id:userId},{Password:1});
-    
     let flag=bcrypt.compareSync(currentPassword, userData.Password) 
        if(flag){     
           let salt = bcrypt.genSaltSync(10);
@@ -133,7 +134,62 @@ catch(e){
 }
 
 }
-// bcrypt.compareSync(myPlaintextPassword, hash) 
+
+exports.updateProfession =async(userId,newProfession)=>{
+
+try{    
+    let changeProfession=await Users.findByIdAndUpdate({_id:userId},{Profession:newProfession});
+    return response.Ok(changeProfession);
+}
+catch(e){
+    return response.BadRequest(e);
+}
+
+}
+
+exports.jobProfile = async(userId,newJobProfile)=>{
+try{
+
+let addJobProfile=await Users.findByIdAndUpdate({_id:userId},{$push:{JobProfile:newJobProfile}},{safe: true, upsert: true});
+return response.Ok(addJobProfile);
+
+}
+catch(e){
+    return response.BadRequest(e);
+}
+
+}
+
+exports.updateStatus =async(userId,newStatus)=>{
+
+try{
+
+let updatedStatus= await Users.findByIdAndUpdate({_id:userId},{Status:newStatus});
+return response.Ok(updatedStatus);
+
+}
+catch(e){
+
+return response.BadRequest(e);
+
+}
+
+}
+
+exports.updateDOB =async(userId,DOB)=>{
+
+try{
+
+let updateDOB=await Users.findByIdAndUpdate({_id:userId},{DateOfBirth:moment.utc(DOB)});
+return response.Ok(updateDOB);
+}
+catch(e){
+return response.ServerError(e);
+}
+
+}
+
+
 
 exports.UserPicUpdate = async (userId,NewPicUrl) => {
     try {
