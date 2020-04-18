@@ -37,7 +37,7 @@ const User = new schema({
     // Post: ["Status", "Images", "Shared-post", "Videos"],
     JobProfile: [String],
     ImageUrl: {type: String, default: 'default'},
-    CoverUrl: {type: schema.Types.String},
+    CoverUrl: {type: schema.Types.String, default: 'default'},
     Status:{type: schema.Types.String,default: `Lets's get started`},
     Profession:{type:schema.Types.String,defalut: null}
     

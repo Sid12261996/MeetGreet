@@ -193,7 +193,14 @@ return response.ServerError(e);
 
 }
 
-
+exports.coverPicUpdate = async (userId,NewCoverUrl) => {
+    try {
+        let coverPicResult = await Users.findByIdAndUpdate({_id:userId},{CoverUrl: NewCoverUrl});
+        return response.Ok(coverPicResult);
+    } catch (e) {
+        return response.BadRequest(e);
+    }
+};
 
 exports.UserPicUpdate = async (userId,NewPicUrl) => {
     try {
