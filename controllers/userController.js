@@ -76,14 +76,17 @@ exports.Register = (req, res) => {
                                 Status: req.body.Status,
                                 Profession: req.body.Profession,
                                 DateOfBirth:req.body.DateOfBirth,
-                                DOBView:req.body.DOBView,
                                 City: req.body.City,
                                 Country: req.body.Country,
                                 // Security: req.body.Security,
                                 inCommunity: req.body.inCommunity,
                                 JobProfile: req.body.JobProfile
                             });
-
+                         
+                        RegisterUser.DOBView.then(function(result){
+                           console.log(result);
+                            
+                         });   
 
                         // Step 2: Save It to DB
                         RegisterUser.save().then(result => {

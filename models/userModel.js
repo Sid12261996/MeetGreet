@@ -1,5 +1,6 @@
 const mongo = require('mongoose'),
     moment = require('moment'),
+    settingModel=require('./settings-model'),   
     schema = mongo.Schema;
 
 //model
@@ -24,7 +25,6 @@ const User = new schema({
     LastName: String,
     Age: {type: schema.Types.Number},
     DateOfBirth:{type:schema.Types.Date,default: null},
-    DOBView:{type:schema.Types.Boolean,default:true},
     Gender: {type: String, enum: ["Male", "Female", "Other"]},
     Password: {type: String, required: true, minlength: 6},
     MobileNo: {type: String},
@@ -43,4 +43,12 @@ const User = new schema({
     
 });
 
+User.virtual('DOBView').
+  get(function() { return settingModel.find({userId:this._id})}).
+  set(function(DOBView){
+  settingModel.findOneAndUpdate({userId:this._id},{DOBView:DOBView})
+  });
+ 
+
 module.exports = mongo.model('Users', User);
+
