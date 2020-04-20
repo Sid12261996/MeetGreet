@@ -35,6 +35,17 @@ catch(e){
                                                                                                            
 });
 
+
+router.put('/:userId/coverPicUpdate', async (req, res) => {
+    try {
+        let ctx = await userController.coverPicUpdate(req.params.userId,req.body.NewCoverUrl);
+        ctx(req, res);
+    } catch (e) {
+        console.log('Route is catching Error', e);
+        res.status(500).json(e);
+    }
+});
+
 router.put('/nameUpdate',JwtToken,async (req, res) => {
     try {
         let ctx = await userController.changeName(req.body._id, req.body.Name);
