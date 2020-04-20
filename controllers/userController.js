@@ -9,6 +9,7 @@ const mongoose = require('mongoose'),
  
 
 exports.Login = (req, res) => {
+
 // Login Check
     Users.find({Email: req.body.Email.trim()}).then(doc => {
         if (doc.length > 0) {

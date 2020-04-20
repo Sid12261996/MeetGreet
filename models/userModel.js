@@ -1,7 +1,8 @@
 const mongo = require('mongoose'),
     moment = require('moment'),
     settingModel=require('./settings-model'),   
-    schema = mongo.Schema;
+    schema = mongo.Schema,
+settingsModel = require('./settings-model');
 
 //model
 
@@ -49,6 +50,10 @@ User.virtual('DOBView').
   settingModel.findOneAndUpdate({userId:this._id},{DOBView:DOBView})
   });
  
+
+User.virtual('DobView').get(function () {
+    return settingsModel.find({userId:this._id});
+})
 
 module.exports = mongo.model('Users', User);
 

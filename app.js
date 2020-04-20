@@ -8,8 +8,8 @@ const express = require('express'),
     JwtToken = require('./AuthVerify/AuthVerify'),
     postRoute = require('./routes/post-route'),
     albumRoute = require('./routes/album-route'),
-    settingRoute=require('./routes/settingRoute');
-    app.use(cors());
+    settingRoute = require('./routes/settingRoute');
+app.use(cors());
 
 //Mongo Connection
 mongoose.connect(Url.env.MongoUrl || process.env.MongoUrl, {
@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 app.use('/api/user', userRoute);
 app.use('/api/posts', JwtToken, postRoute);
 app.use('/api/album', albumRoute);
-app.use('/api/settings',JwtToken,settingRoute);
+app.use('/api/settings', JwtToken, settingRoute);
 //Fake route to tst JWT
 app.get('/api/protected', JwtToken, (req, res) => {
     res.send('You have successfully accessed a protected route!! JWT works!!')

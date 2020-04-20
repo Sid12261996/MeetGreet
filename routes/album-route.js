@@ -10,6 +10,14 @@ Router.post('/create', async (req, res) => {
     let ctx = await controller.createAlbum(req.body);
     ctx(req, res);
 });
+Router.post('/multi-create', async (req, res) => {
+    let ctx = await controller.createMultipleAlbums(req.body);
+    ctx(req, res);
+});
+Router.put('/add-photos/:userId', async (req, res) => {
+    let ctx = await controller.addPhotos(req.body, req.params.userId);
+    ctx(req, res);
+});
 // todo: finish the edit album part
 Router.get('/edit/:id', async (req, res) => {
     let ctx = await controller.editAlbum(req.params.id, req.body);
