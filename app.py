@@ -6,7 +6,8 @@ from flask_pymongo import PyMongo
 from FilesHandler import FilesHandler as Fh
 from flask_cors import CORS
 
-pwd = urllib.parse.quote('MeetTeam@18')
+# pwd = urllib.parse.quote('MeetTeam@18')
+pwd = 'tADlaCnJ0VnPIg6C'
 database = 'beta'
 connection_string = 'mongodb+srv://MeetGDemo:' + pwd + '@meetgdemo-kjmtn.mongodb.net/' + database
 
