@@ -12,7 +12,7 @@ const express = require('express'),
 app.use(cors());
 
 //Mongo Connection
-mongoose.connect(Url.env.MongoUrl || process.env.MongoUrl, {
+mongoose.connect(process.env.MongoUrl || Url.env.MongoUrl , {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false
