@@ -21,7 +21,7 @@ export default class Profile extends Component {
             CoverPic: "",
             ImageUpload: '',
             userData: {},
-            Loader: false,
+            ImageType: null,
             showModel : false,
             showCModel: false,
             src: null,
@@ -48,19 +48,39 @@ export default class Profile extends Component {
         document.getElementById('profileinputbutton').click();
     };
 
+    //Cover Input Initialize
+    handleCoverSubmit = () => {
+        document.getElementById('coverinputbutton').click();
+    };
+
+    //Cover Update
+    onCoverChange = (e) => {
+        if (e.target.files && e.target.files.length > 0) {
+            const reader = new FileReader();
+            reader.addEventListener('load', () =>
+                this.setState({...this.state, src: reader.result, ImageType: 2 })
+            );
+            reader.readAsDataURL(e.target.files[0]);
+        }
+        this.setState({
+            ...this.state,
+            showCModel: true
+        })
+    };
+
     // Profile Pic Update
     onChange = (e) => {
         if (e.target.files && e.target.files.length > 0) {
             const reader = new FileReader();
             reader.addEventListener('load', () =>
-                this.setState({...this.state, src: reader.result })
+                this.setState({...this.state, src: reader.result, ImageType: 1 })
             );
             reader.readAsDataURL(e.target.files[0]);
-        };
+        }
         this.setState({
             ...this.state,
             showCModel: true
-        })
+        });
     };
 
     handleAbout = () => {
@@ -151,7 +171,7 @@ export default class Profile extends Component {
         return (
             <div>
                 <AlbumModel show={this.state.showModel} onHide={() => this.hideModel()} />
-                <CropModel src={this.state.src} crop={this.state.crop} show={this.state.showCModel} onHide={() => this.hideCModel()} userdata={this.state.userData}/>
+                <CropModel src={this.state.src} crop={this.state.crop} show={this.state.showCModel} onHide={() => this.hideCModel()} userdata={this.state.userData} imageType={this.state.ImageType} />
                 {/* SCREEN TITLE */}
                 <Helmet>
                     <title>Profile</title>
@@ -302,6 +322,11 @@ export default class Profile extends Component {
                         {/* PROFILE SCREEN RIGHT PART*/}
                         <div className="profileRight">
                             <div className="coverPic">
+                                <form autoComplete="off" encType="multipart/form-data" id="coverForm">
+                                    <i className="fas fa-times uploadCoverBtn" onClick={this.handleCoverSubmit}>
+                                        <input type="file" id="coverinputbutton" name="file" onChange={this.onCoverChange} />
+                                    </i>
+                                </form>
                                 <div className="statusHighLight" onClick={this.handleNotAvailable}>
                                     <h3>My Life My Rules Hahaha...</h3>
                                 </div>

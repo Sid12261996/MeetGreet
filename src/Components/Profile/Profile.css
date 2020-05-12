@@ -7,7 +7,7 @@
 
 /*LEFT*/
 .profileLeft {width: 50%; height: 100%; background-attachment: fixed; background-repeat: no-repeat; background-size: cover; }
-.userWrapper { width: 100%; height: 40%; }
+.userWrapper { width: 100%; height: 40%; box-shadow: 0 2px 4px rgba(127,127,127,0.6); position: relative;}
 .userDetails { width: 100%; height: 80%; padding: 30px 50px; }
 .userInfo {width: 100%; height: 100%; display: flex; border-radius: 30px;}
 .userProfile {width: 30%; height: 100%; }
@@ -20,7 +20,7 @@
     .userDetails { width: 100%; height: 80%; padding: 40px 60px; }
 }
 
-.userContent {width: 100%; height: 50%; display: flex; align-items: center; background-color: #FFFFFF; box-shadow: inset 0px 2px 5px rgba(127,127,127,0.2);}
+.userContent {width: 100%; height: 50%; display: flex; align-items: center; background-color: #FFFFFF;}
 .about {display: flex; width: 100%; height: 100%; background-image: url("../Images/ProfileLeft/About-Back.png"); background-repeat: no-repeat; background-size: cover;}
 .about .mostViewed {width: 40%; height: 100%; display: flex;}
 .mostViewedCard {width: 80%; height: 90%; box-shadow: 0 2px 4px rgba(127,127,127,0.6); background-color: white; border-radius: 5px; margin: auto;}
@@ -72,14 +72,15 @@
 .photosHeading, .videosHeading, .feedsHeading { border-bottom: 2px solid #F5F5F5; background-color: #F5F5F5; color: #ad3a6e; opacity: 0.6;}
 .aboutHeading:hover, .photosHeading:hover, .videosHeading:hover, .feedsHeading:hover { cursor: pointer;}
 .photosHolder {width: 22%; height: 50%; margin: 4% 1.5% 0; border-radius: 5px; position: relative;}
-#profileAlbum {width: 100%; height: 80%; border-radius: 5px; box-shadow: 0 2px 10px rgba(127,127,127,0.8);}
+#profileAlbum {width: 100%; height: 80%; border-radius: 5px; box-shadow: 0 2px 4px rgba(127,127,127,0.6);}
 #profileAlbum:hover {cursor: pointer;}
 .addPAlbum {width: 50px; height: 40px; box-shadow: 0 2px 4px rgba(173,58,110,0.5); display: flex; justify-content: space-around; align-items: center; background-color: #ad3a6e; color: #FFF; font-size: 12px; position: absolute; bottom: 10px; right: 0; z-index: 4; font-weight: bold;}
 .addPAlbum::before {content: ''; width: 30px; height: 40px; border-radius: 50%; background-color: #ad3a6e; position: absolute; top: 0; left: 0; transform: translateX(-50%); z-index: -1;}
 .addBtn {margin: 0; font-family: 'Lato', sans-serif;}
 .addPAlbum:hover {cursor: pointer;}
 .transparent { width: 100%; height: 20%; display: flex; align-items: flex-start; justify-content: center; margin-top: 5px; text-overflow: ellipsis;}
-.black-trans::after {content: ''; position: absolute; top: 0; right: 0; width: 35%; height: 80%; background-color: rgba(0,0,0,0.8); border-top-right-radius: 5px; border-bottom-right-radius: 5px; transition: .2s;}
+.black-trans::after {content: ''; position: absolute; top: 0; right: 0; width: 35%; height: 80%; background-color: rgba(0,0,0,0.8); border-top-right-radius: 5px; border-bottom-right-radius: 5px; transition: .2s; box-shadow: 0 2px 4px rgba(127,127,127,0.6);}
+.black-trans:hover { cursor: pointer; }
 #profileAlbum:hover ~ .black-trans::after {width: 40%;}
 .black-trans:hover::after {width: 40%;}
 .transparent p {font-family: 'Lato', sans-serif; font-size: 16px;}
@@ -93,7 +94,7 @@
 .photos::-webkit-scrollbar-thumb:hover, .videos::-webkit-scrollbar-thumb:hover, .contentRightPData::-webkit-scrollbar-thumb:hover, .contentRightVData::-webkit-scrollbar-thumb:hover, .profileRight::-webkit-scrollbar-thumb:hover { background: #555; }
 
 /* Profile Pic */
-.solarProfile {width: 100%; height: 100%; cursor: pointer; border-radius: 50%; overflow: hidden; transform: scale(1.2, 1.3) translateX(-15px); box-shadow: 0 0 5px rgba(127,127,127,0.5); position: relative;}
+.solarProfile {width: 100%; height: 100%; cursor: pointer; border-radius: 50%; overflow: hidden; transform: scale(1.2, 1.3) translateX(-15px); box-shadow: 0 2px 4px rgba(127,127,127,0.6); position: relative;}
 #profilePic { width: 100%; height: 100%;}
 #profileinputbutton {width: 0;}
 .choose-propic {z-index: 4; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); display: none; place-items: center; border-radius: 50%;}
@@ -101,8 +102,17 @@
 .mainDP {color: white; font-size: 20px; position: absolute;}
 
 /*RIGHT*/
-.profileRight {width: 50%; height: 100%; overflow-y: auto;}
+.profileRight {width: 50%; height: 100%; overflow-y: auto; position: relative;}
 .statusHighLight {width: 100%; height: 15%; background-color: rgba(0,0,0,0.4); display: grid; place-items: center; color: #FFFFFF;}
 .statusHighLight h3 {font-size: 24px;}
 .statusHighLight:hover {background-color: rgba(0,0,0,0.8); cursor: pointer;}
 .coverPic {width: 100%; height: 100vh; background-image: url("../Images/Cover.jpg"); background-size: cover; background-repeat: no-repeat; z-index: -1;}
+.uploadCoverBtn { position: absolute; bottom: 60px; display: none; padding: 16px 20px; background-color: rgba(0,0,0,0.6); color: white; font-size: 16px; border-radius: 50%;}
+.coverPic:hover .uploadCoverBtn { display: inline; animation: slide .1s ease-out forwards; cursor: pointer;}
+.uploadCoverBtn:hover { background-color: rgba(0,0,0,0.8); }
+#coverinputbutton {width: 0;}
+
+@keyframes slide {
+    from { transform : translateY(0);}
+    to { transform : translateY(-100%);}
+}
