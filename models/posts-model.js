@@ -8,7 +8,7 @@ const mongo = require('mongoose'),
 const posts = new schema({
     baseEntity: entity,
     title: {type: String, required: true, default: 'No Title'},
-    imageUrl: String,
+    imageUrl: {type: String, required: true, default: 'default'},
     videoUrl: String,
     author: schema.Types.ObjectId,
     authorName: {type: String, required: true},
