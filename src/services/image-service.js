@@ -3,7 +3,6 @@ import baseService from "./base-service";
 
 const URL = `${env.ImageBaseUrl}`;
 const ApiLink = `${env.ApiLink}`;
-// baseService.axios = axios.defaults.headers.common['Authorization'] = `bearer ${userStore.getState().root.token}`;
 const axios = baseService.axios();
 
 class imageService {
@@ -14,6 +13,10 @@ class imageService {
 
     static ProfilePic = (userId, PPUrl) => {
         return axios.put(`${ApiLink}user/${userId}/userPicUpdate`, {NewImgUrl: PPUrl});
+    };
+
+    static CoverPic = (userId, CPUrl) => {
+        return axios.put(`${ApiLink}user/${userId}/coverPicUpdate`, {NewCoverUrl: CPUrl});
     };
 }
 

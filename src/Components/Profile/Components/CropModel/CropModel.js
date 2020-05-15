@@ -96,24 +96,46 @@ class CropModel extends Component {
         const config = {
             headers: { 'content-type': 'multipart/form-data' }
         };
-        ImageService.upload(formData, config).then(DPUrl => {
-            ImageService.ProfilePic(userData._id, DPUrl.data).then(() => {
-                userService.fetchData(userData._id).then((currentUser) => {
-                    auth.updateAuthencity(true, currentUser, () => {
-                        userStore.dispatch({type: 'USERS_DATA', result: currentUser.data.data});
-                        console.log(userStore.getState().root.user);
-                        this.props.onHide();
-                        window.location.reload(false);
+        if (this.props.imageType === 1) {
+            ImageService.upload(formData, config).then(DPUrl => {
+                ImageService.ProfilePic(userData._id, DPUrl.data).then(() => {
+                    userService.fetchData(userData._id).then((currentUser) => {
+                        auth.updateAuthencity(true, currentUser, () => {
+                            userStore.dispatch({type: 'USERS_DATA', result: currentUser.data.data});
+                            console.log(userStore.getState().root.user);
+                            this.props.onHide();
+                            window.location.reload(false);
+                        });
+                    }, er => {
+                        console.log(er);
                     });
-                }, er => {
-                    console.log(er);
+                }, error => {
+                    console.log(error);
                 });
-            }, error => {
-                console.log(error);
+            }, err => {
+                console.log(err);
             });
-        }, err => {
-            console.log(err);
-        });
+        }
+        if (this.props.imageType === 2) {
+            ImageService.upload(formData, config).then(CPUrl => {
+                ImageService.CoverPic(userData._id, CPUrl.data).then(() => {
+                    userService.fetchData(userData._id).then((currentUser) => {
+                        auth.updateAuthencity(true, currentUser, () => {
+                            userStore.dispatch({type: 'USERS_DATA', result: currentUser.data.data});
+                            console.log(userStore.getState().root.user);
+                            this.props.onHide();
+                            window.location.reload(false);
+                        });
+                    }, er => {
+                        console.log(er);
+                    });
+                }, error => {
+                    console.log(error);
+                });
+            }, err => {
+                console.log(err);
+            });
+        }
     };
 
     //Function Not Available
@@ -121,9 +143,9 @@ class CropModel extends Component {
         alert('This feature is currently unavailable.');
     };
     render() {
-        console.log(this.state);
+        console.log(this.props);
         const { src } = this.props;
-        const { crop, croppedImageUrl } = this.state;
+        const { crop } = this.state;
         return (
             <Modal
                 {...this.props}
