@@ -1,5 +1,5 @@
 *{font-family: 'Lato', sans-serif;}
-.Sidebar { background-color: black; position: fixed; right: 0; bottom: 60px; top: 0; display: grid; place-items: center;}
+.Sidebar { background-color: black; position: fixed; right: 0; height: 100%; top: 0; display: grid; place-items: center;}
 
 .Notifications, .Messages, .Onlinefriends, .Search { color: white; width: 100px; height: 100%; display: grid; place-items: center; transition: background-color 0.4s;}
 .Notifications:hover, .Messages:hover, .Onlinefriends:hover, .Search:hover {cursor: pointer; background-color: rgba(22,22,22,0.9);}
