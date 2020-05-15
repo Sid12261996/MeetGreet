@@ -103,10 +103,11 @@
 
 /*RIGHT*/
 .profileRight {width: 50%; height: 100%; overflow-y: auto; position: relative;}
-.statusHighLight {width: 100%; height: 15%; background-color: rgba(0,0,0,0.4); display: grid; place-items: center; color: #FFFFFF;}
+.statusHighLight {width: 100%; height: 15%; background-color: rgba(0,0,0,0.4); display: grid; place-items: center; color: #FFFFFF; position: absolute; top: 0;}
 .statusHighLight h3 {font-size: 24px;}
 .statusHighLight:hover {background-color: rgba(0,0,0,0.8); cursor: pointer;}
-.coverPic {width: 100%; height: 100vh; background-image: url("../Images/Cover.jpg"); background-size: cover; background-repeat: no-repeat; z-index: -1;}
+.coverPic {width: 100%; height: 100vh; z-index: -1;}
+#coverPic { width: 100%; height: 100%;}
 .uploadCoverBtn { position: absolute; bottom: 60px; display: none; padding: 16px 20px; background-color: rgba(0,0,0,0.6); color: white; font-size: 16px; border-radius: 50%;}
 .coverPic:hover .uploadCoverBtn { display: inline; animation: slide .1s ease-out forwards; cursor: pointer;}
 .uploadCoverBtn:hover { background-color: rgba(0,0,0,0.8); }

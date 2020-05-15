@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Tabs from '../Tabs/Tabs';
 import Sidebar from "../Sidebar/Sidebar";
 import DefaultPic from '../Images/Profile/ProfileCircle.png';
+import DefaultCover from '../Images/Cover.jpg'
 import 'react-image-crop/dist/ReactCrop.css';
 import './Profile.css';
 import $ from 'jquery';
@@ -65,7 +66,7 @@ export default class Profile extends Component {
         this.setState({
             ...this.state,
             showCModel: true
-        })
+        });
     };
 
     // Profile Pic Update
@@ -322,6 +323,7 @@ export default class Profile extends Component {
                         {/* PROFILE SCREEN RIGHT PART*/}
                         <div className="profileRight">
                             <div className="coverPic">
+                                <img id="coverPic" src={`${userData.CoverUrl}` !== "default" ? `${this.state.ProfilePic}images/${userData.CoverUrl}` : `${DefaultCover}`}/>
                                 <form autoComplete="off" encType="multipart/form-data" id="coverForm">
                                     <i className="fas fa-times uploadCoverBtn" onClick={this.handleCoverSubmit}>
                                         <input type="file" id="coverinputbutton" name="file" onChange={this.onCoverChange} />

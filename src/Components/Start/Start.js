@@ -131,8 +131,11 @@ class Start extends Component {
                 <div className="start">
                     <div className="mainContent">
                         <div className="post-container">
-                            <div className="FandSColumn">
-
+                            <div className="stickyColumn">
+                                <div className="stickySmall">
+                                    <div className="stickyPeople"></div>
+                                    <div className="stickyStats"></div>
+                                </div>
                             </div>
                             <div className="toolBoxWrapper">
                                 <div className="ToolBox">

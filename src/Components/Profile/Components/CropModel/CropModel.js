@@ -116,8 +116,25 @@ class CropModel extends Component {
                 console.log(err);
             });
         }
-        else {
-            console.log("Under Development");
+        if (this.props.imageType === 2) {
+            ImageService.upload(formData, config).then(CPUrl => {
+                ImageService.CoverPic(userData._id, CPUrl.data).then(() => {
+                    userService.fetchData(userData._id).then((currentUser) => {
+                        auth.updateAuthencity(true, currentUser, () => {
+                            userStore.dispatch({type: 'USERS_DATA', result: currentUser.data.data});
+                            console.log(userStore.getState().root.user);
+                            this.props.onHide();
+                            window.location.reload(false);
+                        });
+                    }, er => {
+                        console.log(er);
+                    });
+                }, error => {
+                    console.log(error);
+                });
+            }, err => {
+                console.log(err);
+            });
         }
     };
 
