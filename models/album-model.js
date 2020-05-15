@@ -7,7 +7,8 @@ const albumModel = new schema({
     postIds: {type: [schema.Types.ObjectId], required: true},
     CreatedAt: {type: schema.Types.Date, required: true, default: Date.now()},
     UpdatedAt: {type: schema.Types.Date, required: true, default: Date.now()},
-    DeletedAt: {type: schema.Types.Date, default: null}
+    DeletedAt: {type: schema.Types.Date, default: null},
+    albumType:{type:schema.Types.Number}
 });
 
 module.exports = mongoose.model('album', albumModel);

@@ -5,8 +5,11 @@ const mongoose = require('mongoose'),
     response = require('../utils/http-utils'),
     env = require('../environment').env,
     jwt = require('jsonwebtoken');
+    const moment=require('moment');
+ 
 
 exports.Login = (req, res) => {
+
 // Login Check
     Users.find({Email: req.body.Email.trim()}).then(doc => {
         if (doc.length > 0) {
@@ -71,13 +74,20 @@ exports.Register = (req, res) => {
                                 Gender: req.body.Gender,
                                 Password: hash,
                                 State: req.body.State,
+                                Status: req.body.Status,
+                                Profession: req.body.Profession,
+                                DateOfBirth:req.body.DateOfBirth,
                                 City: req.body.City,
                                 Country: req.body.Country,
                                 // Security: req.body.Security,
                                 inCommunity: req.body.inCommunity,
                                 JobProfile: req.body.JobProfile
                             });
-
+                         
+                        RegisterUser.DOBView.then(function(result){
+                           console.log(result);
+                            
+                         });   
 
                         // Step 2: Save It to DB
                         RegisterUser.save().then(result => {
@@ -96,6 +106,104 @@ exports.Register = (req, res) => {
         console.log(err);
         res.status(500).json({message: 'Validation Errors', Errors: err})
     })
+};
+
+exports.changeName= async (userId,Name) =>{
+
+try{
+     let nameResult =await Users.findByIdAndUpdate({_id:userId},{Name: Name});
+     return response.Ok(nameResult);
+}
+catch(e){
+    return response.BadRequest(e);
+}
+
+}
+
+exports.changePassword = async (userId,currentPassword,newPassword) =>{
+
+try{
+    
+    let userData= await Users.findById({_id:userId},{Password:1});
+    let flag=bcrypt.compareSync(currentPassword, userData.Password) 
+       if(flag){     
+          let salt = bcrypt.genSaltSync(10);
+          let hash = bcrypt.hashSync(newPassword, salt); 
+          let passwordResult= await Users.findByIdAndUpdate({_id: userId},{Password: hash});
+        return response.Ok(passwordResult);    
+      }
+      else{
+        return response.UnAuthorized("Invalid Current Password");
+      }
+
+}
+catch(e){
+   return response.BadRequest(e);
+}
+
+}
+
+exports.updateProfession =async(userId,newProfession)=>{
+
+try{    
+    let changeProfession=await Users.findByIdAndUpdate({_id:userId},{Profession:newProfession});
+    return response.Ok(changeProfession);
+}
+catch(e){
+    return response.BadRequest(e);
+}
+
+}
+
+exports.jobProfile = async(userId,newJobProfile)=>{
+try{
+
+let addJobProfile=await Users.findByIdAndUpdate({_id:userId},{$push:{JobProfile:newJobProfile}},{safe: true, upsert: true});
+return response.Ok(addJobProfile);
+
+}
+catch(e){
+    return response.BadRequest(e);
+}
+
+}
+
+exports.updateStatus =async(userId,newStatus)=>{
+
+try{
+
+let updatedStatus= await Users.findByIdAndUpdate({_id:userId},{Status:newStatus});
+return response.Ok(updatedStatus);
+
+}
+catch(e){
+
+return response.BadRequest(e);
+
+}
+
+}
+
+exports.updateDOB =async(userId,DOB)=>{
+
+try{
+
+let updateDOB=await Users.findByIdAndUpdate({_id:userId},{DateOfBirth:moment.utc(DOB)});
+return response.Ok(updateDOB);
+}
+catch(e){
+return response.ServerError(e);
+}
+
+}
+
+exports.coverPicUpdate = async (userId,NewCoverUrl) => {
+    try {
+        let coverPicResult = await Users.findByIdAndUpdate({_id:userId},{CoverUrl: NewCoverUrl});
+        return response.Ok(coverPicResult);
+    } catch (e) {
+        return response.BadRequest(e);
+    }
 };
 
 exports.UserPicUpdate = async (userId,NewPicUrl) => {

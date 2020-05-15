@@ -1,7 +1,8 @@
 const controller = {},
     mongoose = require('mongoose'),
     Response = require('../utils/http-utils'),
-    albumModel = require('../models/album-model');
+    albumModel = require('../models/album-model'),
+    albumTypes = require('../utils/enum').albumTypes;
 
 controller.createAlbum = async function (album) {
     try {
@@ -11,7 +12,8 @@ controller.createAlbum = async function (album) {
         const newAlbum = new albumModel({
             name: album.name,
             authorId: mongoose.Types.ObjectId(album.authorId),
-            postIds: postIds
+            postIds: postIds,
+            albumType: albumTypes.normalOne
         });
 
         const savedAlbum = await newAlbum.save();
@@ -21,6 +23,19 @@ controller.createAlbum = async function (album) {
         return Response.ServerError(null, e);
     }
 };
+controller.createMultipleAlbums = function (multipleAlbums) {
+// multiple albums have
+}
+controller.addPhotos = async function (body, userId) {
+// add new photos to the album params : album unique id
+    try {
+        const albums = await albumModel.findByIdAndUpdate(body.id,{});
+        const album = albums[0];
+
+    } catch (e) {
+        return Response.ServerError(null, e)
+    }
+}
 controller.showAlbums = async function (userId) {
     try {
         const albums = await albumModel.find({authorId: mongoose.Types.ObjectId(userId)});

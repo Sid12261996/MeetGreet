@@ -3,31 +3,48 @@ const response = require('../utils/http-utils'),
     privacy = require('../models/privacy').Posts,
     Posts = require('../models/posts-model'),
     applicationUser = require('../models/userModel'),
+    baseEntity = require('../models/base-entity'),
+    moment = require('moment'),
     mongoose = require('mongoose');
 
-exports.Create = async (post, userId) => {
-    let interaction = new interactions('First', '5dd04caa2387b90c44020caf');
+
+function createSinglePostEntity(user,post){
+    let interaction = new interactions('First', user._id);
     // console.log(userId);
-    let user = await applicationUser.findById(userId, {Name: 1});
-    let newPost = new Posts({
+    return new Posts({
+        baseEntity: {CreatedAt: moment.utc().toDate(), UpdatedAt: moment.utc().toDate(), DeletedAt: null},
         title: post.title,
         imageUrl: post.imageUrl,
         videoUrl: post.videoUrl,
         interactions: {comments: interaction.comments, likes: interaction.likes},
         privacy: privacy,
-        author: mongoose.Types.ObjectId(userId),
+        author: mongoose.Types.ObjectId(user._id),
         authorName: user.Name
     });
-    // let newPost =  posts.initial;
+}
+
+exports.Create = async (post, userId) => {
+
+    let user = await applicationUser.findById(userId, {Name: 1});
+    const newPost = createSinglePostEntity(user,post)
     try {
         let saved = await newPost.save();
         // console.log(saved, 'saved');
         return response.Ok(saved);
     } catch (e) {
+        console.log(e);
         return response.BadRequest(e);
     }
 
 };
+exports.BulkPostCreate = async function(bulkPosts,userId){
+
+    let user = await applicationUser.findById(userId, {Name: 1});
+    let newPosts = []
+    bulkPosts.Images.forEach(image=>{
+        newPosts.push(createSinglePostEntity(user,{title:bulkPosts.name,imageUrl:image}))
+    })
+}
 
 exports.getAll = async (userId) => {
     try {
@@ -89,3 +106,4 @@ exports.get = async (id, userId) => {
         return response.BadRequest(e);
     }
 };
+
