@@ -11,12 +11,12 @@ import env from "../../environment";
 import userService from "../../services/user-services";
 import AlbumModel from "./Components/AlbumModel/AlbumModel";
 import CropModel from './Components/CropModel/CropModel'
+import { connect } from 'react-redux';
 
-export default class Profile extends Component {
+class Profile extends Component {
 
     constructor(props) {
         super(props);
-        console.log(this.props);
         this.state = {
             ProfilePic: "",
             CoverPic: "",
@@ -33,7 +33,6 @@ export default class Profile extends Component {
     componentDidMount() {
         const URL = `${env.ImageBaseUrl}`;
         userService.fetchData(this.props.match.params.id).then( result => {
-            console.log(result.data.data);
             this.setState({
                 ...this.state,
                 ProfilePic: URL,
@@ -168,7 +167,6 @@ export default class Profile extends Component {
 
     render() {
         let userData = this.state.userData;      //GETTING USER DETAILS
-        console.log(this.state.userData);
         return (
             <div>
                 <AlbumModel show={this.state.showModel} onHide={() => this.hideModel()} />
@@ -189,7 +187,7 @@ export default class Profile extends Component {
                                     <div className="userProfile">
                                         {/* PROFILE PIC CIRCLE DIV */}
                                         <div className="solarProfile">
-                                            <img id="profilePic" src={`${userData.ImageUrl}` !== "default" ? `${this.state.ProfilePic}images/${userData.ImageUrl}` : `${DefaultPic}`}/>
+                                            <img id="profilePic" src={`${userData.ImageUrl}` !== "default" ? `${this.state.ProfilePic}images/${userData.ImageUrl}` : `${DefaultPic}`} alt="Profile"/>
                                             <form autoComplete="off" encType="multipart/form-data" id="DPForm">
                                                 <div className="choose-propic" onClick={this.handleSubmit}>
                                                     <i className="fas fa-pencil-alt mainDP"></i>
@@ -323,7 +321,7 @@ export default class Profile extends Component {
                         {/* PROFILE SCREEN RIGHT PART*/}
                         <div className="profileRight">
                             <div className="coverPic">
-                                <img id="coverPic" src={`${userData.CoverUrl}` !== "default" ? `${this.state.ProfilePic}images/${userData.CoverUrl}` : `${DefaultCover}`}/>
+                                <img id="coverPic" src={`${userData.CoverUrl}` !== "default" ? `${this.state.ProfilePic}images/${userData.CoverUrl}` : `${DefaultCover}`} alt="Cover"/>
                                 <form autoComplete="off" encType="multipart/form-data" id="coverForm">
                                     <i className="fas fa-times uploadCoverBtn" onClick={this.handleCoverSubmit}>
                                         <input type="file" id="coverinputbutton" name="file" onChange={this.onCoverChange} />
@@ -344,3 +342,14 @@ export default class Profile extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    const {user} = state.root;
+    return {user}
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {}
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Profile)

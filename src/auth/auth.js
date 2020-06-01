@@ -40,7 +40,7 @@ class Auth extends PlayingWithCache {
         if (token) {
             let user = JSON.parse(Auth.getCache('user'));
             let token = JSON.parse(Auth.getCache('token'));
-            userStore.dispatch({type: 'USERS_DATA', result: user, token: token});
+            userStore.dispatch({type: 'USERS_DATA', user: user, token: token});
             this.authenticated = true;
             return true;
         }

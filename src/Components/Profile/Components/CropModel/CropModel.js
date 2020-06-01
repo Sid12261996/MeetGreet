@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import {Modal} from 'react-bootstrap';
 import "./CropModel.css";
 import ReactCrop from "react-image-crop";
 import ImageService from "../../../../services/image-service";
 import userService from "../../../../services/user-services";
 import auth from '../../../../auth/auth';
-import userStore from "../../../../Store/stores/user-store";
 
 class CropModel extends Component {
 
@@ -88,9 +88,10 @@ class CropModel extends Component {
     }
 
     changeProfileDP = () => {
-        let userData = this.props.userdata;
+        let userData = this.props.user;
         let files = this.state.croppedImageUrl;
-        var formObj = new File([files] , this.state.fileName);
+        let fileName = this.state.fileName;
+        var formObj = new File([files] , fileName);
         let formData = new FormData();
         formData.append('file', formObj);
         const config = {
@@ -101,8 +102,7 @@ class CropModel extends Component {
                 ImageService.ProfilePic(userData._id, DPUrl.data).then(() => {
                     userService.fetchData(userData._id).then((currentUser) => {
                         auth.updateAuthencity(true, currentUser, () => {
-                            userStore.dispatch({type: 'USERS_DATA', result: currentUser.data.data});
-                            console.log(userStore.getState().root.user);
+                            this.props.userdata(currentUser.data.data);
                             this.props.onHide();
                             window.location.reload(false);
                         });
@@ -121,8 +121,7 @@ class CropModel extends Component {
                 ImageService.CoverPic(userData._id, CPUrl.data).then(() => {
                     userService.fetchData(userData._id).then((currentUser) => {
                         auth.updateAuthencity(true, currentUser, () => {
-                            userStore.dispatch({type: 'USERS_DATA', result: currentUser.data.data});
-                            console.log(userStore.getState().root.user);
+                            this.props.userdata(currentUser.data.data);
                             this.props.onHide();
                             window.location.reload(false);
                         });
@@ -136,6 +135,10 @@ class CropModel extends Component {
                 console.log(err);
             });
         }
+        if (this.props.imageType === 3) {
+            this.props.cropData(files,fileName);
+            this.props.onHide();
+        }
     };
 
     //Function Not Available
@@ -143,7 +146,6 @@ class CropModel extends Component {
         alert('This feature is currently unavailable.');
     };
     render() {
-        console.log(this.props);
         const { src } = this.props;
         const { crop } = this.state;
         return (
@@ -184,4 +186,18 @@ class CropModel extends Component {
     }
 }
 
-export default CropModel;
+const mapStateToProps = (state) => {
+    const {user} = state.root;
+    return {user}
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return(
+        {
+            userData: (currentUser) => {dispatch({type: 'USERS_DATA', user: currentUser})},
+            cropData: (file,fileName) => {dispatch({type: 'CROP_DATA', cropImage: file, cropImageName: fileName})}
+        }
+    )
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(CropModel);

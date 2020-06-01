@@ -13,8 +13,9 @@
 .ToolBox { width: 50%; background-color: #FAFAFA; display: flex; justify-content: center; align-items: center; padding: 10px 0;}
 .ToolBoxIn { width: 95%; height: 100%; background-image: linear-gradient(to bottom right, #FFFFFF 30%, rgba(250,250,250,1) 70%); box-shadow: 0 2px 4px rgba(127,127,127,0.6); border-radius: 5px; display: flex;}
 .TB1 { width: 20%; height: 100%;}
-.statusTab1 {width: 100%; height: 50%; display: flex; justify-content: flex-start; padding: 20px 15px; border-left: 2px solid #ad3a6e; }
-.statusTab2 {width: 100%; height: 50%; display: flex; justify-content: flex-start; padding: 20px 15px; color: rgba(127,127,127,1);}
+.statusTab1 {width: 100%; height: 50%; display: flex; justify-content: flex-start; padding: 20px 15px; border-left: 2px solid #ad3a6e; color: #000000;}
+.statusTab1:hover, .statusTab2:hover { cursor: pointer; }
+.statusTab2 {width: 100%; height: 50%; display: flex; justify-content: flex-start; padding: 20px 15px; color: rgba(127,127,127,1); border-left: 2px solid #ffffff;}
 .fa-quote-right {display: flex; font-size: 20px;}
 .statusTab1 h5 { margin-left: 5px; font-size: 16px;}
 .fa-images {display: flex; font-size: 20px;}
@@ -25,7 +26,8 @@
 .moodBox h5 { font-size: 16px;}
 .moodBox .fa-caret-down { font-size: 14px; margin: 4px;}
 .bgBox {width: 100%; height: 70%; display: flex; justify-content: center;}
-.statusBg {width: 80%; height: 90%; background-color: #2B93B7; border-radius: 20%; cursor: not-allowed;}
+.statusBg {width: 80%; height: 90%; background-color: #2B93B7; border-radius: 20%; cursor: pointer;}
+.statusPic {width: 80%; height: 90%; background-color: #DDDDDD; border-radius: 20%; cursor: pointer;}
 .TB3 { width: 60%; height: 100%;}
 .statusField { width: 100%; height: 70%; display: flex; justify-content: center; align-items: center;}
 .statusField textarea { height: 80%; resize: none; width: 90%; padding: 5px 10px; border-radius: 5px; border: 1px solid rgba(127,127,127,0.6); }
@@ -43,8 +45,8 @@
 .authorTime h6 { font-size: 12px; color: rgba(127,127,127,0.8);}
 .authorPic { width: 40px; height: 40px; border-radius: 50%;}
 .postDesc {text-align: left; padding: 10px;}
-.postTitleImg { padding: 20px 10px; height: 450px; background-color: #2B93B7; font-size: 24px; overflow-y: auto; text-align: center; display: table-cell; vertical-align: middle;}
-.postTitleImg p {font-family: 'Courgette', cursive; color: white;}
+.postTitleImg { padding: 20px 10px; height: 450px; background-color: #2B93B7; font-size: 24px; overflow-y: auto; text-align: center; display: flex;}
+.postTitleImg p {font-family: 'Courgette', cursive; color: white; margin: auto;}
 .hideTitle {display: none;}
 .postBody { width: 100%; height: 100%; display: flex;}
 .authorPost {width: 85%;}
@@ -53,6 +55,9 @@
 .like, .dislike, .share, .comment, .report { height: 20%; width: 100%; display: flex; justify-content: center; align-items: center; color: rgba(22,22,22,0.9); cursor: pointer; transition: color 0.4s; border-right: 2px solid #FFFFFF;}
 .like:hover, .dislike:hover, .share:hover, .comment:hover, .report:hover {color: rgba(20,0,0,0.9); border-right: 2px solid #AD3A6E;}
 .fa-thumbs-up, .fa-thumbs-down, .fa-exclamation-triangle, .fa-comment, .fa-share {font-size: 24px;}
+
+#postinputbutton {width: 0;}
+.statusBg img {width: 100%; height: 100%; border-radius: 20%;}
 
 
 /*Scroll Design*/
