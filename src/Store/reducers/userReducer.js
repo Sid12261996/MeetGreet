@@ -1,18 +1,18 @@
 const initState = {
-    user : [],
+    user : {},
     token : []
 };
 
 const userReducer = (state = initState,action) => {
-    if (action.type !== "USERS_DATA") {
-        return state
-    }
-    else {
+    if (action.type === "USERS_DATA") {
         return {
             ...state,
-            user: action.result,
+            user: action.user,
             token: action.token
         }
+    }
+    else {
+        return state
     }
 };
 

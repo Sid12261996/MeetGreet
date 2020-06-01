@@ -1,13 +1,15 @@
 const initState = {
-    post : []
+    post: []
 };
 
-const postReducer = (state = initState,action) => {
-    if (action.type !== "POST_DATA") {
+const postReducer = (state = initState, action) => {
+    if (action.type === "POST_DATA") {
+        return {
+            ...state,
+            post: action.post
+        }
+    } else {
         return state
-    } else return {
-        ...state,
-        post: action.result
     };
 };
 

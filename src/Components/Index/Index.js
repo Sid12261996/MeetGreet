@@ -6,7 +6,7 @@ import Logo from '../Images/mg02col.png';
 import userService from "../../services/user-services";
 import auth from '../../auth/auth';
 import Helmet from 'react-helmet';
-import userStore from "../../Store/stores/user-store";
+import { connect } from 'react-redux';
 import $ from 'jquery';
 
 class Index extends Component {
@@ -33,8 +33,8 @@ class Index extends Component {
             result => {
                 if (result) {
                     auth.setAuthenticity(true, result, () => {
-                        userStore.dispatch({type: 'USERS_DATA', result: result.data.currentUser, token: result.data.token});
-                        let userData = userStore.getState().root.user;
+                        this.props.userData(result.data.currentUser,result.data.token);
+                        let userData = this.props.user;
                         this.props.history.push(`/${userData._id}/start`);
                     });
                 }
@@ -155,4 +155,17 @@ class Index extends Component {
     }
 }
 
-export default Index;
+const mapStateToProps = (state) => {
+    const {user} = state.root;
+    return {user}
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return(
+        {
+            userData: (currentUser,token) => {dispatch({type: 'USERS_DATA', user: currentUser, token: token})}
+        }
+    )
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Index);
