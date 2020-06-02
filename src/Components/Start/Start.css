@@ -6,8 +6,24 @@
 .post-container { width: 90%; height: 100%;}
 .stickyColumn { position: fixed; top: 0; bottom: 0; height: 100%; width: 30%; background-color: #FAFAFA; right: 18%;}
 .stickySmall { position: absolute; top: 0; width: 100%; bottom: 60px; display: flex; flex-direction: column; justify-content: space-around; align-items: center;}
-.stickyPeople { width: 95%; height: 46%; background-image: linear-gradient(to bottom right, #FFFFFF 30%, rgba(250,250,250,1) 70%); box-shadow: 0 2px 4px rgba(127,127,127,0.6); border-radius: 5px;}
-.stickyStats { width: 95%; height: 46%; background-image: linear-gradient(to bottom right, #FFFFFF 30%, rgba(250,250,250,1) 70%); box-shadow: 0 2px 4px rgba(127,127,127,0.6); border-radius: 5px;}
+.stickyPeople { width: 95%; height: 46%;}
+.stickyHead { width: 100%; height: 15%; display: flex; justify-content: space-between; padding: 0 10px; align-items: center;}
+.stickyLink { color: #ad3a6e;}
+.stickyHead span {font-size: 16px;}
+.stickyBody { width: 100%; height: 85%;}
+.stickyRow { width: 100%; height: 50%; display: flex; justify-content: space-around; align-items: center;}
+.familiarBox { width: 45%; height: 85%; background-image: linear-gradient(to bottom right, #FFFFFF 30%, rgba(250,250,250,1) 70%); box-shadow: 0 2px 4px rgba(127,127,127,0.6); border-radius: 5px;}
+.familiarHead {width: 100%; height: 40%; display: flex; margin: 0 10px; align-items: center;}
+.familiarHead span { margin-left: 10px; font-size: 14px;}
+.familiarBody {width: 100%; height: 60%;}
+.familiarPic1 {width: 35px; height: 35px; border-radius: 50%; background-color: #FDAD92;}
+.familiarPic2 {width: 35px; height: 35px; border-radius: 50%; background-color: #AAD380;}
+.familiarPic3 {width: 35px; height: 35px; border-radius: 50%; background-color: #A08DA4;}
+.familiarPic4 {width: 35px; height: 35px; border-radius: 50%; background-color: #FCE496;}
+.stickyStats { width: 95%; height: 46%; }
+.statsHead { width: 100%; height: 15%; display: flex; align-items: center; padding: 0 10px;}
+.statsHead span {font-size: 16px;}
+.statsBody { width: 95%; height: 85%; background-image: linear-gradient(to bottom right, #FFFFFF 30%, rgba(250,250,250,1) 70%); box-shadow: 0 2px 4px rgba(127,127,127,0.6); border-radius: 5px; margin: auto;}
 
 .toolBoxWrapper { width: 100%; display: flex; justify-content: flex-start;}
 .ToolBox { width: 50%; background-color: #FAFAFA; display: flex; justify-content: center; align-items: center; padding: 10px 0;}
@@ -27,13 +43,18 @@
 .moodBox .fa-caret-down { font-size: 14px; margin: 4px;}
 .bgBox {width: 100%; height: 70%; display: flex; justify-content: center;}
 .statusBg {width: 80%; height: 90%; background-color: #2B93B7; border-radius: 20%; cursor: pointer;}
-.statusPic {width: 80%; height: 90%; background-color: #DDDDDD; border-radius: 20%; cursor: pointer;}
+.statusPic {width: 80%; height: 90%; border-radius: 20%; cursor: pointer; border: 1px dashed rgba(127,127,127,0.6); display: flex; justify-content: center; align-items: center;}
+.statusPic .image-post-icon { color: rgba(127,127,127,0.6); font-size: 24px;}
+.statusPic:hover { background-color: rgba(0,0,0,0.8); cursor: pointer; display: flex; justify-content: center; align-items: center; border: none;}
+.statusPic:hover .image-post-icon {display: block; font-size: 24px; color: #FFF;}
 .TB3 { width: 60%; height: 100%;}
 .statusField { width: 100%; height: 70%; display: flex; justify-content: center; align-items: center;}
 .statusField textarea { height: 80%; resize: none; width: 90%; padding: 5px 10px; border-radius: 5px; border: 1px solid rgba(127,127,127,0.6); }
 .statusField textarea:focus { outline: none; }
 .postBtn { width: 100%; height: 30%; display: flex; justify-content: center; align-items: flex-start;}
-.postItBtn { height: 80%; width: 30%; background-image: linear-gradient(to bottom right,  #782C4C, #AD3A6E); color: white; border: none; box-shadow: 0 2px 4px rgba(173,58,110,0.6); font-family: 'Montserrat', sans-serif; font-size: 14px;}
+.postItBtn { height: 80%; width: 20%; background-image: linear-gradient(to bottom,  #782C4C, #AD3A6E); color: white; border: none; box-shadow: 0 2px 8px rgba(173,58,110,0.6); font-family: 'Montserrat', sans-serif; font-size: 14px; position: relative; z-index: 10;}
+.postItBtn::after { content: ''; width: 30px; height: 100%; border-radius: 50%; background-color: #2b93b7; position: absolute; top: 0; left: -12px; background-image: linear-gradient(to bottom,  #782C4C, #AD3A6E); z-index: -5;}
+.postItBtn::before { content: ''; width: 30px; height: 100%; border-radius: 50%; background-color: #2b93b7; position: absolute; top: 0; right: -12px; background-image: linear-gradient(to bottom,  #782C4C, #AD3A6E); z-index: -5;}
 .postItBtn:focus { outline: none;}
 
 .postWrapper { width: 100%; display: flex; background-color: white; justify-content: flex-start;}
@@ -49,8 +70,27 @@
 .postTitleImg p {font-family: 'Courgette', cursive; color: white; margin: auto;}
 .hideTitle {display: none;}
 .postBody { width: 100%; height: 100%; display: flex;}
-.authorPost {width: 85%;}
+.authorPost {width: 85%; position: relative;}
 .authorPost img { width: 100%; height: 450px;}
+.commentsBox {position: absolute; bottom: 0; background-color: rgba(0,0,0,0.8); height: 0; width: 90%; left: 5%; border-top-left-radius: 20%; border-top-right-radius: 20%; color: white; display: flex; align-items: flex-end;}
+.commenting { width: 100%; height: 90%;}
+.commentBody { width: 100%; height: 80%;}
+.commentMapping { display: none; padding: 0 10px; align-items: center;}
+
+@keyframes fade {
+    from{
+        opacity: 0;
+        pointer-events: none;
+    }
+    to{
+        opacity: 1;
+        pointer-events: all;
+    }
+}
+
+.commentProfile { width: 40px; height: 40px; background-color: #2b93b7; border-radius: 50%;}
+.commentMapping span { margin-left: 10px;}
+.commentFooter { width: 100%; height: 20%; }
 .authorActions {width: 15%; height: 450px;}
 .like, .dislike, .share, .comment, .report { height: 20%; width: 100%; display: flex; justify-content: center; align-items: center; color: rgba(22,22,22,0.9); cursor: pointer; transition: color 0.4s; border-right: 2px solid #FFFFFF;}
 .like:hover, .dislike:hover, .share:hover, .comment:hover, .report:hover {color: rgba(20,0,0,0.9); border-right: 2px solid #AD3A6E;}
