@@ -8,6 +8,7 @@ import auth from '../../auth/auth';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import $ from 'jquery';
+import store from "../../Store/stores/user-store";
 
 class Index extends Component {
     constructor(props) {
@@ -33,8 +34,8 @@ class Index extends Component {
             result => {
                 if (result) {
                     auth.setAuthenticity(true, result, () => {
-                        this.props.userData(result.data.currentUser,result.data.token);
-                        let userData = this.props.user;
+                        store.dispatch({type: 'USERS_DATA', user: result.data.currentUser, token: result.data.token});
+                        let userData = store.getState().root.user;
                         this.props.history.push(`/${userData._id}/start`);
                     });
                 }

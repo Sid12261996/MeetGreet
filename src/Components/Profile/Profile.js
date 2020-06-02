@@ -191,7 +191,7 @@ class Profile extends Component {
                                             <form autoComplete="off" encType="multipart/form-data" id="DPForm">
                                                 <div className="choose-propic" onClick={this.handleSubmit}>
                                                     <i className="fas fa-pencil-alt mainDP"></i>
-                                                    <input type="file" id="profileinputbutton" name="file"
+                                                    <input type="file" id="profileinputbutton" name="file" accept="image/jpeg"
                                                            onChange={(e) => {
                                                                this.onChange(e)
                                                            }}/>
@@ -324,7 +324,7 @@ class Profile extends Component {
                                 <img id="coverPic" src={`${userData.CoverUrl}` !== "default" ? `${this.state.ProfilePic}images/${userData.CoverUrl}` : `${DefaultCover}`} alt="Cover"/>
                                 <form autoComplete="off" encType="multipart/form-data" id="coverForm">
                                     <i className="fas fa-times uploadCoverBtn" onClick={this.handleCoverSubmit}>
-                                        <input type="file" id="coverinputbutton" name="file" onChange={this.onCoverChange} />
+                                        <input type="file" id="coverinputbutton" name="file" accept="image/jpeg" onChange={this.onCoverChange} />
                                     </i>
                                 </form>
                                 <div className="statusHighLight" onClick={this.handleNotAvailable}>

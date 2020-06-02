@@ -15,6 +15,7 @@ import baseService from "../../services/base-service";
 import * as moment from "moment";
 import DefaultPic from '../Images/Profile/ProfileCircle.png';
 import CropModel from "../Profile/Components/CropModel/CropModel";
+import { Bar } from "react-chartjs-2";
 
 class Start extends Component {
     constructor(props) {
@@ -30,7 +31,31 @@ class Start extends Component {
             userData: null,
             imgUpload: null,
             statusCode: 1,
-            fileName: ''
+            commentsBox : 1,
+            data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [25, 19, 3, 5, 12, 3],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            }
         };
 
         //BINDING FUNCTIONS
@@ -39,8 +64,7 @@ class Start extends Component {
 
 
     componentDidMount() {      //WILL RUN ON PAGE RELOAD
-        let userData = store.getState().root.user;          //Needs to be Removed At Release
-        console.log(userData)
+        let userData = store.getState().root.user;
         const ImageFetch = `${env.ImageBaseUrl}images/`;
         baseService.axios();
 
@@ -57,66 +81,33 @@ class Start extends Component {
             });
     }
 
-    handleSubmit = (e) => {     //POST SUBMIT FUNCTION
-        e.preventDefault();
-        let myPost = $('#statusBox').val();       //POST CHANGE FUNCTION
-        let userData = this.state.userData;
-        let files = this.props.cropImage;
-        let fileName = this.props.cropImageName;
-        var formObj = new File([files] , fileName);
-        let formData = new FormData();
-        formData.append('file', formObj);
-        const config = {
-            headers: { 'content-type': 'multipart/form-data' }
-        };
-
-        if(fileName === "default"){
-            PostService.createPost(userData._id, {title: myPost, imageUrl: "default"}).then(()=>{
-                userService.fetchData(userData._id).then((currentUser) => {
-                    auth.updateAuthencity(true, currentUser, () => {
-                        this.props.userData(currentUser.data.data);
-                        document.getElementById('statusBox').value = "";
-                    });
-                    this.setState({
-                        ...this.state,
-                        postText: ''
-                    });
-                    this.props.cropData();
-                },err=>{
-                    console.log(err);
-                })
-            },error=>{
-                console.log(error);
-            })
-        }
-        else {
-            ImageService.upload(formData, config).then(Imgcreate => {
-                PostService.createPost(userData._id, {
-                    title: myPost,
-                    imageUrl: this.state.imgGetUrl + Imgcreate.data
-                }).then(() => {
-                        userService.fetchData(userData._id).then((currentUser) => {
-                            auth.updateAuthencity(true, currentUser, () => {
-                                this.props.userData(currentUser.data.data);
-                            });
-
-                            this.setState({
-                                ...this.state,
-                                postText: ''
-                            });
-                            this.props.cropData();
-                            document.getElementById('statusBox').value = "";
-                        }, er => {
-                            console.log(er);
-                        });
-                    }, err => {
-                        console.log(err)
-                    });
-            }, error => {
-                console.log(error)
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.cropImageName === "default") {
+            $('.statusPic').css({'border':'1px dashed rgba(127,127,127,0.6)'});
+            $('.statusPic').hover(()=>{
+                $('.statusPic').css({'border':'none'});
+            },()=>{
+                $('.statusPic').css({'border':'1px dashed rgba(127,127,127,0.6)'});
             });
         }
-    };
+        else {
+            $('.statusPic').css({'border':'1px dashed rgba(111,173,56,1)'});
+            $('.statusPic').hover(()=>{
+                $('.statusPic').css({'border':'none'});
+                $('.image-post-icon').css({'color':'rgba(127,127,127,0.6)'});
+            });
+
+            $('.statusPic').css({'border':'1px dashed rgba(111,173,56,1)'});
+            $('.image-post-icon').css({'color':'rgba(111,173,56,1)'});
+            $('.statusPic').hover(()=>{
+                $('.statusPic').css({'border':'none'});
+                $('.image-post-icon').css({'color':'rgba(255,255,255,1)'});
+            },()=>{
+                $('.statusPic').css({'border':'1px dashed rgba(111,173,56,1)'});
+                $('.image-post-icon').css({'color':'rgba(111,173,56,1)'});
+            });
+        };
+    }
 
     unitsOfTime = ['years', 'days', 'hours', 'minutes', 'seconds'];
     handleDate(CreatedAt, index = 0) {
@@ -140,7 +131,7 @@ class Start extends Component {
         document.getElementById('postinputbutton').click();
     }
 
-    onPostChange = (e) => {
+    onPostChange = (e) => {     //POST CHANGE FUNCTION
         if (e.target.files && e.target.files.length > 0) {
             const reader = new FileReader();
             reader.addEventListener('load', () =>
@@ -153,6 +144,69 @@ class Start extends Component {
             showModel: true
         });
     }
+
+    handleSubmit = (e) => {     //POST SUBMIT FUNCTION
+        e.preventDefault();
+        let myPost = $('#statusBox').val();
+        let userData = this.state.userData;
+        let files = this.props.cropImage;
+        let fileName = this.props.cropImageName;
+        var formObj = new File([files] , fileName);
+        let formData = new FormData();
+        formData.append('file', formObj);
+        const config = {
+            headers: { 'content-type': 'multipart/form-data' }
+        };
+
+        if(fileName === "default"){
+            PostService.createPost(userData._id, {title: myPost, imageUrl: "default"}).then(()=>{
+                userService.fetchData(userData._id).then((currentUser) => {
+                    auth.updateAuthencity(true, currentUser, () => {
+                        this.props.userData(currentUser.data.data);
+                        document.getElementById('statusBox').value = "";
+                        window.location.reload(false);
+                    });
+                    this.setState({
+                        ...this.state,
+                        postText: ''
+                    });
+                    this.props.cropData();
+                },err=>{
+                    console.log(err);
+                })
+            },error=>{
+                console.log(error);
+            })
+        }
+        else {
+            ImageService.upload(formData, config).then(Imgcreate => {
+                PostService.createPost(userData._id, {
+                    title: myPost,
+                    imageUrl: this.state.imgGetUrl + Imgcreate.data
+                }).then(() => {
+                    userService.fetchData(userData._id).then((currentUser) => {
+                        auth.updateAuthencity(true, currentUser, () => {
+                            this.props.userData(currentUser.data.data);
+                        });
+
+                        this.setState({
+                            ...this.state,
+                            postText: ''
+                        });
+                        this.props.cropData();
+                        document.getElementById('statusBox').value = "";
+                        window.location.reload(false);
+                    }, er => {
+                        console.log(er);
+                    });
+                }, err => {
+                    console.log(err)
+                });
+            }, error => {
+                console.log(error)
+            });
+        }
+    };
 
     hideModel = () => {
         this.setState({
@@ -180,9 +234,39 @@ class Start extends Component {
         }
     }
 
+    handleCommentBox = (index) => {
+        if (this.state.commentsBox === 1) {
+            let elem = document.getElementsByClassName('commentsBox')[index].style;
+            let elem2 = document.getElementsByClassName('comment')[index].style;
+            let elem3 = document.getElementsByClassName('commentMapping')[index].style;
+            elem.height = '0';
+            elem.transitionDelay = 'height .2s'
+            elem.transition = '.2s';
+            elem.transitionTimingFunction = 'ease-out'
+            elem3.display = 'none';
+            this.setState({
+                ...this.state,
+                commentsBox : 2
+            });
+        }
+        else {
+            let elem = document.getElementsByClassName('commentsBox')[index].style;
+            let elem2 = document.getElementsByClassName('comment')[index].style;
+            let elem3 = document.getElementsByClassName('commentMapping')[index].style;
+            elem.height = '350px';
+            elem.transition = '.2s';
+            elem.transitionTimingFunction = 'ease-out';
+            elem3.animation = 'fade .4s ease-in forwards';
+            elem3.display = 'flex';
+            this.setState({
+                ...this.state,
+                commentsBox : 1
+            });
+        }
+    }
+
     render() {
         const posts = this.state.posts;
-        console.log(posts)
         return (
             <div>
 
@@ -198,8 +282,65 @@ class Start extends Component {
                         <div className="post-container">
                             <div className="stickyColumn">
                                 <div className="stickySmall">
-                                    <div className="stickyPeople"></div>
-                                    <div className="stickyStats"></div>
+                                    <div className="stickyPeople">
+                                        <div className="stickyHead">
+                                            <span>Someone Familiar?</span>
+                                            <span className="stickyLink">See More</span>
+                                        </div>
+                                        <div className="stickyBody">
+                                            <div className="stickyRow">
+                                                <div className="familiarBox">
+                                                    <div className="familiarHead">
+                                                        <div className="familiarPic1"></div>
+                                                        <span>Jacob Defroz</span>
+                                                    </div>
+                                                    <div className="familiarBody">
+
+                                                    </div>
+                                                </div>
+                                                <div className="familiarBox">
+                                                    <div className="familiarHead">
+                                                        <div className="familiarPic2"></div>
+                                                        <span>Jacob Defroz</span>
+                                                    </div>
+                                                    <div className="familiarBody">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="stickyRow">
+                                                <div className="familiarBox">
+                                                    <div className="familiarHead">
+                                                        <div className="familiarPic3"></div>
+                                                        <span>Jacob Defroz</span>
+                                                    </div>
+                                                    <div className="familiarBody">
+
+                                                    </div>
+                                                </div>
+                                                <div className="familiarBox">
+                                                    <div className="familiarHead">
+                                                        <div className="familiarPic4"></div>
+                                                        <span>Jacob Defroz</span>
+                                                    </div>
+                                                    <div className="familiarBody">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="stickyStats">
+                                        <div className="statsHead">
+                                            <span>Station Details:</span>
+                                        </div>
+                                        <div className="statsBody">
+                                            <Bar
+                                                data={this.state.data}
+                                                options={{ maintainAspectRatio: false }}
+                                            />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div className="toolBoxWrapper">
@@ -230,8 +371,9 @@ class Start extends Component {
                                                     this.state.statusCode === 1 ? (<div className="statusBg"></div>) :
                                                         (
                                                                 <div className="statusPic" onClick={this.handlePostSubmit}>
+                                                                    <i className="fas fa-image image-post-icon"></i>
                                                                     <form autoComplete="off" encType="multipart/form-data" id="coverForm">
-                                                                    <input type="file" id="postinputbutton" name="file" onChange={this.onPostChange} />
+                                                                    <input type="file" id="postinputbutton" name="file" accept="image/jpeg" onChange={this.onPostChange} />
                                                                     </form>
                                                                 </div>
                                                         )
@@ -254,7 +396,7 @@ class Start extends Component {
                             <div className="postWrapper">
                                 <div className="post">
                                     {
-                                        posts && posts.map(post => {
+                                        posts && posts.map((post,index) => {
                                             return(
                                                 <div className="postIn" key={post._id}>
                                                     <div className="postHeader">
@@ -273,6 +415,25 @@ class Start extends Component {
                                                         }
                                                     <div className="postBody">
                                                         <div className="authorPost">
+                                                            <div className="commentsBox">
+                                                                <div className="commenting">
+                                                                    <div className="commentBody">
+                                                                        {
+                                                                            post.interactions.comments.map(comment => {
+                                                                                return(
+                                                                                    <div className="commentMapping" key={comment._id}>
+                                                                                        {/*REAL PROFILE WILL BE HERE*/}
+                                                                                        <div className="commentProfile"></div>
+                                                                                        <span>Simon Baker:</span>
+                                                                                        <span>{comment.comment}</span>
+                                                                                    </div>
+                                                                                )
+                                                                            })
+                                                                        }
+                                                                    </div>
+                                                                    <div className="commentFooter"></div>
+                                                                </div>
+                                                            </div>
                                                             {
                                                                 post.imageUrl === "default" ? (<div className='postTitleImg'><p>{post.title}</p></div>) : (<img src={post.imageUrl} alt="Post" />)
                                                             }
@@ -281,7 +442,7 @@ class Start extends Component {
                                                             <div className="like"><i className="fas fa-thumbs-up"></i></div>
                                                             <div className="dislike"><i className="fas fa-thumbs-down"></i></div>
                                                             <div className="report"><i className="fas fa-exclamation-triangle"></i></div>
-                                                            <div className="comment"><i className="fas fa-comment"></i></div>
+                                                            <div className="comment" onClick={()=>{this.handleCommentBox(index)}}><i className="fas fa-comment"></i></div>
                                                             <div className="share"><i className="fas fa-share"></i></div>
                                                         </div>
                                                     </div>
